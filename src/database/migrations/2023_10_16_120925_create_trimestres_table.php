@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('libelle');
             $table->string('code');
-            $table->foreignId('annee_scolaire_id')->constrained()->cascadeOnUpdate();
+            $table->foreignId('annees_scolaire_id')->constrained()->cascadeOnUpdate();
             $table->timestamps();
         });
     }
