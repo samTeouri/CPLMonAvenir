@@ -1,0 +1,223 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\geometry{
+    a4paper,
+    left=2.5cm,
+    right=2.5cm,
+    top=3cm,
+    bottom=3cm
+}
+\begin{document}
+
+\begin{titlepage}
+    \centering
+    %\includegraphics[width=0.5\textwidth]{college_logo.png}
+    
+    \vspace{2cm}
+    
+    \Huge\textbf{Cahier des Charges}\\
+    
+    \vspace{1cm}
+    
+    \Large{Application Web de Gestion du CEG Mon Avenir}
+    
+    \vspace{2cm}
+    
+    \Large\textbf{Coordonnées du Responsable de Projet :}\\
+    
+    \vspace{0.5cm}
+    
+    \large
+    \begin{tabular}{l}
+        \textbf{Nom de la Personne à Contacter :} TEOURI Sabirou \\
+        \textbf{Adresse E-mail :} sabirou.teouri@ifnti.com \\
+        \textbf{Téléphone :} +228 90 91 81 41 \\
+    \end{tabular}
+    
+    \vfill
+    
+    \large{Date : \today}
+    
+\end{titlepage}
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{Présentation du projet}
+
+\subsection{Contexte :}
+
+Le CEG Mon Avenir est à la recherche d'une solution informatique moderne pour rationaliser et améliorer la gestion de ses opérations quotidiennes. Actuellement, de nombreuses tâches administratives sont effectuées manuellement, ce qui entraîne des inefficacités et des retards. Le besoin d'une application web de gestion de collège découle de la nécessité d'optimiser la gestion des élèves, des enseignants, des notes, des paiements de scolarité, et d'autres aspects administratifs.
+
+\subsection{Objectifs :}
+
+Les objectifs de ce projet sont les suivants :
+
+\begin{enumerate}
+    \item \textbf{Améliorer l'efficacité opérationnelle :} L'application doit permettre une gestion plus efficace des données et des processus du collège, réduisant ainsi le temps et les ressources nécessaires pour les tâches administratives.
+
+    \item \textbf{Améliorer la communication :} L'application doit faciliter la communication entre le personnel administratif, les enseignants et les parents en fournissant un accès rapide aux informations essentielles.
+
+    \item \textbf{Faciliter la prise de décision :} L'application doit fournir des informations en temps réel sur les performances des élèves, les paiements de scolarité et d'autres indicateurs clés pour aider à la prise de décision éclairée.
+
+    \item \textbf{Assurer la sécurité des données :} La solution doit garantir la sécurité et la confidentialité des données des élèves et du personnel conformément aux normes de protection des données en vigueur.
+\end{enumerate}
+
+\subsection{Critères d'acceptabilité du produit :}
+
+Le succès de ce projet sera mesuré en fonction des critères d'acceptabilité suivants :
+
+\begin{enumerate}
+    \item \textbf{Fonctionnalité :} L'application doit répondre à toutes les fonctionnalités spécifiées dans le cahier des charges, en permettant une gestion complète du collège.
+
+    \item \textbf{Performance :} L'application doit être réactive et offrir des temps de chargement rapides, même en cas d'utilisation simultanée par de nombreux utilisateurs.
+
+    \item \textbf{Sécurité :} L'application doit être sécurisée et respecter les normes de sécurité des données, garantissant la protection des informations sensibles.
+
+    \item \textbf{Utilisabilité :} L'interface utilisateur doit être conviviale, intuitive et accessible, de manière à ce que le personnel du collège puisse l'utiliser sans formation complexe.
+
+    \item \textbf{Fiabilité :} L'application doit être stable et fiable, minimisant les temps d'indisponibilité non planifiés.
+
+    \item \textbf{Conformité réglementaire :} L'application doit être conforme aux réglementations en vigueur, notamment en matière de protection des données (par exemple, RGPD).
+
+    \item \textbf{Support et maintenance :} Un plan de support et de maintenance doit être en place pour résoudre rapidement les problèmes et appliquer les mises à jour nécessaires.
+
+\end{enumerate}
+
+\section{Expression des besoins}
+
+Les besoins de l'application de gestion du CEG Mon Avenir wsont les suivants :
+
+\begin{enumerate}
+    \item \textbf{Gestion des élèves :}
+    \begin{itemize}
+        \item Enregistrement des informations personnelles des élèves (nom, prénom, date de naissance, adresse, etc.).
+        \item Attribution d'un numéro d'identification unique à chaque élève.
+        \item Suivi des absences et retards.
+        \item Génération de listes de classe.
+        \item Gestion de la présence des élèves.
+    \end{itemize}
+
+    \item \textbf{Gestion des enseignants :}
+    \begin{itemize}
+        \item Enregistrement des informations personnelles des enseignants (nom, prénom, matière enseignée, etc.).
+        \item Attribution d'un numéro d'identification unique à chaque enseignant.
+        \item Gestion de la présence des enseignants.
+        \item Gestion des emplois du temps des enseignants.
+    \end{itemize}
+
+    \item \textbf{Gestion des notes et bulletins :}
+    \begin{itemize}
+        \item Saisie des notes par matière et par élève.
+        \item La saisie des notes est faite par le professeur
+        \item Le professeur a le choix sur les pondérations de chaque note.
+        \item Calcul automatique des moyennes et générations des bulletins trimestriels et annuels.
+        \item Possibilité d'exporter les bulletins au format PDF.
+        \item Les bulletins sont générés selement si les frais de scolarité sont payés en totalité.
+        \item Les appréciations sur le bulletin sont automatisées en fonction de la note de l’élève, suivi
+d’un commentaire du professeur.
+		\item Le directeur précise l’appréciation globale de l’élève sur le bulletin, ainsi que le passage en année supérieure ou le redoublement de ce dernier à l’issue du conseil académique.
+		\item Gestion des évaluations (devoirs, interrogations, compositions).
+    \end{itemize}
+    
+    \item \textbf{Gestion des inscriptions :}
+    \begin{itemize}
+        \item Enregistrement des nouvelles inscriptions d'élèves.
+        \item Collecte des informations nécessaires pour l'admission.
+        \item Suivi de l'état d'avancement des inscriptions.
+    \end{itemize}
+    
+    \item \textbf{Gestion de l'année scolaire :}
+    \begin{itemize}
+    		\item Décision de la semestrialisation ou trimestrialisation au début de chaque année scolaire
+par le directeur.
+    \end{itemize}
+    
+    \newpage
+
+    \item \textbf{Gestion des paiements de scolarité :}
+    \begin{itemize}
+        \item Enregistrement des paiements des élèves.
+        \item Génération de rappels de paiement pour les parents.
+        \item Suivi des paiements en attente.
+        \item Gestion des réductions de frais scolarité.
+    \end{itemize}
+
+    \item \textbf{Gestion des utilisateurs et des autorisations :}
+    \begin{itemize}
+        \item Création de comptes utilisateur pour le personnel administratif, les enseignants et les parents.
+        \item Attribution de niveaux d'autorisation appropriés.
+    \end{itemize}
+
+    \item \textbf{Communication avec les parents :}
+    \begin{itemize}
+        \item Envoi de notifications par e-mail aux parents pour les informations importantes (réunions, bulletins, etc.).
+    \end{itemize}
+\end{enumerate}
+
+\section{Déroulement du projet}
+
+\subsection{Plan d'assurance qualité :}
+
+Le plan d'assurance qualité sera élaboré pour garantir la qualité du produit final, y compris des tests rigoureux, des revues de code, et des normes de développement conformes.\\
+La qualité des délivrables pourra être vérifié par les différents maîtres d’ouvrage au moyen de divers rendez-vous. L’application pourra également être testée dans le cadre de la génération de buletin si son avancement le permet. Ce test permettrait d’évaluer la qualité de l’acquisition et de l’intégration de nouvelles données
+
+\subsection{Documentation :}
+
+Une documentation complète du projet sera créée pour assurer la compréhension et la maintenance du système. Elle comprendra la documentation technique, les guides d'utilisation et les manuels de support.\\
+Le code sera également auto-documenté pour permettre sa réutilisation la plus facile possible.
+
+\newpage
+
+\subsection{Responsabilités :}
+
+Les responsabilités pour ce projet sont réparties comme suit :
+
+\subsubsection{Maîtrise d'ouvrage :}
+
+La maîtrise d'ouvrage sera assurée par:
+
+\begin{itemize}
+	\item COUBADJA Nadia
+	\item TEOURI Sabirou
+\end{itemize}
+
+Leurs responsabilités incluent :
+
+\begin{enumerate}
+    \item La définition des besoins et des objectifs du projet.
+    \item L'approbation des spécifications fonctionnelles et techniques.
+    \item La validation des livrables du projet.
+\end{enumerate}
+
+\subsubsection{Maîtrise d'œuvre :}
+
+La maîtrise d'œuvre sera assurée par:
+
+\begin{itemize}
+	\item ISSA-TOURÉ Abdel-Aziz
+	\item TEOURI Samrou
+	\item TEOURI Touré-Ydaou
+\end{itemize}
+
+Leurs responsabilités incluent :
+
+\begin{enumerate}
+    \item La conception et le développement de l'application.
+    \item La gestion de projet, y compris la planification, le suivi et le reporting.
+    \item La conformité aux spécifications et aux normes de qualité définies.
+    \item La fourniture de support technique et de maintenance.
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,91 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\author{ISSA-TOURE Abdel-Aziz, TEOURI Samrou, TEOURI, Touré-Ydaou}
+\title{Dictionnaire de données de l'application de l'école Mon Avenir}
+\begin{document}
+
+\maketitle
+
+\begin{itemize}
+\item Eleve:
+	\begin{itemize}
+		\item identifiant eleve
+		\item nom
+		\item prenom
+		\item adresse
+		\item sexe
+		\item date de naissance
+		\item téléphone du parent
+		\item statut financier
+		\item statut scolaire (redoublant ou passant)
+		\item identifiant niveau
+	\end{itemize}
+
+\item Professeur:
+	\begin{itemize}
+		\item identifiant professeur
+		\item nom
+		\item prenom
+		\item adresse
+		\item sexe
+		\item date de naissance
+		\item telephone
+		\item email
+		\item identifiant cours
+	\end{itemize}
+
+\item Note:
+	\begin{itemize}
+		\item identifiant note
+		\item valeur
+		\item identifiant eleve
+		\item identifiant cours
+	\end{itemize}
+
+\item Cours
+	\begin{itemize}
+		\item identifiant cours
+		\item identifiant matiere
+		\item identifiant professeur
+		\item identifiant classe
+	\end{itemize}
+
+\item Bulletin
+	\begin{itemize}
+		\item identifiant bulletin
+		\item moyenne
+		\item rang
+		\item appréciation
+		\item absences
+		\item retards
+		\item identifiant eleve
+		\item identifaint trimestre ou semestre
+	\end{itemize}
+
+\item Année Scolaire:
+	\begin{itemize}
+		\item identifiant annee scolaire
+		\item date de rentrée
+		\item date de cloture
+	\end{itemize}
+
+\item Niveau:
+	\begin{itemize}
+		\item identifiant niveau
+		\item nom
+	\end{itemize}
+
+\item Matière
+	\begin{itemize}
+		\item identifiant de la matière
+		\item nom
+	\end{itemize}
+\end{itemize}
+
+\end{document}
