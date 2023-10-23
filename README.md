@@ -12,7 +12,7 @@ Ce projet est une application web de gestion d'école développée en utilisant 
 
 - Emploi du temps : Créer des emplois du temps pour les élèves et les enseignants, afficher les horaires des cours et des activités.
 
-- Gestion des absences : Suivre les absences des élèves et générer des rapports.
+- Gestion des absences et retards : Suivre les absences et retards des élèves et générer des rapports.
 
 - Bulletins : Générer les bulleitns des élèves après chaque trimestre.
 
