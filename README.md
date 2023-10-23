@@ -42,8 +42,6 @@ composer install
 php artisan key:generate
 ```
 
-6. Modifiez le fichier `.env` Assurez-vous de définir les paramètres de base de données et d'autres variables d'environnement nécessaires.
-
 6. Exécutez les migrations de base de données tout en intégrant les données de seeder:
 ```bash
 php artisan migrate --seed
