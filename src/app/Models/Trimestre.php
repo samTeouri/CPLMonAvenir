@@ -10,8 +10,7 @@ class Trimestre extends Model
     use HasFactory;
 
     protected $fillable = [
-        'code',
-        'libelle',
+        'numero',
         'annee_scolaire_id',
     ];
 
@@ -31,5 +30,14 @@ class Trimestre extends Model
      */
     public function anneeScolaire() {
         return $this->belongsTo(AnneeScolaire::class);
+    }
+
+    /**
+     *
+     *  Récupérer les retards du trimestre
+     *
+     */
+    public function retards() {
+        return $this->belongsTo(Retard::class);
     }
 }

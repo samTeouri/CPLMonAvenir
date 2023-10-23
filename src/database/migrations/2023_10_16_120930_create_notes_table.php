@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('notes', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('note');
+            $table->decimal('note');
             $table->enum('type', ['interrogation', 'devoir', 'composition']);
             $table->foreignId('eleve_id')->constrained()->noActionOnDelete()->cascadeOnDelete();
+            $table->foreignId('cours_id')->constrained()->noActionOnDelete()->cascadeOnDelete();
             $table->foreignId('trimestre_id')->constrained()->noActionOnDelete()->cascadeOnDelete();
             $table->timestamps();
         });

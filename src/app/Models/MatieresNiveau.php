@@ -5,14 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Coefficent extends Model
+class MatieresNiveau extends Model
 {
     use HasFactory;
 
     protected $fillable = [
+        'nombre_heures',
+        'coefficient',
         'matiere_id',
         'niveau_id',
-        'valeur'
     ];
 
     /**
@@ -31,5 +32,14 @@ class Coefficent extends Model
      */
     public function niveau() {
         return $this->belongsTo(Niveau::class);
+    }
+
+    /**
+     *
+     *  Récupérer les cours correspondant à la matière et au niveau
+     *
+     */
+    public function cours() {
+        return $this->hasMany(Cours::class);
     }
 }

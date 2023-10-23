@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('coefficients', function (Blueprint $table) {
+        Schema::create('matieres_niveaux', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('valeur');
+            $table->bigInteger('coefficient');
+            $table->integer('nombre_heures');
             $table->foreignId('matiere_id')->constrained()->cascadeOnUpdate();
             $table->foreignId('niveau_id')->constrained()->cascadeOnUpdate();
             $table->timestamps();
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('coefficients');
+        Schema::dropIfExists('matieres_niveaux');
     }
 };

@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->date('date_naissance');
             $table->boolean('redoublant');
-            $table->foreignId('classe_id')->constrained()->cascadeOnUpdate();
+            $table->foreignId('classe_id')->constrained()->nullOnDelete()->cascadeOnUpdate();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }
