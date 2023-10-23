@@ -42,9 +42,11 @@ composer install
 php artisan key:generate
 ```
 
-6. Exécutez les migrations de base de données :
+6. Modifiez le fichier `.env` Assurez-vous de définir les paramètres de base de données et d'autres variables d'environnement nécessaires.
+
+6. Exécutez les migrations de base de données tout en intégrant les données de seeder:
 ```bash
-php artisan migrate
+php artisan migrate --seed
 ```
 
 7. Lancez le serveur de développement :
@@ -54,9 +56,10 @@ php artisan serve
 
 8. Accédez à l'application dans votre navigateur à l'adresse http://localhost:8000.
 
-## Configuration
+## Informations supplémentaires
 
-Vous pouvez configurer l'application en modifiant le fichier `.env`. Assurez-vous de définir les paramètres de base de données et d'autres variables d'environnement nécessaires.
+* Dans le dossier Documents vous trouverez toutes les informations nécessaires à la prise en main du projet (Diagramme de classe, Cahier de charges, ...)
+* Le dossier Template contient le template à utiliser pour le projet, tous les fichiers JS et CSS ont déjà été intégré au projet. Si dans l'exécution de vos tâches vous êtes amenés à créer des vues HTML, vous n'aurez qu'à intégrer les vues correspondantes du template en ajoutant seulement le code HTML.
 
 ## Contributeurs
 
