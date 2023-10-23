@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('trimestres', function (Blueprint $table) {
             $table->id();
-            $table->string('libelle');
-            $table->string('code');
+            $table->integer('numero');
             $table->foreignId('annees_scolaire_id')->constrained()->cascadeOnUpdate();
             $table->timestamps();
         });

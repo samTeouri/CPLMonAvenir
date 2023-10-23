@@ -13,6 +13,7 @@ class Note extends Model
         'note',
         'type',
         'eleve_id',
+        'cours_id',
         'trimestre_id'
     ];
 
@@ -23,6 +24,15 @@ class Note extends Model
      */
     public function eleve() {
         return $this->belongsTo(Eleve::class);
+    }
+
+    /**
+     *
+     *  Récupérer le cours dans lequel l'élève a eu la note
+     *
+     */
+    public function cours() {
+        return $this->belongsTo(Cours::class);
     }
 
     /**

@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('code');
             $table->string('libelle');
-            $table->bigInteger('nombre_heures');
             $table->foreignId('classe_id')->constrained()->cascadeOnUpdate();
             $table->foreignId('professeur_id')->constrained()->cascadeOnUpdate();
             $table->foreignId('matiere_id')->constrained()->cascadeOnUpdate();

@@ -20,15 +20,6 @@ class Matiere extends Model
      *
      */
     public function niveaux() {
-        return $this->belongsToMany(Niveau::class, 'coefficients', 'matiere_id', 'niveau_id')->withPivot('valeur');
-    }
-
-    /**
-     *
-     *  Récupérer les cours correspondants
-     *
-     */
-    public function cours() {
-        return $this->hasMany(Cours::class);
+        return $this->belongsToMany(Niveau::class, 'matieres_niveaux', 'matiere_id', 'niveau_id')->withPivot('valeur');
     }
 }

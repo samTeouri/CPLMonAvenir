@@ -20,7 +20,7 @@ class Niveau extends Model
      *
      */
     public function matieres() {
-        return $this->belongsToMany(Matiere::class, 'coefficients', 'niveau_id', 'matiere_id')->withPivot('valeur');
+        return $this->belongsToMany(Matiere::class, 'matieres_niveaux', 'niveau_id', 'matiere_id')->withPivot('valeur');
     }
 
     /**

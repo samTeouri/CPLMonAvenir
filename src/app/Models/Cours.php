@@ -12,7 +12,6 @@ class Cours extends Model
     protected $fillable = [
         'code',
         'libelle',
-        'nombre_heures',
         'classe_id',
         'professeur_id',
         'matiere_id'
@@ -38,11 +37,11 @@ class Cours extends Model
 
     /**
      *
-     *  Récupérer la matière du cours
+     *  Récupérer la matière et le niveau du cours
      *
      */
-    public function matiere() {
-        return $this->belongsTo(Matiere::class);
+    public function MatieresNiveau() {
+        return $this->belongsTo(MatieresNiveau::class);
     }
 
     /**

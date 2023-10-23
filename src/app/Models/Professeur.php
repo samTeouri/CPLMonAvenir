@@ -10,7 +10,8 @@ class Professeur extends User
 
     protected $fillable = [
         'niveau_etudes',
-        'salaire'
+        'salaire',
+        'user_id',
     ];
 
     /**
