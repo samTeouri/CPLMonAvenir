@@ -36,6 +36,7 @@
                                     <!-- jQuery Validation (.js-validation-reminder class is initialized in js/pages/op_auth_reminder.min.js which was auto compiled from _es6/pages/op_auth_reminder.js) -->
                                     <!-- For more info and examples you can check out https://github.com/jzaefferer/jquery-validation -->
                                     <form class="js-validation-reminder" action="{{ route('password.email') }}" method="POST">
+                                        @csrf
                                         <div class="form-group py-3">
                                             <input type="text" class="form-control form-control-lg form-control-alt @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Email">
                                             @error('email')

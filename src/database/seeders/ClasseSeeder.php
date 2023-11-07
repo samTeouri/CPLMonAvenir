@@ -26,8 +26,8 @@ class ClasseSeeder extends Seeder
         ]);
 
         Classe::create([
-            'code' => '3',
-            'libelle' => 'troisième',
+            'code' => '3A',
+            'libelle' => 'Troisième A',
             'niveau_id' => 4
         ]);
     }

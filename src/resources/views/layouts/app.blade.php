@@ -8,23 +8,26 @@
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ config('app.name', 'CPL Mon Avenir') }}</title>
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+        <link rel="stylesheet" href="{{ asset('assets/js/plugins/toastr/toastr.min.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/oneui.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
 
         <!-- Scripts -->
         {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
     </head>
     <body>
         @yield('content')
-        <script src="{{ asset('assets/js/core/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('assets/js/plugins/toastr/toastr.min.js') }}"></script>
         <script src="{{ asset('assets/js/core/simplebar.min.js') }}"></script>
         <script src="{{ asset('assets/js/core/jquery.min.js') }}"></script>
         <script src="{{ asset('assets/js/core/jquery-scrollLock.min.js') }}"></script>
         <script src="{{ asset('assets/js/core/jquery.appear.min.js') }}"></script>
         <script src="{{ asset('assets/js/core/js.cookie.min.js') }}"></script>
+        <script src="{{ asset('assets/js/core/bootstrap.bundle.min.js') }}"></script>
 
         <script src="{{ asset('assets/js/oneui.core.min.js') }}"></script>
         <script src="{{ asset('assets/js/oneui.app.min.js') }}"></script>

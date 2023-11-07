@@ -30,6 +30,7 @@
                                         Bienvenue, créez votre compte !
                                     </p>
                                     <form class="js-validation-signin" action="{{ route('register') }}" method="POST">
+                                        @csrf
                                         <div class="py-3">
                                             <div class="form-group">
                                                 <input type="text" class="form-control form-control-alt form-control-lg @error('nom') is-invalid @enderror" value="{{ old('nom') }}" id="nom" name="nom" placeholder="Nom" required autocomplete="nom" autofocus>

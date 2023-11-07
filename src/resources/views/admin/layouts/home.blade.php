@@ -7,7 +7,7 @@
     @include('admin.layouts.navbar')
 
     <main id="main-container">
-        @yield('content')
+        @yield('main-content')
     </main>
 
     @include('admin.layouts.footer')

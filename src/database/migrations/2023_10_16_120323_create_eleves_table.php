@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('eleves', function (Blueprint $table) {
             $table->id();
+            $table->string('matricule');
             $table->date('date_naissance');
             $table->boolean('redoublant');
             $table->foreignId('classe_id')->constrained()->nullOnDelete()->cascadeOnUpdate();

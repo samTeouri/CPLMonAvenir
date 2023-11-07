@@ -1,0 +1,7 @@
+/* Eleves create page */
+
+.field-required {
+    font-weight: bold;
+    font-style: normal;
+    color: #f00;
+}

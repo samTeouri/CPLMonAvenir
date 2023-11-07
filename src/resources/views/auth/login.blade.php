@@ -30,6 +30,7 @@
                                         Bienvenue, connectez vous à votre compte
                                     </p>
                                     <form class="js-validation-signin" action="{{ route('login') }}" method="POST">
+                                        @csrf
                                         <div class="py-3">
                                             <div class="form-group">
                                                 <input type="text" class="form-control form-control-alt form-control-lg @error('email') is-invalid @enderror" value="{{ old('email') }}" id="email" name="email" placeholder="Email" required autocomplete="email" autofocus>

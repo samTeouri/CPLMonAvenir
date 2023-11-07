@@ -15,22 +15,22 @@ class NiveauSeeder extends Seeder
     {
         Niveau::create([
             'code' => '6',
-            'libelle' => 'sixième'
+            'libelle' => 'Sixième'
         ]);
 
         Niveau::create([
             'code' => '5',
-            'libelle' => 'cinquième'
+            'libelle' => 'Cinquième'
         ]);
 
         Niveau::create([
             'code' => '4',
-            'libelle' => 'quatrième'
+            'libelle' => 'Quatrième'
         ]);
 
         Niveau::create([
             'code' => '3',
-            'libelle' => 'troisième'
+            'libelle' => 'Troisième'
         ]);
     }
 }

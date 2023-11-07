@@ -11,6 +11,7 @@ class Eleve extends User
 
     protected $fillable = [
         'date_naissance',
+        'matricule',
         'redoublant',
         'classe_id',
         'user_id',

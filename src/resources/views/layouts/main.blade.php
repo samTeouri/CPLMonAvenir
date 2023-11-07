@@ -6,6 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+        
         <link rel="stylesheet" href="{{ asset('assets/css/oneui.min.css') }}">
 
         <title>CPL Mon Avenir</title>
@@ -50,19 +51,19 @@
                 </div>
                 <!-- END Page Content -->
             </main>
-
             @include('layouts.footer')
         </div>
 
-
-        <script src="{{ asset('assets/js/core/bootstrap.bundle.min.js') }}"></script>
         <script src="{{ asset('assets/js/core/simplebar.min.js') }}"></script>
         <script src="{{ asset('assets/js/core/jquery.min.js') }}"></script>
         <script src="{{ asset('assets/js/core/jquery-scrollLock.min.js') }}"></script>
         <script src="{{ asset('assets/js/core/jquery.appear.min.js') }}"></script>
+        <script src="{{ asset('assets/js/core/bootstrap.bundle.min.js') }}"></script>
         <script src="{{ asset('assets/js/core/js.cookie.min.js') }}"></script>
 
         <script src="{{ asset('assets/js/oneui.core.min.js') }}"></script>
         <script src="{{ asset('assets/js/oneui.app.min.js') }}"></script>
+
+        @yield('dashboard-scripts')
     </body>
 </html>
