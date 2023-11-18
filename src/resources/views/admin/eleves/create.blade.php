@@ -2,12 +2,15 @@
 
 @section('main-content')
 
-@if ($success = Session::get('success'))
-<script src="{{asset('assets/js/core/jquery.min.js')}}"></script>
+@if (Session::get('success'))
 <script type="text/javascript">
-$(document).ready(function () {
-    toastr.success("{{ Session::get('success') }}");
-});
+    One.helpers("notify", {type: "success", icon: "fa fa-check mr-1", message: "{{ Session::get('success') }}"});
+</script>
+@endif
+
+@if (Session::get('error'))
+<script type="text/javascript">
+    One.helpers("notify", {type: "error", icon: "fa fa-check mr-1", message: "{{ Session::get('error') }}"});
 </script>
 @endif
 
