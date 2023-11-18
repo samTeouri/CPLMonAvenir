@@ -1,4 +1,4 @@
-@extends('admin.layouts.home')
+@extends('home')
 
 @section('main-content')
 
@@ -10,7 +10,9 @@
 
 @if (Session::get('error'))
 <script type="text/javascript">
-    One.helpers("notify", {type: "error", icon: "fa fa-check mr-1", message: "{{ Session::get('error') }}"});
+$(document).ready(function () {
+    toastr.success("{{ Session::get('success') }}");
+});
 </script>
 @endif
 
