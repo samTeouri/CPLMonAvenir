@@ -3,23 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class Professeur extends User
+class Professeur extends Model
 {
     use HasFactory;
-
-    protected $fillable = [
-        'niveau_etudes',
-        'salaire',
-        'user_id',
-    ];
-
-    /**
-     *
-     *  Récupérer les cours disppensés par le professeur
-     *
-     */
-    public function cours() {
-        return $this->hasMany(Cours::class);
-    }
 }
