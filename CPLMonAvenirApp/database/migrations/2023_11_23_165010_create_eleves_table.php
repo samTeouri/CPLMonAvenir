@@ -17,10 +17,12 @@ return new class extends Migration
             $table->string('prenom');
             $table->date('date_naissance');
             $table->string('lieu_naissance');
-            $table->json('contact_tuteur');
-            $table->string('matricule');
+            $table->json('contact_tuteur')->nullable();
+            $table->string('matricule')->nullable()->unique();
             $table->string('profil')->nullable();
             $table->string('adresse');
+            $table->integer('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

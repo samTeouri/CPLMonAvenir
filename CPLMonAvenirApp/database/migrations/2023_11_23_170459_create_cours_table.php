@@ -14,10 +14,12 @@ return new class extends Migration
         Schema::create('cours', function (Blueprint $table) {
             $table->id();
             $table->string('nom');
-            $table->integer('professeur_id');
+            $table->integer('professeur_id')->nullable();
             $table->integer('classe_id');
-            $table->foreign('professeur_id')->references('id')->on('professeur');
-            $table->foreign('classe_id')->references('id')->on('classe');
+            $table->integer('matiere_id');
+            $table->foreign('matiere_id')->references('id')->on('matieres');
+            $table->foreign('professeur_id')->references('id')->on('professeurs');
+            $table->foreign('classe_id')->references('id')->on('classes');
             $table->timestamps();
         });
     }
