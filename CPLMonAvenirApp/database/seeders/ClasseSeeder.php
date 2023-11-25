@@ -72,7 +72,7 @@ class ClasseSeeder extends Seeder
         $eleve_2 = Eleve::find(2);
 
         $eleve_1->classes()->attach($classe_2);
-        $eleve_1->classes()->attach($classe_1);
+        $eleve_2->classes()->attach($classe_1);
 
         $eleve_2->classes()->attach($classe_2);
         $eleve_1->classes()->attach($classe_1);
@@ -99,6 +99,5 @@ class ClasseSeeder extends Seeder
                 }
             }
         }
-
     }
 }

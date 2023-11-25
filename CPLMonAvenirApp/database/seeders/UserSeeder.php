@@ -16,27 +16,27 @@ class UserSeeder extends Seeder
     {
         User::create([
             'username' => 'monavenir',
-            'password' => Hash::make('1234')
+            'password' => Hash::make('12345678')
         ]);
 
         User::create([
             'username' => 'eleve1',
-            'password' => Hash::make('1234')
+            'password' => Hash::make('12345678')
         ]);
 
         User::create([
             'username' => 'eleve2',
-            'password' => Hash::make('1234')
+            'password' => Hash::make('12345678')
         ]);
 
         User::create([
             'username' => 'enseignant1',
-            'password' => Hash::make('1234')
+            'password' => Hash::make('12345678')
         ]);
 
         User::create([
             'username' => 'enseignant2',
-            'password' => Hash::make('1234')
+            'password' => Hash::make('12345678')
         ]);
     }
 }

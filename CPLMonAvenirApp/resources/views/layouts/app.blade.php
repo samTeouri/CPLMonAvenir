@@ -1,35 +1,68 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-        <!-- CSRF Token -->
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-        <title>{{ config('app.name', 'CPL Mon Avenir') }}</title>
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <!-- Fonts -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
-        <link rel="stylesheet" href="{{ asset('assets/js/plugins/toastr/toastr.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/css/oneui.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
+    <title>{{ config('app.name', 'CPL Mon Avenir') }}</title>
 
-        <!-- Scripts -->
-        {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
-    </head>
-    <body>
-        @yield('content')
-        <script src="{{ asset('assets/js/plugins/toastr/toastr.min.js') }}"></script>
-        <script src="{{ asset('assets/js/core/simplebar.min.js') }}"></script>
-        <script src="{{ asset('assets/js/core/jquery.min.js') }}"></script>
-        <script src="{{ asset('assets/js/core/jquery-scrollLock.min.js') }}"></script>
-        <script src="{{ asset('assets/js/core/jquery.appear.min.js') }}"></script>
-        <script src="{{ asset('assets/js/core/js.cookie.min.js') }}"></script>
-        <script src="{{ asset('assets/js/core/bootstrap.bundle.min.js') }}"></script>
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="{{ asset('assets/js/plugins/toastr/toastr.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/oneui.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
 
-        <script src="{{ asset('assets/js/oneui.core.min.js') }}"></script>
-        <script src="{{ asset('assets/js/oneui.app.min.js') }}"></script>
-    </body>
+    <!-- Scripts -->
+    {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
+</head>
+
+<body>
+    @yield('content')
+    <script src="{{ asset('assets/js/plugins/toastr/toastr.min.js') }}"></script>
+    <script src="{{ asset('assets/js/core/simplebar.min.js') }}"></script>
+    <script src="{{ asset('assets/js/core/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/js/core/jquery-scrollLock.min.js') }}"></script>
+    <script src="{{ asset('assets/js/core/jquery.appear.min.js') }}"></script>
+    <script src="{{ asset('assets/js/core/js.cookie.min.js') }}"></script>
+    <script src="{{ asset('assets/js/core/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins/jquery-sparkline/jquery.sparkline.min.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins/chart.js/Chart.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/js/oneui.core.min.js') }}"></script>
+    <script src="{{ asset('assets/js/oneui.app.min.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/be_pages_dashboard.min.js') }}"></script>
+
+    <script>
+        // changement de l'année dans l'application
+        $("#change-year").on("change", function(e) {
+            let annee_id = e.target.value
+            $.ajax({
+                type: 'GET',
+                url: `/changeYear/${annee_id}`,
+                success: function(response) {
+                    // Vérifiez si la requête a réussi du côté serveur
+                    if (response.success) {
+                        alert(response.message);
+                        window.location.href = response.url;
+                    } else {
+
+                    }
+                },
+                error: function(xhr, status, error) {
+                    // Gérer les erreurs de requête Ajax
+                    console.log(`status ${status}`)
+                    console.log(`error: ${error}`)
+                }
+            })
+        })
+    </script>
+
+
+
+</body>
+
 </html>

@@ -18,7 +18,7 @@ class EvaluationSeeder extends Seeder
     {
         //
 
-        /* Pour créer une évaluation il faut toud'abord récuperer la promotion (niveau),
+        /* Pour créer une évaluation il faut tout d'abord récuperer la promotion (niveau),
         concerné puis toutes les classes de ce niveau. 
         Ensuite recuperer toutes les matières du niveau et trier pour prendre la matières évaluée.
         Puis dans toutes les classes du niveau récupérer les cours dans chaque matière, et enfin trier chaque cours afin de voir celui fait dans la matière donnée en comparant les identifiants des matières.

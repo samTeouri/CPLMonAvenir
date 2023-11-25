@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnneeScolaireController;
 use App\Http\Controllers\ClasseController;
 use App\Http\Controllers\EleveController;
 use App\Http\Controllers\HomeController;
@@ -19,25 +20,27 @@ use Illuminate\Support\Facades\Route;
 */
 
 /* Routes d'authentification */
+
 Auth::routes();
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('login');
 });
 
-Route::group(['middleware' => 'auth', 'prefix' => '/admin'], function() {
-    Route::get('/dashboard', [HomeController::class, 'index'])->name('home');
 
-    /* Routes pour les classes */
-    Route::get('/classes-by-niveau/{niveau}', [ClasseController::class, 'getClassesByNiveau']);
 
-    /* Routes pour les niveaux */
-    Route::get('/niveau-by-classe/{classe}', [NiveauController::class, 'getNiveauByClasse']);
 
-    /* Routes pour les élèves */
-    Route::group(['prefix' => '/eleves'], function() {
-        Route::get('/create', [EleveController::class, 'create'])->name('eleves.create');
-        Route::get('/index', [EleveController::class, 'index'])->name('eleves.index');
-        Route::post('/store', [EleveController::class, 'store'])->name('eleves.store');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
+
+
+
+    // Routes concernant l'année scolaire
+    Route::controller(AnneeScolaireController::class)->group(function () {
+
+
+        // Méthode AJAX
+        Route::get('/changeYear/{anneeScolaire}', 'changeAppCurrentYear')->name('changeYear');
     });
 });
