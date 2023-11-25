@@ -36,10 +36,11 @@
                                             <div class="py-3">
                                                 <div class="form-group">
                                                     <input type="text"
-                                                        class="form-control form-control-alt form-control-lg @error('email') is-invalid @enderror"
-                                                        value="{{ old('email') }}" id="email" name="email"
-                                                        placeholder="Email" required autocomplete="email" autofocus>
-                                                    @error('email')
+                                                        class="form-control form-control-alt form-control-lg @error('username') is-invalid @enderror"
+                                                        value="{{ old('username') }}" id="username" name="username"
+                                                        placeholder="Nom d'utilisateur" required autocomplete="username"
+                                                        autofocus>
+                                                    @error('username')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
@@ -49,7 +50,8 @@
                                                     <input type="password"
                                                         class="form-control form-control-alt form-control-lg @error('password') is-invalid @enderror"
                                                         value="{{ old('password') }}" id="password" name="password"
-                                                        placeholder="Password" required autocomplete="password" autofocus>
+                                                        placeholder="Mot de passe" required autocomplete="password"
+                                                        autofocus>
                                                     @error('password')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
