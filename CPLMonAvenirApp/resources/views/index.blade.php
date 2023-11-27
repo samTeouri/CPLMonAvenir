@@ -8,7 +8,7 @@
                 <div class="flex-sm-fill">
                     <div class="d-flex justify-content-between">
                         <h1 class="h2 font-w700 mb-2">
-                            Soukouli
+                            CPL Mon Avenir 
                         </h1>
                         <h2 class="font-w700 mb-2">
                             Année Scolaire: <span class="text-primary">{{ $anneeCourante->annee }}</span>
