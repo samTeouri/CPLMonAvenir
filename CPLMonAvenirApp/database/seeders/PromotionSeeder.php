@@ -86,9 +86,10 @@ class PromotionSeeder extends Seeder
             for ($i = 1; $i < 4; $i++) {
 
                 $trimestre = Trimestre::create([
-                    'intitule' => 'Trimestre ' . $i . ' ' . $promotion->nom . 'eme ' . $promotion->anneeScolaire->annee
+                    'intitule' => 'Trimestre ' . $i . ' ' . $promotion->nom . 'eme ' . $promotion->anneeScolaire->annee,
+                    'promotion_id' => $promotion->id
                 ]);
-                $promotion->trimestres()->attach($trimestre);
+                //$promotion->trimestres()->attach($trimestre);
             }
 
             // ajout des matières enseignées au niveau
@@ -96,7 +97,5 @@ class PromotionSeeder extends Seeder
                 $promotion->matieres()->attach($matiere);
             }
         }
-
-        
     }
 }

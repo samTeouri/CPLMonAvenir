@@ -11,12 +11,13 @@ class Trimestre extends Model
 
     protected $fillable = [
         'intitule',
-        'courant'
+        'courant',
+        'promotion_id'
     ];
 
     public function promotions()
     {
-        return $this->belongsToMany(Promotion::class);
+        return $this->belongsTo(Promotion::class);
     }
 
     public function eleves()

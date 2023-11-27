@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('intitule');
             $table->boolean('courant')->default(false);
+            $table->integer('promotion_id');
+            $table->foreign('promotion_id')->references('id')->on('promotions');
             $table->timestamps();
         });
     }

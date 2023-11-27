@@ -10,12 +10,13 @@ class Promotion extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nom'
+        'nom',
+        'annee_scolaire_id'
     ];
 
     public function trimestres()
     {
-        return $this->belongsToMany(Trimestre::class);
+        return $this->hasMany(Trimestre::class);
     }
 
     public function matieres()
