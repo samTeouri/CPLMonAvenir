@@ -15,12 +15,12 @@ class Cours extends Model
         'professeur_id',
     ];
 
-    public function classes()
+    public function classe()
     {
         return $this->belongsTo(Classe::class);
     }
 
-    public function professeurs()
+    public function professeur()
     {
         return $this->belongsTo(Professeur::class);
     }

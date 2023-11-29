@@ -29,7 +29,8 @@
             <div>
                 <select class="form-control" id="change-year">
                     @foreach ($anneesScolaires as $anneeScolaire)
-                        <option value="{{ $anneeScolaire->id }}"@if($anneeScolaire->courant === true) selected @endif>{{ $anneeScolaire->annee }}</option>
+                        <option value="{{ $anneeScolaire->id }}"@if ($anneeScolaire->courant === true) selected @endif>
+                            {{ $anneeScolaire->annee }}</option>
                     @endforeach
                 </select>
             </div>
@@ -40,8 +41,8 @@
             <div class="dropdown d-inline-block ml-2">
                 <button type="button" class="btn btn-sm btn-dual d-flex align-items-center"
                     id="page-header-user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img class="rounded-circle" src="assets/media/avatars/avatar10.jpg" alt="Header Avatar"
-                        style="width: 21px;">
+                    <img class="rounded-circle" src="{{ asset('assets/media/avatars/avatar10.jpg') }}"
+                        alt="Header Avatar" style="width: 21px;">
                     <span class="d-none d-sm-inline-block ml-2">Adam</span>
                     <i class="fa fa-fw fa-angle-down d-none d-sm-inline-block ml-1 mt-1"></i>
                 </button>

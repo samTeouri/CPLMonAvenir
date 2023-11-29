@@ -28,6 +28,5 @@ class PromotionsServiceProvider extends ServiceProvider
         view()->composer('*', function ($view) use ($promotions) {
             $view->with('promotions', $promotions);
         });
-
     }
 }

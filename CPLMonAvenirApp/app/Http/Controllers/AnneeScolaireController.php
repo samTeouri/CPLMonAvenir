@@ -13,7 +13,7 @@ class AnneeScolaireController extends Controller
     public function changeAppCurrentYear(AnneeScolaire $anneeScolaire)
     {
 
-        $url = url()->previous();
+        $url = '/dashboard';
 
         $predAnnee = AnneeScolaire::getAnneeScolaire();
         $predAnnee->update([

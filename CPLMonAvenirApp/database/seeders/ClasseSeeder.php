@@ -34,48 +34,65 @@ class ClasseSeeder extends Seeder
         ]);
 
         $classe_2 = Classe::create([
+            'nom' => '6eme B' . ' ' . $promotion_1->anneeScolaire->annee,
+            'promotion_id' => $promotion_1->id
+        ]);
+
+        $classe_3 = Classe::create([
             'nom' => '6eme A' . ' ' . $promotion_5->anneeScolaire->annee,
             'promotion_id' => $promotion_5->id
         ]);
 
-        $classe_3 = Classe::create([
+        $classe_4 = Classe::create([
+            'nom' => '6eme B' . ' ' . $promotion_5->anneeScolaire->annee,
+            'promotion_id' => $promotion_5->id
+        ]);
+
+        $classe_5 = Classe::create([
             'nom' => '5eme A' . ' ' . $promotion_2->anneeScolaire->annee,
             'promotion_id' => $promotion_2->id
         ]);
 
-        $classe_4 = Classe::create([
+        $classe_6 = Classe::create([
             'nom' => '5eme A' . ' ' . $promotion_6->anneeScolaire->annee,
             'promotion_id' => $promotion_6->id
         ]);
 
-        $classe_5 = Classe::create([
+        $classe_7 = Classe::create([
             'nom' => '4eme A' . ' ' . $promotion_3->anneeScolaire->annee,
             'promotion_id' => $promotion_3->id
         ]);
 
-        $classe_6 = Classe::create([
+        $classe_8 = Classe::create([
             'nom' => '4eme A' . ' ' . $promotion_7->anneeScolaire->annee,
             'promotion_id' => $promotion_7->id
         ]);
 
-        $classe_7 = Classe::create([
+        $classe_9 = Classe::create([
             'nom' => '3eme A' . ' ' . $promotion_4->anneeScolaire->annee,
             'promotion_id' => $promotion_4->id
         ]);
 
-        $classe_8 = Classe::create([
+        $classe_10 = Classe::create([
             'nom' => '3eme A' . ' ' . $promotion_8->anneeScolaire->annee,
             'promotion_id' => $promotion_8->id
         ]);
 
         $eleve_1 = Eleve::find(1);
         $eleve_2 = Eleve::find(2);
+        $eleve_3 = Eleve::find(3);
+        $eleve_4 = Eleve::find(4);
 
-        $eleve_1->classes()->attach($classe_2);
-        $eleve_2->classes()->attach($classe_1);
+        $eleve_1->classes()->attach($classe_5);
+        $eleve_2->classes()->attach($classe_3);
 
-        $eleve_2->classes()->attach($classe_2);
-        $eleve_1->classes()->attach($classe_1);
+        $eleve_2->classes()->attach($classe_5);
+        $eleve_1->classes()->attach($classe_3);
+
+        $eleve_3->classes()->attach($classe_4);
+
+        $eleve_4->classes()->attach($classe_4);
+
 
 
         $matieres = Matiere::all();
