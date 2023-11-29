@@ -16,17 +16,17 @@ class Note extends Model
         'trimestre_id'
     ];
 
-    public function eleves()
+    public function eleve()
     {
         return $this->belongsTo(Eleve::class);
     }
 
-    public function trimestres()
+    public function trimestre()
     {
         return $this->belongsTo(Trimestre::class);
     }
 
-    public function evaluations()
+    public function evaluation()
     {
         return $this->belongsTo(Evaluation::class);
     }

@@ -14,7 +14,7 @@ class Classe extends Model
         'promotion_id'
     ];
 
-    public function promotions()
+    public function promotion()
     {
         return $this->belongsTo(Promotion::class);
     }

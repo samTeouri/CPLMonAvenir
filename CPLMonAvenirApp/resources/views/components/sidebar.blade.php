@@ -153,7 +153,8 @@
                             <ul class="nav-main-submenu">
                                 @foreach ($promotions as $promotion)
                                     <li class="nav-main-item">
-                                        <a class="nav-main-link" href="#">
+                                        <a class="nav-main-link"
+                                            href="{{ route('evaluation_matieres', $promotion->id) }}">
                                             <span class="nav-main-link-name">{{ $promotion->nom }}eme</span>
                                         </a>
                                     </li>
@@ -206,6 +207,30 @@
 
                             </ul>
                         </li>
+
+
+                        <!---- Devoirs ---->
+
+                        <li class="nav-main-item">
+                            <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true"
+                                aria-expanded="false" href="#">
+                                <i class="nav-main-link-icon si si-eye"></i>
+                                <span class="nav-main-link-name">Voir les devoirs/compostions</span>
+                            </a>
+                            <ul class="nav-main-submenu">
+                                @foreach ($promotions as $promotion)
+                                    <li class="nav-main-item">
+                                        <a class="nav-main-link"
+                                            href="{{ route('view_evaluation_matieres', $promotion->id) }}">
+                                            <span class="nav-main-link-name">{{ $promotion->nom }}eme</span>
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </li>
+
+
+
 
                     </ul>
                 </li>
