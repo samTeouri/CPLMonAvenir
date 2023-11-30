@@ -11,6 +11,7 @@ class Cours extends Model
 
     protected $fillable = [
         'nom',
+        'coefficient',
         'classe_id',
         'professeur_id',
     ];

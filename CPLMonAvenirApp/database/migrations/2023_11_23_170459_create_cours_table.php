@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nom');
             $table->integer('professeur_id')->nullable();
+            $table->integer('coefficient');
             $table->integer('classe_id');
             $table->integer('matiere_id');
             $table->foreign('matiere_id')->references('id')->on('matieres');
