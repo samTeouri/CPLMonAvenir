@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Classe;
 use App\Models\Cours;
 use App\Models\Eleve;
 use App\Models\Evaluation;
@@ -13,7 +14,39 @@ use Illuminate\Http\Request;
 
 class EvaluationController extends Controller
 {
-    //
+
+    // liste des cours pour créer une intérrogation
+    public function choixCours(Classe $classe)
+    {
+        $cours = $classe->cours;
+        $trimestres = $classe->promotion->trimestres;
+
+        $data = [
+            'cours' => $cours,
+            'trimestres' => $trimestres,
+            'classe' => $classe
+        ];
+
+        return view('evaluation.interrogation.liste_cours', $data);
+    }
+
+
+    public function choixCoursViewInterrogation(Classe $classe)
+    {
+        $cours = $classe->cours;
+        $trimestres = $classe->promotion->trimestres;
+
+        $data = [
+            'cours' => $cours,
+            'trimestres' => $trimestres,
+            'classe' => $classe
+        ];
+
+        return view('evaluation.interrogation.view.liste_cours', $data);
+    }
+
+
+    // liste des matières pour créer une évaluation
     public function choixMatiere(Promotion $promotion)
     {
 
@@ -28,6 +61,34 @@ class EvaluationController extends Controller
         return view('evaluation.liste_matieres', $data);
     }
 
+
+    // les interrogations de la classe dans le cours donné dans le trimestre choisi
+    public function indexInterrogation(Classe $classe, Cours $cours, Trimestre $trimestre)
+    {
+        $evaluations = $cours->evaluations;
+
+
+        // tableau contenant les interrogations du trimestre dans le cours
+        $evaluation_trimestre = [];
+
+        foreach ($evaluations as $evaluation) {
+            if (($evaluation->notes[0]->trimestre_id === $trimestre->id) && $evaluation->type === 'interrogation') {
+                array_push($evaluation_trimestre, $evaluation);
+            }
+        }
+
+        $data = [
+            'evaluations' => $evaluation_trimestre,
+            'cours' => $cours,
+            'classe' => $classe,
+            'trimestre' => $trimestre
+        ];
+
+        return view('evaluation.interrogation.view.index', $data);
+    }
+
+
+    // liste des matières pour voir les évaluations et les modifier
     public function choixMatiereViewEvaluation(Promotion $promotion)
     {
         // on récupère toutes les matières du niveau
@@ -66,7 +127,7 @@ class EvaluationController extends Controller
 
         // tri des evaluations du trimestre concerné en fonction du trimestre de l'une des notes dans l'évaluation donnée
         foreach ($tab_evaluations as $evaluation) {
-            if (($evaluation->notes[0]->trimestre_id === $trimestre->id) && ($evaluation->type === 'devoir' || 'composition')) {
+            if (($evaluation->notes[0]->trimestre_id === $trimestre->id) && ($evaluation->type === 'devoir' || $evaluation->type === 'composition')) {
                 array_push($evaluation_trimestre, $evaluation);
             }
         }
@@ -131,41 +192,100 @@ class EvaluationController extends Controller
     }
 
 
+    // page de création d'une interrogation
+    public function createInterrogation(Classe $classe, Cours $cours,  Trimestre $trimestre)
+    {
+
+
+        $data = [
+            'cours' => $cours,
+            'classe' => $classe,
+            'trimestre' => $trimestre,
+        ];
+
+        return view('evaluation.interrogation.create', $data);
+    }
+
+
     // Création des évaluations
     public function store(Request $request)
     {
 
+        if ($request->type === 'devoir' || $request->type === 'composition') {
 
-        $trimestre = Trimestre::find($request->trimestre_id);
+            $trimestre = Trimestre::find($request->trimestre_id);
 
-        // Récupérer les notes pour chaque élève
-        $eleves = $request->input('eleves');
+            // Récupérer les notes pour chaque élève
+            $eleves = $request->input('eleves');
 
-        // Tableau pour stocker les IDs de cours uniques
-        $idsCours = [];
+            // Tableau pour stocker les IDs de cours uniques
+            $idsCours = [];
 
-        foreach ($request->eleves as $eleve) {
-            // Ajouter l'ID de cours au tableau
-            $idsCours[] = $eleve['cours_id'];
+            foreach ($request->eleves as $eleve) {
+                // Ajouter l'ID de cours au tableau
+                $idsCours[] = $eleve['cours_id'];
+            }
+
+
+
+            // Récupérer les IDs de cours de manière unique
+            $idsCoursUniques = array_unique($idsCours);
+
+            $tab_cours = [];
+            foreach ($idsCoursUniques as $id) {
+                $cours = Cours::find($id);
+                array_push($tab_cours, $cours);
+            }
+
+
+
+            $tab_evaluations = [];
+
+            // Exemple de traitement des données
+            foreach ($tab_cours as $cours) {
+                $evaluation = Evaluation::create([
+                    'intitule' => $request->intitule . ' ' . $cours->classe->nom . ' ' . substr(
+                        $trimestre->intitule,
+                        0,
+                        11
+                    ),
+                    'type' => $request->type,
+                    'note_maximale' => $request->note_maximale,
+                    'date' => $request->date,
+                    'cours_id' => $cours->id
+                ]);
+                array_push($tab_evaluations, $evaluation);
+            }
+
+            foreach ($tab_evaluations as $evaluation) {
+                foreach ($eleves as $eleve) {
+                    if (intval($eleve['cours_id']) === $evaluation->cours_id) {
+                        //ddd('note');
+                        $note = Note::create([
+                            'valeur' => floatval($eleve['note']),
+                            'evaluation_id' => $evaluation->id,
+                            'trimestre_id' => $request->trimestre_id,
+                            'eleve_id' => intval($eleve['eleve_id'])
+                        ]);
+                        $eleve_model = Eleve::find($eleve['eleve_id']);
+                        $evaluation->notes()->save($note);
+                        $eleve_model->notes()->save($note);
+                        $trimestre->notes()->save($note);
+                    }
+                }
+            }
+
+            $trimestre = Trimestre::find($request->trimestre_id);
+
+
+
+            return redirect()->route('evaluation.create', ['promotion' => $trimestre->promotion->id, 'matiere' => $tab_cours[0]->matiere->id, 'trimestre' => $trimestre->id])->with('notification', ['type' => 'success', 'message' => 'Evaluation créée avec succès']);
         }
 
 
-
-        // Récupérer les IDs de cours de manière unique
-        $idsCoursUniques = array_unique($idsCours);
-
-        $tab_cours = [];
-        foreach ($idsCoursUniques as $id) {
-            $cours = Cours::find($id);
-            array_push($tab_cours, $cours);
-        }
-
-
-
-        $tab_evaluations = [];
-
-        // Exemple de traitement des données
-        foreach ($tab_cours as $cours) {
+        if ($request->type === 'interrogation') {
+            $cours = Cours::find($request->cours_id);
+            $trimestre = Trimestre::find($request->trimestre_id);
             $evaluation = Evaluation::create([
                 'intitule' => $request->intitule . ' ' . $cours->classe->nom . ' ' . substr(
                     $trimestre->intitule,
@@ -175,34 +295,29 @@ class EvaluationController extends Controller
                 'type' => $request->type,
                 'note_maximale' => $request->note_maximale,
                 'date' => $request->date,
-                'cours_id' => $cours->id
+                'cours_id' => $request->cours_id
             ]);
-            array_push($tab_evaluations, $evaluation);
-        }
 
-        foreach ($tab_evaluations as $evaluation) {
+
+            $eleves = $request->input('eleves');
+
+
             foreach ($eleves as $eleve) {
-                if (intval($eleve['cours_id']) === $evaluation->cours_id) {
-                    //ddd('note');
-                    $note = Note::create([
-                        'valeur' => floatval($eleve['note']),
-                        'evaluation_id' => $evaluation->id,
-                        'trimestre_id' => $request->trimestre_id,
-                        'eleve_id' => intval($eleve['eleve_id'])
-                    ]);
-                    $eleve_model = Eleve::find($eleve['eleve_id']);
-                    $evaluation->notes()->save($note);
-                    $eleve_model->notes()->save($note);
-                    $trimestre->notes()->save($note);
-                }
+
+                $note = Note::create([
+                    'valeur' => floatval($eleve['note']),
+                    'evaluation_id' => $evaluation->id,
+                    'trimestre_id' => $request->trimestre_id,
+                    'eleve_id' => intval($eleve['eleve_id'])
+                ]);
+                $eleve_model = Eleve::find($eleve['eleve_id']);
+                $evaluation->notes()->save($note);
+                $eleve_model->notes()->save($note);
+                $trimestre->notes()->save($note);
             }
+
+            return redirect()->route('evaluation.create.interrogation', ['classe' => $cours->classe->id, 'cours' => $cours->id, 'trimestre' => $trimestre->id])->with('notification', ['type' => 'success', 'message' => 'Interrogation créée avec succès']);
         }
-
-        $trimestre = Trimestre::find($request->trimestre_id);
-
-
-
-        return redirect()->route('evaluation.create', ['promotion' => $trimestre->promotion->id, 'matiere' => $tab_cours[0]->matiere->id, 'trimestre' => $trimestre->id])->with('notification', ['type' => 'success', 'message' => 'Evaluation créée avec succès']);
     }
 
 
@@ -211,11 +326,7 @@ class EvaluationController extends Controller
     {
         $evaluation->update([
             'intitule' =>
-            $request->intitule . ' ' . $evaluation->cours->classe->nom . ' ' . substr(
-                $trimestre->intitule,
-                0,
-                11
-            ),
+            $request->intitule,
             'date' => $request->date,
             'type' => $request->type,
             'note_maximale' => $request->note_maximale

@@ -74,10 +74,15 @@
                             href="op_auth_lock.html">
                             <span class="font-size-sm font-w500">Lock Account</span>
                         </a>
-                        <a class="dropdown-item d-flex align-items-center justify-content-between"
-                            href="op_auth_signin.html">
-                            <span class="font-size-sm font-w500">Log Out</span>
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                            <i class="feather icon-power"></i> Déconnexion
                         </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
                     </div>
                 </div>
             </div>

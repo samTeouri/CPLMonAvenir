@@ -41,12 +41,16 @@ Route::middleware(['auth'])->group(function () {
     Route::controller(EvaluationController::class)->group(function () {
         Route::prefix('/evaluation')->group(function () {
             Route::get('/add/niveau/matiere/trimestre/{promotion}/{matiere}/{trimestre}', 'create')->name('evaluation.create');
+            Route::get('/add/interrogation/{classe}/cours/{cours}/trimestre/{trimestre}', 'createInterrogation')->name('evaluation.create.interrogation');
             Route::post('/add/nouvelleEvaluation', 'store')->name('evaluation.store');
             Route::get('/add/niveau/matieres/{promotion}', 'choixMatiere')->name('evaluation_matieres');
             Route::get('/liste/niveau/matieres/{promotion}', 'choixMatiereViewEvaluation')->name('view_evaluation_matieres');
             Route::get('/liste/index/niveau/matieres/{promotion}/{matiere}/{trimestre}', 'index')->name('evaluation.index');
             Route::get('/details/{evaluation}/trimestre/{trimestre}/niveau/{promotion}', 'show')->name('evaluation.show');
             Route::post('/update/{evaluation}/trimestre/{trimestre}', 'update')->name('evaluation.update');
+            Route::get('/add/interrogation/liste-des-cours/classe/{classe}', 'choixCours')->name('interrogation.cours');
+            Route::get('/liste/interrogation/liste-des-cours/classe/{classe}', 'choixCoursViewInterrogation')->name('view_interrogation_cours');
+            Route::get('/liste/index/interrogation/liste-des-interrogations/classe/{classe}/cours/{cours}/trimestre{trimestre}', 'indexInterrogation')->name('interrogation.index');
         });
     });
 
