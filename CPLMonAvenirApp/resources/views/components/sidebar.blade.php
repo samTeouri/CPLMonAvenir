@@ -188,11 +188,13 @@
                                                     <a class="nav-main-link nav-main-link-submenu"
                                                         data-toggle="submenu" aria-haspopup="true"
                                                         aria-expanded="false" href="#">
-                                                        <span class="nav-main-link-name">{{ $classe->nom }}</span>
+                                                        <span
+                                                            class="nav-main-link-name">{{ substr($classe->nom, 0, 6) }}</span>
                                                     </a>
                                                     <ul class="nav-main-submenu">
                                                         <li class="nav-main-item">
-                                                            <a class="nav-main-link" href="#">
+                                                            <a class="nav-main-link"
+                                                                href="{{ route('interrogation.cours', $classe->id) }}">
                                                                 <span class="nav-main-link-name">Ajouter
                                                                     interrogation</span>
                                                             </a>
@@ -230,6 +232,54 @@
                         </li>
 
 
+
+
+
+                        <!---- Interrogations ---->
+
+                        <li class="nav-main-item">
+                            <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true"
+                                aria-expanded="false" href="#">
+                                <i class="nav-main-link-icon si si-pencil"></i>
+                                <span class="nav-main-link-name">Voir les interrogations</span>
+                            </a>
+                            <ul class="nav-main-submenu">
+
+
+                                @foreach ($promotions as $promotion)
+                                    <li class="nav-main-item">
+                                        <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu"
+                                            aria-haspopup="true" aria-expanded="false" href="#">
+                                            <span class="nav-main-link-name">{{ $promotion->nom }}eme</span>
+                                        </a>
+                                        <ul class="nav-main-submenu">
+
+                                            @foreach ($promotion->classes as $classe)
+                                                <li class="nav-main-item">
+                                                    <a class="nav-main-link nav-main-link-submenu"
+                                                        data-toggle="submenu" aria-haspopup="true"
+                                                        aria-expanded="false" href="#">
+                                                        <span
+                                                            class="nav-main-link-name">{{ substr($classe->nom, 0, 6) }}</span>
+                                                    </a>
+                                                    <ul class="nav-main-submenu">
+                                                        <li class="nav-main-item">
+                                                            <a class="nav-main-link"
+                                                                href="{{ route('view_interrogation_cours', $classe->id) }}">
+                                                                <span class="nav-main-link-name">Voir
+                                                                    interrogations</span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            @endforeach
+
+                                        </ul>
+                                    </li>
+                                @endforeach
+
+                            </ul>
+                        </li>
 
 
                     </ul>
