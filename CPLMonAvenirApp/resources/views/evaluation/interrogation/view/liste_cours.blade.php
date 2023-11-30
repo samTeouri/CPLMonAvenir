@@ -77,29 +77,36 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($cours as $cour)
-                                <tr>
-                                    <td class="font-w600 font-size-sm">
-                                        {{ $cour->nom }}
-                                    </td>
-                                    <td class="text-center">
-                                        <div class="dropdown">
-                                            <button type="button" class="btn btn-success dropdown-toggle"
-                                                id="dropdown-default-primary" data-toggle="dropdown" aria-haspopup="true"
-                                                aria-expanded="false">
-                                                Trimestre
-                                            </button>
-                                            <div class="dropdown-menu font-size-sm"
-                                                aria-labelledby="dropdown-default-primary">
-                                                @foreach ($trimestres as $trimestre)
-                                                    <a class="dropdown-item"
-                                                        href="{{ route('interrogation.index', ['classe' => $classe, 'cours' => $cour->id, 'trimestre' => $trimestre->id]) }}">{{ substr($trimestre->intitule, 0, 11) }}</a>
-                                                @endforeach
+                            @if ($cours)
+                                @foreach ($cours as $cour)
+                                    <tr>
+                                        <td class="font-w600 font-size-sm">
+                                            {{ $cour->nom }}
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="dropdown">
+                                                <button type="button" class="btn btn-success dropdown-toggle"
+                                                    id="dropdown-default-primary" data-toggle="dropdown"
+                                                    aria-haspopup="true" aria-expanded="false">
+                                                    Trimestre
+                                                </button>
+                                                <div class="dropdown-menu font-size-sm"
+                                                    aria-labelledby="dropdown-default-primary">
+                                                    @foreach ($trimestres as $trimestre)
+                                                        <a class="dropdown-item"
+                                                            href="{{ route('interrogation.index', ['classe' => $classe, 'cours' => $cour->id, 'trimestre' => $trimestre->id]) }}">{{ substr($trimestre->intitule, 0, 11) }}</a>
+                                                    @endforeach
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @else
+                                <tr>
+                                    <td colspan="2">Pas de cours disponibles</td>
                                 </tr>
-                            @endforeach
+                            @endif
+
                         </tbody>
                     </table>
                 </div>

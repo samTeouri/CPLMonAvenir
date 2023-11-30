@@ -109,6 +109,7 @@ class ClasseSeeder extends Seeder
                 foreach ($classes as $classe) {
                     Cours::create([
                         'nom' => $matiere->intitule . ' ' . $classe->nom,
+                        'coefficient' => 1,
                         'professeur_id' => $professeur->id,
                         'classe_id' => $classe->id,
                         'matiere_id' => $matiere->id

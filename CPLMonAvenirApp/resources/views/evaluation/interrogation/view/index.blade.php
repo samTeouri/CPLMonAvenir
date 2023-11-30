@@ -5,13 +5,14 @@
         <div class="content content-full">
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
                 <h1 class="flex-sm-fill h3 my-2">
-                    Liste des évaluations en {{ $cours->matiere->intitule }} de la classe {{ substr($classe->nom, 0, 6) }}
+                    Liste des interrogations en {{ $cours->matiere->intitule }} de la classe
+                    {{ substr($classe->nom, 0, 6) }}
                     du
                     {{ substr($trimestre->intitule, 0, 11) }}.
                 </h1>
                 <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
-                        <li class="breadcrumb-item">Evaluation</li>
+                        <li class="breadcrumb-item">Interrogation</li>
                         <li class="breadcrumb-item">{{ substr($classe->nom, 0, 6) }}</li>
                         <li class="breadcrumb-item">{{ $cours->matiere->intitule }}</li>
                         <li class="breadcrumb-item"><a class="link-fx"
