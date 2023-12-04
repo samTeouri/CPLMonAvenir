@@ -16,13 +16,20 @@ class Eleve extends Model
         'date_naissance',
         'contact_tuteur',
         'matricule',
+        'sexe',
         'lieu_naissance',
         'profil',
-        'adresse'
+        'adresse',
+        'pere',
+        'mere',
+        'sante',
     ];
 
     protected $cast = [
-        'adresse' => 'json'
+        'contact_tuteur' => 'json',
+        'pere' => 'json',
+        'mere' => 'json',
+        'sante' => 'json',
     ];
 
 

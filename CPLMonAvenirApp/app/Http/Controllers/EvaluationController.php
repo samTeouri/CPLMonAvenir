@@ -134,8 +134,6 @@ class EvaluationController extends Controller
 
 
 
-
-
         $data = [
             'evaluations' => $evaluation_trimestre,
             'promotion' => $promotion,
@@ -260,7 +258,7 @@ class EvaluationController extends Controller
             foreach ($tab_evaluations as $evaluation) {
                 foreach ($eleves as $eleve) {
                     if (intval($eleve['cours_id']) === $evaluation->cours_id) {
-                        //ddd('note');
+
                         $note = Note::create([
                             'valeur' => floatval($eleve['note']),
                             'evaluation_id' => $evaluation->id,
@@ -324,19 +322,31 @@ class EvaluationController extends Controller
     // mise à jour des notes d'une évaluation et de l'évaluation
     public function update(Request $request, Evaluation $evaluation, Trimestre $trimestre)
     {
+
+        // $request->validate([
+        //     'note_maximale' => 'bail|min:0|max:20'
+        // ]);
+
         $evaluation->update([
-            'intitule' =>
-            $request->intitule,
+            'intitule' => $request->intitule,
             'date' => $request->date,
             'type' => $request->type,
             'note_maximale' => $request->note_maximale
         ]);
+
+        $evaluation->save();
 
         $notes = $request->notes;
 
 
 
         foreach ($notes as $note) {
+
+            // on verifie si la note n'est pas supérieure au barême
+            if ($note['valeur'] > $evaluation->note_maximale) {
+                return redirect()->route('evaluation.show', ['evaluation' => $evaluation->id, 'trimestre' => $trimestre->id, 'promotion' => $evaluation->cours->classe->promotion->id])->with('notification', ['type' => 'warning', 'message' => 'La note ne doit pas dépasser le barême']);
+            }
+
             $old_note = Note::find($note['note_id']);
             $old_note->update([
                 'valeur' => $note['valeur']
@@ -346,5 +356,12 @@ class EvaluationController extends Controller
 
 
         return redirect()->route('evaluation.show', ['evaluation' => $evaluation->id, 'trimestre' => $trimestre->id, 'promotion' => $evaluation->cours->classe->promotion->id])->with('notification', ['type' => 'success', 'message' => 'Evaluation et notes mises à jour avec succès']);
+    }
+
+    public function destroy(Evaluation $evaluation)
+    {
+        $url = url()->previous();
+        $evaluation->delete();
+        return redirect()->to($url)->with('notification', ['type' => 'danger', 'message' => 'Evaluation supprimée']);
     }
 }

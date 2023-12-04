@@ -13,6 +13,7 @@ class Cours extends Model
         'nom',
         'coefficient',
         'classe_id',
+        'matiere_id',
         'professeur_id',
     ];
 

@@ -17,7 +17,11 @@ return new class extends Migration
             $table->string('prenom');
             $table->date('date_naissance');
             $table->string('lieu_naissance');
+            $table->enum('sexe', ['M', 'F']);
             $table->json('contact_tuteur')->nullable();
+            $table->json('pere')->nullable();
+            $table->json('mere')->nullable();
+            $table->json('sante')->nullable();
             $table->string('matricule')->nullable()->unique();
             $table->string('profil')->nullable();
             $table->string('adresse');

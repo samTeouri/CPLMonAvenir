@@ -12,7 +12,8 @@ class Professeur extends Model
     protected $fillable = [
         'nom',
         'prenom',
-        'contact'
+        'contact',
+        'sexe'
     ];
 
     protected $cast = [

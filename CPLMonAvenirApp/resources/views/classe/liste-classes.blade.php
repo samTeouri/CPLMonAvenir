@@ -1,29 +1,23 @@
 @extends('layouts.dashboard')
 
 @section('main-content')
+
     <div class="bg-body-light">
         <div class="content content-full">
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
                 <h1 class="flex-sm-fill h3 my-2">
-                    Liste des interrogations en {{ $cours->matiere->intitule }} de la classe
-                    {{ substr($classe->nom, 0, 6) }}
-                    du
-                    {{ substr($trimestre->intitule, 0, 11) }}.
+                    Liste des classes de {{ $promotion->nom }}eme
                 </h1>
                 <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
-                        <li class="breadcrumb-item">Interrogation</li>
-                        <li class="breadcrumb-item">{{ substr($classe->nom, 0, 6) }}</li>
-                        <li class="breadcrumb-item">{{ $cours->matiere->intitule }}</li>
-                        <li class="breadcrumb-item"><a class="link-fx"
-                                href="">{{ substr($trimestre->intitule, 0, 11) }}</a></li>
+                        <li class="breadcrumb-item">Classes</li>
+                        <li class="breadcrumb-item"><a class="link-fx" href="">{{ $promotion->nom }}eme</a>
+                        </li>
                     </ol>
                 </nav>
             </div>
         </div>
     </div>
-
-
 
 
     <div class="content">
@@ -39,7 +33,7 @@
                     <p class="mb-0">{{ $notification['message'] }}</p>
                 </div>
             @endif
-            @if ($notification['type'] === 'success')
+            @if ($notification['type'] === 'warning')
                 <div class="alert alert-warning alert-dismissable" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -59,45 +53,43 @@
 
         <!---- Copiez collez ----->
 
-
         <div class="block block-rounded">
+
             <div class="block-header">
-                <h3 class="block-title">Liste des evaluations de la classe de {{ substr($classe->nom, 0, 6) }} en
-                    {{ $cours->matiere->intitule }}</h3>
+                <h3 class="block-title">Liste des classe de {{ $promotion->nom }}eme</h3>
+                <a class="btn btn-success" href="{{ route('classe.create', $promotion->id) }}"><i
+                        class="si si-chalkboard"></i> Nouvelle classe</a>
             </div>
+
             <div class="block-content">
-                <p class="font-size-sm text-muted">
-                    Voici la liste des interrogations de {{ $cours->matiere->intitule }} au niveau de la classe de
-                    {{ $classe->nom }}.
-                </p>
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped table-vcenter js-dataTable-full-pagination">
                         <thead>
                             <tr>
-                                <th>Interrogation</th>
-                                <th class="text-center" style="width: 200px;">Type d'examen</th>
-                                <th class="text-center">Date de l'interrogation</th>
-                                <th class="text-center" style="width: 150px;">Classe</th>
-                                <th class="text-center" class="text-center">Voir détails</th>
+                                <th style="width: 50px">N°</th>
+                                <th class="text-center">Classe</th>
+                                <th class="text-center" style="width: 200px;">Nombre d'élèves</th>
                                 <th class="text-center" style="width: 50px;">Suppression</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @if ($evaluations)
-                                @foreach ($evaluations as $evaluation)
+                            @if ($promotion->classes)
+                                @php
+                                    $i = 0;
+                                @endphp
+                                @foreach ($promotion->classes as $classe)
+                                    @php
+                                        $i++;
+                                    @endphp
                                     <tr>
-                                        <td>{{ $evaluation->intitule }}</td>
-                                        <td class="text-center text-primary fw-bolder">{{ $evaluation->type }}</td>
-                                        <td class="text-center">{{ $evaluation->date }}</td>
-                                        <td class="text-center">{{ substr($evaluation->cours->classe->nom, 0, 6) }}</td>
-                                        <td class="text-center">
-                                            <a class="btn btn-success"
-                                                href="{{ route('evaluation.show', ['evaluation' => $evaluation->id, 'trimestre' => $trimestre->id, 'promotion' => $classe->promotion->id]) }}"><i
-                                                    class="si si-eye"></i> Détails</a>
+                                        <td class="text-center">{{ $i }}</td>
+                                        <td class="text-center">{{ $classe->nom }}</td>
+                                        <td class="text-center text-primary" style="font-weight: 700;">
+                                            {{ count($classe->eleves) }} éleves
                                         </td>
                                         <td class="text-center">
-                                            <form action="{{ route('evaluation.destroy', $evaluation->id) }}"
-                                                method="post" onsubmit="return Confirm()">
+                                            <form action="{{ route('classe.destroy', $classe->id) }}" method="post"
+                                                onsubmit="return Confirm()">
                                                 @csrf
                                                 @method('delete')
 
@@ -109,13 +101,14 @@
                                 @endforeach
                             @else
                                 <tr>
-                                    <td class="text-center h4 p-3" colspan="6">Pas d'évaluations existantes !</td>
+                                    <td class="text-center h4 p-3" colspan="3">Pas de classes !</td>
                                 </tr>
                             @endif
                         </tbody>
                     </table>
                 </div>
             </div>
+
         </div>
 
 
@@ -123,7 +116,7 @@
 
     <script>
         function Confirm() {
-            return confirm("Voulez vous supprimer l'interrogation ?")
+            return confirm("Voulez vous supprimer la classe ?")
         }
     </script>
 
