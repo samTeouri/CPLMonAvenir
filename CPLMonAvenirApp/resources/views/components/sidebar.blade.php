@@ -52,20 +52,10 @@
                     </a>
                     <ul class="nav-main-submenu">
                         <li class="nav-main-item">
-                            <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true"
-                                aria-expanded="false" href="#">
-                                <i class="nav-main-link-icon si si-bag"></i>
+                            <a class="nav-main-link" href="#">
+                                <i class="nav-main-link-icon fa fa-book"></i>
                                 <span class="nav-main-link-name">Ajouter une matière</span>
                             </a>
-                            <ul class="nav-main-submenu">
-                                @foreach ($promotions as $promotion)
-                                    <li class="nav-main-item">
-                                        <a class="nav-main-link" href="#">
-                                            <span class="nav-main-link-name">{{ $promotion->nom }}eme</span>
-                                        </a>
-                                    </li>
-                                @endforeach
-                            </ul>
                         </li>
                     </ul>
                 </li>
@@ -316,7 +306,7 @@
                                     <!---- Ajouter un groupe ---->
 
                                     <li class="nav-main-item">
-                                        <a class="nav-main-link" href="#">
+                                        <a class="nav-main-link" href="{{ route('classe.list', $promotion->id) }}">
                                             <span class="nav-main-link-name">Ajouter un groupe</span>
                                         </a>
                                     </li>
@@ -324,7 +314,6 @@
                                     <!----- Gestion des groupes ------>
 
                                     @foreach ($promotion->classes as $classe)
-                                        <!----- 6eme A ---->
                                         <li class="nav-main-item">
                                             <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu"
                                                 aria-haspopup="true" aria-expanded="false" href="#">
@@ -332,66 +321,14 @@
                                             </a>
                                             <ul class="nav-main-submenu">
                                                 <li class="nav-main-item">
-                                                    <a class="nav-main-link" href="#">
+                                                    <a class="nav-main-link"
+                                                        href="{{ route('classe.index', $classe->id) }}">
                                                         <span class="nav-main-link-name">Liste des élèves</span>
                                                     </a>
-                                                </li>
-                                                <li class="nav-main-item">
-                                                    <a class="nav-main-link nav-main-link-submenu"
-                                                        data-toggle="submenu" aria-haspopup="true"
-                                                        aria-expanded="false" href="#">
-                                                        <span class="nav-main-link-name">Sub Level 4</span>
-                                                    </a>
-                                                    <ul class="nav-main-submenu">
-                                                        <li class="nav-main-item">
-                                                            <a class="nav-main-link" href="#">
-                                                                <span class="nav-main-link-name">Link 4-1</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="nav-main-item">
-                                                            <a class="nav-main-link" href="#">
-                                                                <span class="nav-main-link-name">Link 4-2</span>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
                                                 </li>
                                             </ul>
                                         </li>
                                     @endforeach
-
-                                    <!----- 6eme B ---->
-                                    <li class="nav-main-item">
-                                        <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu"
-                                            aria-haspopup="true" aria-expanded="false" href="#">
-                                            <span class="nav-main-link-name">6eme B</span>
-                                        </a>
-                                        <ul class="nav-main-submenu">
-                                            <li class="nav-main-item">
-                                                <a class="nav-main-link" href="#">
-                                                    <span class="nav-main-link-name">Liste des élèves</span>
-                                                </a>
-                                            </li>
-                                            <li class="nav-main-item">
-                                                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu"
-                                                    aria-haspopup="true" aria-expanded="false" href="#">
-                                                    <span class="nav-main-link-name">Sub Level 4</span>
-                                                </a>
-                                                <ul class="nav-main-submenu">
-                                                    <li class="nav-main-item">
-                                                        <a class="nav-main-link" href="#">
-                                                            <span class="nav-main-link-name">Link 4-1</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="nav-main-item">
-                                                        <a class="nav-main-link" href="#">
-                                                            <span class="nav-main-link-name">Link 4-2</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-
 
                                 </ul>
                             </li>

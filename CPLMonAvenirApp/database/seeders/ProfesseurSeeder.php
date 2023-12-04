@@ -24,6 +24,7 @@ class ProfesseurSeeder extends Seeder
             'nom' => 'BAGOUNA',
             'prenom' => 'Joseph',
             'contact' => '90123456',
+            'sexe' => 'M',
             'user_id' => $user_4->id
         ]);
 
@@ -31,6 +32,7 @@ class ProfesseurSeeder extends Seeder
             'nom' => 'RHODES',
             'prenom' => 'Cecile',
             'contact' => '90123456',
+            'sexe' => 'M',
             'user_id' => $user_5->id
         ]);
     }

@@ -74,8 +74,9 @@
                                 <th>Examen</th>
                                 <th class="text-center" style="width: 200px;">Type d'examen</th>
                                 <th class="text-center" style="width: 200px;">Date de l'examen</th>
-                                <th class="text-center" style="width: 200px;">Classe</th>
-                                <th class="text-center" class="text-center">Voir détails</th>
+                                <th class="text-center" style="width: 175px;">Classe</th>
+                                <th class="text-center">Voir détails</th>
+                                <th class="text-center" style="width: 50px;">Suppression</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -91,11 +92,21 @@
                                                 href="{{ route('evaluation.show', ['evaluation' => $evaluation->id, 'trimestre' => $trimestre->id, 'promotion' => $promotion->id]) }}"><i
                                                     class="si si-eye"></i> Détails</a>
                                         </td>
+                                        <td class="text-center">
+                                            <form action="{{ route('evaluation.destroy', $evaluation->id) }}"
+                                                method="post" onsubmit="return Confirm()">
+                                                @csrf
+                                                @method('delete')
+
+                                                <button type="submit" class="btn btn-danger"><i
+                                                        class="fa fa-trash"></i></button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 @endforeach
                             @else
                                 <tr>
-                                    <td class="text-center h4 p-3" colspan="5">Pas d'évaluations existantes !</td>
+                                    <td class="text-center h4 p-3" colspan="6">Pas d'évaluations existantes !</td>
                                 </tr>
                             @endif
                         </tbody>
@@ -107,4 +118,9 @@
 
     </div>
 
+    <script>
+        function Confirm() {
+            return confirm("Voulez vous supprimer l'évaluation ?")
+        }
+    </script>
 @endsection

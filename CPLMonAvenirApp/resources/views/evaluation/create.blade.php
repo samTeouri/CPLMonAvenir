@@ -66,12 +66,12 @@
                         <div class="form-group col-12 col-lg-5">
                             <label for="intitule">Intitulé de l'évaluation</label>
                             <input type="text" class="form-control form-control-alt" id="intitule" name="intitule"
-                                placeholder="Intitulé du devoir...">
+                                placeholder="Intitulé du devoir..." required />
                         </div>
                         <div class="form-group col-12 col-lg-3">
                             <label for="intitule">Type d'évaluation</label>
                             <select class="form-control form-control-alt" id="type" name="type" style="width: 100%;"
-                                data-placeholder="Choisissez un type">
+                                data-placeholder="Choisissez un type" required>
                                 <option value="">Type d'évaluation</option>
                                 <option value="devoir">Devoir</option>
                                 <option value="composition">Composition</option>
@@ -81,12 +81,12 @@
                             <label for="bareme">Note maximale</label>
                             <input type="number" class="form-control form-control-alt" id="bareme" name="note_maximale"
                                 placeholder="Bareme..." alue="0.0" min="0" step="0.25" max="20"
-                                required>
+                                required />
                         </div>
                         <div class="form-group col-12 col-lg-2">
                             <label for="example-flatpickr-default">Date évaluation</label>
                             <input type="text" class="js-flatpickr form-control form-control-alt"
-                                id="example-flatpickr-default" name="date" placeholder="Y-m-d">
+                                id="example-flatpickr-default" name="date" placeholder="Y-m-d" required />
                         </div>
                     </div>
                 </div>

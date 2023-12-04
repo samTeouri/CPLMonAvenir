@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "66152a68c796bb6cc614eba7f7a10ae8",
+    "content-hash": "70fdb5baf5ec5b859b0623c8eb4f22c6",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -1053,6 +1053,71 @@
                 }
             ],
             "time": "2023-08-27T10:19:19+00:00"
+        },
+        {
+            "name": "ismaelw/laratex",
+            "version": "v1.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ismaelw/laratex.git",
+                "reference": "e809b92bcea1b2d938d9b39ed50e299a9581ffc1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ismaelw/laratex/zipball/e809b92bcea1b2d938d9b39ed50e299a9581ffc1",
+                "reference": "e809b92bcea1b2d938d9b39ed50e299a9581ffc1",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/filesystem": "^5.0|^6.0|^7.0|^8.0|^9.0|^10.0",
+                "illuminate/support": "^5.0|^6.0|^7.0|^8.0|^9.0|^10.0",
+                "php": "^7.4|^8.0",
+                "symfony/process": "^2.0|^3.0|^4.0|^5.0|^6.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Ismaelw\\LaraTeX\\LaraTeXServiceProvider"
+                    ],
+                    "aliases": {
+                        "LaraTeX": "Ismaelw\\LaraTeX\\LaraTeXFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ismaelw\\LaraTeX\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ismael Wismann",
+                    "email": "wismann.ismael@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A package for creating PDFs in Laravel using LaTeX",
+            "homepage": "https://github.com/ismaelw/laratex",
+            "keywords": [
+                "ismaelw",
+                "laratex"
+            ],
+            "support": {
+                "issues": "https://github.com/ismaelw/laratex/issues",
+                "source": "https://github.com/ismaelw/laratex/tree/v1.2.2"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/ismaelw",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-10-09T15:32:53+00:00"
         },
         {
             "name": "laravel/framework",

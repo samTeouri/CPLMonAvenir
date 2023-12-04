@@ -78,21 +78,12 @@ class ClasseSeeder extends Seeder
             'promotion_id' => $promotion_8->id
         ]);
 
-        $eleve_1 = Eleve::find(1);
-        $eleve_2 = Eleve::find(2);
-        $eleve_3 = Eleve::find(3);
-        $eleve_4 = Eleve::find(4);
 
-        $eleve_1->classes()->attach($classe_5);
-        $eleve_2->classes()->attach($classe_3);
-
-        $eleve_2->classes()->attach($classe_5);
-        $eleve_1->classes()->attach($classe_3);
-
-        $eleve_3->classes()->attach($classe_4);
-
-        $eleve_4->classes()->attach($classe_4);
-
+        for ($i = 1; $i < 47; $i++) {
+            $eleve = Eleve::find($i);
+            $eleve->classes()->attach($classe_3);
+            $eleve->classes()->attach($classe_5);
+        }
 
 
         $matieres = Matiere::all();
