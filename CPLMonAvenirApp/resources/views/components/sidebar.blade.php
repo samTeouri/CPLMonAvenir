@@ -52,7 +52,7 @@
                     </a>
                     <ul class="nav-main-submenu">
                         <li class="nav-main-item">
-                            <a class="nav-main-link" href="#">
+                            <a class="nav-main-link" href="{{route('matiere.index')}}">
                                 <i class="nav-main-link-icon fa fa-book"></i>
                                 <span class="nav-main-link-name">Ajouter une matière</span>
                             </a>
