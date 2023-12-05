@@ -29,8 +29,6 @@ class LaTexToPDFController extends Controller
     public function informationsEleve(Eleve $eleve)
     {
 
-       
-
         $data = [
             'eleve' => $eleve,
             'logo' => public_path('assets/images/logo2.png'),
@@ -38,5 +36,18 @@ class LaTexToPDFController extends Controller
         ];
 
         return (new LaraTeX('latex.informationEleve'))->with($data)->inline('fiche_information_' . $eleve->nom .  '_' . $eleve->prenom);
+    }
+
+
+    // fonction générant les fiche sd'informations des l'élève s de la classe
+    public function informationsEleveAll(Classe $classe)
+    {
+
+        $data = [
+            'eleves' => $classe->eleves->sortBy('nom'),
+            'logo' => public_path('assets/images/logo2.png'),
+        ];
+
+        return (new LaraTeX('latex.informationEleveClasse'))->with($data)->inline('fiche_informations_' . $classe->nom);
     }
 }

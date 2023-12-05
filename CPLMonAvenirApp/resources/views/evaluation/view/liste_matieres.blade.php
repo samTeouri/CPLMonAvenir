@@ -66,7 +66,7 @@
                     et le trimestre du devoir ou de la composition recherchée.
                 </p>
                 <div class="table-responsive">
-                    <table class="table table-bordered table-striped table-vcenter">
+                    <table class="table table-bordered table-striped table-vcenter js-dataTable-full-pagination">
                         <thead>
                             <tr>
                                 <th>Nom de la matière</th>

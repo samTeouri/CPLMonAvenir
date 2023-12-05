@@ -70,6 +70,13 @@
                         </li>
 
                         <li class="nav-main-item">
+                            <a class="nav-main-link" href="{{ route('eleve.classe.info', $classe->id) }}">
+                                <span class="nav-main-link-name"><i class="fa fa-info-circle mr-2"></i>Fiches
+                                    d'information</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-main-item">
                             <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true"
                                 aria-expanded="false" href="#">
                                 <span class="nav-main-link-name"> <i class="fa fa-file-pdf mr-2"></i> Bulletins</span>
@@ -150,7 +157,7 @@
                                                         <a class="nav-main-link"
                                                             href="{{ route('eleve.info', $eleve->id) }}">
                                                             <span class="nav-main-link-name"><i
-                                                                    class="fa fa-info-circle mr-2"></i>Assiduité</span>
+                                                                    class="fa fa-clock mr-2"></i>Assiduité</span>
                                                         </a>
                                                     </li>
 

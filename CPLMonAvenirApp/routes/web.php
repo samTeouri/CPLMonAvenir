@@ -6,7 +6,9 @@ use App\Http\Controllers\EleveController;
 use App\Http\Controllers\EvaluationController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LaTexToPDFController;
+use App\Http\Controllers\MatiereController;
 use App\Http\Controllers\NiveauController;
+use App\Models\Matiere;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -36,6 +38,20 @@ Route::get('/', function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
 
+
+
+
+    // Routes concernant les matières
+    Route::controller(MatiereController::class)->group(function () {
+        Route::prefix('/matiere')->group(function () {
+            Route::get('/liste-des-matieres', 'index')->name('matiere.index');
+            Route::get('/ajouter-une-matiere', 'create')->name('matiere.create');
+            Route::post('/ajouter-une-matiere', 'store')->name('matiere.store');
+            Route::get('/modifier-matiere/{matiere}', 'edit')->name('matiere.edit');
+            Route::post('/modifier-matiere/{matiere}', 'update')->name('matiere.update');
+            Route::delete('/supprimer-matiere/{matiere}', 'destroy')->name('matiere.delete');
+        });
+    });
 
 
     // Routes concernant les élèves
@@ -95,5 +111,6 @@ Route::middleware(['auth'])->group(function () {
     Route::controller(LaTexToPDFController::class)->group(function () {
         Route::get('/liste-eleves/classe/{classe}', 'listesDesEleves')->name('listeDesEleves');
         Route::get('/fiche-informations-eleve/{eleve}', 'informationsEleve')->name('eleve.info');
+        Route::get('/fiche-informations-eleve/classe/{classe}', 'informationsEleveAll')->name('eleve.classe.info');
     });
 });
