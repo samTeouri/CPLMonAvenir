@@ -105,7 +105,14 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/changeYear/{anneeScolaire}', 'changeAppCurrentYear')->name('changeYear');
     });
 
-
+    // Routes concernant les cours
+    Route::controller(CoursController::class)->group(function() {
+        Route::prefix('/cours')->group(function() {
+            Route::get('/classe/{classe}', 'index')->name('cours.index');
+            Route::get('/{cours}', 'show')->name('cours.show');
+            Route::post('/update/{cours}', 'update')->name('cours.update');
+        });
+    });
 
     //Route pour la génération de documents
     Route::controller(LaTexToPDFController::class)->group(function () {

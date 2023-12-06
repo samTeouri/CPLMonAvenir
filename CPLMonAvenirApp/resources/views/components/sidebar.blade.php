@@ -94,13 +94,8 @@
                                             </a>
                                             <ul class="nav-main-submenu">
                                                 <li class="nav-main-item">
-                                                    <a class="nav-main-link" href="#">
+                                                    <a class="nav-main-link" href="{{ route('cours.index', $classe->id) }}">
                                                         <span class="nav-main-link-name">Liste des cours</span>
-                                                    </a>
-                                                </li>
-                                                <li class="nav-main-item">
-                                                    <a class="nav-main-link" href="#">
-                                                        <span class="nav-main-link-name">Affecter un enseignant</span>
                                                     </a>
                                                 </li>
                                             </ul>

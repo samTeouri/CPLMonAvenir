@@ -5,29 +5,20 @@
         <div class="content content-full">
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
                 <h1 class="flex-sm-fill h3 my-2">
-                    Liste des interrogations en {{ $cours->matiere->intitule }} de la classe
-                    {{ substr($classe->nom, 0, 6) }}
-                    du
-                    {{ substr($trimestre->intitule, 0, 11) }}.
+                    Cours de {{ $classe->nom }}
                 </h1>
                 <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
-                        <li class="breadcrumb-item">Interrogation</li>
-                        <li class="breadcrumb-item">{{ substr($classe->nom, 0, 6) }}</li>
-                        <li class="breadcrumb-item">{{ $cours->matiere->intitule }}</li>
-                        <li class="breadcrumb-item"><a class="link-fx"
-                                href="">{{ substr($trimestre->intitule, 0, 11) }}</a></li>
+                        <li class="breadcrumb-item">Cours</li>
+                        <li class="breadcrumb-item">{{ $classe->promotion->nom }}eme</li>
+                        <li class="breadcrumb-item">{{ $classe->nom }}</li>
                     </ol>
                 </nav>
             </div>
         </div>
     </div>
 
-
-
-
     <div class="content">
-
         <!---- Copiez collez (il s'agit des alertes pour le retour d'actions)----->
 
         @if ($notification = Session::get('notification'))
@@ -39,7 +30,7 @@
                     <p class="mb-0">{{ $notification['message'] }}</p>
                 </div>
             @endif
-            @if ($notification['type'] === 'success')
+            @if ($notification['type'] === 'warning')
                 <div class="alert alert-warning alert-dismissable" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -58,58 +49,42 @@
         @endif
 
         <!---- Copiez collez ----->
-
-
         <div class="block block-rounded">
             <div class="block-header">
-                <h3 class="block-title">Liste des evaluations de la classe de {{ substr($classe->nom, 0, 6) }} en
-                    {{ $cours->matiere->intitule }}</h3>
+                <h3 class="block-title">Liste des cours</h3>
             </div>
             <div class="block-content">
                 <p class="font-size-sm text-muted">
-                    Voici la liste des interrogations de {{ $cours->matiere->intitule }} au niveau de la classe de
-                    {{ $classe->nom }}.
+                    {{-- Voici la liste des devoirs et compositions en {{ $matiere->intitule }} au niveau de la
+                    {{ $promotion->nom }}eme. --}}
                 </p>
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped table-vcenter js-dataTable-full-pagination">
                         <thead>
                             <tr>
-                                <th>Interrogation</th>
-                                <th class="text-center" style="width: 200px;">Type d'examen</th>
-                                <th class="text-center">Date de l'interrogation</th>
-                                <th class="text-center" style="width: 150px;">Classe</th>
-                                <th class="text-center" class="text-center">Voir détails</th>
-                                <th class="text-center" style="width: 50px;">Suppression</th>
+                                <th style="width: 200px;">Libellé</th>
+                                <th class="text-center" style="width: 200px;">Professeur</th>
+                                <th class="text-center" style="width: 200px;">Coefficient</th>
+                                <th class="text-center" style="width: 200px;">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @if ($evaluations)
-                                @foreach ($evaluations as $evaluation)
+                            @if ($cours)
+                                @foreach ($cours as $cour)
                                     <tr>
-                                        <td>{{ $evaluation->intitule }}</td>
-                                        <td class="text-center text-primary fw-bolder">{{ $evaluation->type }}</td>
-                                        <td class="text-center">{{ $evaluation->date }}</td>
-                                        <td class="text-center">{{ substr($evaluation->cours->classe->nom, 0, 6) }}</td>
+                                        <td>{{ Str::substr($cour->nom, 0, -17) }}</td>
+                                        <td class="text-center text-primary fw-bolder"><a href="#">{{ $cour->professeur->nom }} {{ $cour->professeur->prenom }}</a></td>
+                                        <td class="text-center">{{ $cour->coefficient }}</td>
                                         <td class="text-center">
                                             <a class="btn btn-success"
-                                                href="{{ route('evaluation.show', ['evaluation' => $evaluation->id, 'trimestre' => $trimestre->id, 'promotion' => $classe->promotion->id]) }}"><i
+                                                href="{{ route('cours.show', $cour->id) }}"><i
                                                     class="si si-eye"></i> Détails</a>
-                                        </td>
-                                        <td class="text-center">
-                                            <form action="{{ route('evaluation.destroy', $evaluation->id) }}"
-                                                method="post" onsubmit="return Confirm()">
-                                                @csrf
-                                                @method('delete')
-
-                                                <button type="submit" class="btn btn-danger"><i
-                                                        class="fa fa-trash"></i></button>
-                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach
                             @else
                                 <tr>
-                                    <td class="text-center h4 p-3" colspan="6">Pas d'évaluations existantes !</td>
+                                    <td class="text-center h4 p-3" colspan="5">Pas de cours dans cette classe !</td>
                                 </tr>
                             @endif
                         </tbody>
@@ -117,14 +92,5 @@
                 </div>
             </div>
         </div>
-
-
     </div>
-
-    <script>
-        function Confirm() {
-            return confirm("Voulez vous supprimer l'interrogation ?")
-        }
-    </script>
-
 @endsection
