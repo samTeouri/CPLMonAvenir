@@ -79,15 +79,16 @@
                                 @foreach ($matieres as $matiere)
                                     <tr>
                                         <td class="font-w600 font-size-sm">
-                                            {{ $matiere->intitule }}
+                                            {{ $matiere['matiere']->intitule }}
                                         </td>
                                         <td class="text-center">
-                                            @foreach ($matiere->promotions as $promotion)
+                                            @foreach ($matiere['promotions'] as $promotion)
                                                 <span class="badge badge-primary">{{ $promotion->nom }}eme</span>
                                             @endforeach
                                         </td>
                                         <td class="text-center">
-                                            <form action="{{ route('matiere.delete', $matiere->id) }}" method="post">
+                                            <form action="{{ route('matiere.delete', $matiere['matiere']->id) }}"
+                                                method="post">
                                                 @method('delete')
                                                 @csrf
                                                 <button class="btn btn-danger"><i class="fa fa-trash"></i></button>

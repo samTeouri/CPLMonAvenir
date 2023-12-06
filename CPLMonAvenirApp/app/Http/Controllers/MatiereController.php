@@ -36,8 +36,25 @@ class MatiereController extends Controller
         // Le tableau $matieres ne contiendra que des matières uniques
         $matieres = array_values($matieres);
 
+
+        $tab_matieres = [];
+        foreach ($matieres as $matiere) {
+            $temp_matiere = [];
+            $tab_promotions = [];
+            foreach ($matiere->promotions as $promotion) {
+                if (!isset($tab_promotions[$promotion->nom])) {
+                    $tab_promotions[$promotion->nom] = $promotion;
+                }
+            }
+            $temp_matiere['promotions'] = $tab_promotions;
+            $temp_matiere['matiere'] = $matiere;
+            array_push($tab_matieres, $temp_matiere);
+        }
+
+        //ddd($tab_matieres);
+
         $data = [
-            'matieres' => $matieres,
+            'matieres' => $tab_matieres,
             'annee' => $annee->annee
         ];
 

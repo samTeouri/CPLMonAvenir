@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('classe_id');
             $table->integer('matiere_id');
             $table->foreign('matiere_id')->references('id')->on('matieres')->onDelete('cascade');
-            $table->foreign('professeur_id')->references('id')->on('professeurs')->onDelete('cascade');
+            $table->foreign('professeur_id')->references('id')->on('professeurs');
             $table->foreign('classe_id')->references('id')->on('classes')->onDelete('cascade');
             $table->timestamps();
         });
