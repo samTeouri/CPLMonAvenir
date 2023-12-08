@@ -91,7 +91,7 @@
 
 
                 <div class="block-content tab-content">
-                    @foreach ($classe->eleves as $eleve)
+                    @foreach ($classe->eleves->sortBy('nom') as $eleve)
                         <div class="row mx-0 px-0">
 
                             <div class="d-flex col-12 my-2 align-items-center">

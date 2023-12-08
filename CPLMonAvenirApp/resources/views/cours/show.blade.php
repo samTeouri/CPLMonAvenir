@@ -11,8 +11,8 @@
                     <ol class="breadcrumb breadcrumb-alt">
                         <li class="breadcrumb-item">Cours</li>
                         <li class="breadcrumb-item">{{ substr($cours->classe->nom, 0, 6) }}</li>
-                        <li class="breadcrumb-item"><a class="link-fx"
-                                href="#">{{ $cours->matiere->intitule }}</a></li>
+                        <li class="breadcrumb-item"><a class="link-fx" href="#">{{ $cours->matiere->intitule }}</a>
+                        </li>
                     </ol>
                 </nav>
             </div>
@@ -58,15 +58,18 @@
                     <div class="row justify-content-around mx-0 px-0">
                         <div class="form-group col-12 col-lg-6">
                             <label for="nom">Nom du cours</label>
-                            <input type="text" class="form-control form-control-alt" id="nom" name="nom" value="{{ $cours->nom }}" disabled/>
+                            <input type="text" class="form-control form-control-alt" id="nom" name="nom"
+                                value="{{ $cours->nom }}" disabled />
                         </div>
                         <div class="form-group col-12 col-lg-4">
                             <label for="intitule">Professeur</label>
-                            <select class="form-control form-control-alt" id="professeur_id" name="professeur_id" style="width: 100%;"
-                                data-placeholder="Choisissez un professeur">
+                            <select class="form-control form-control-alt" id="professeur_id" name="professeur_id"
+                                style="width: 100%;" data-placeholder="Choisissez un professeur">
                                 @foreach ($professeurs as $professeur)
-                                <option value="{{ $professeur->id }}"
-                                    @if ($professeur->id == $cours->professeur->id) selected @endif>{{ $professeur->nom }} {{ $professeur->prenom }}</option>
+                                    <option value="{{ $professeur->id }}"
+                                        @if ($cours->professeur) @if ($professeur->id === $cours->professeur->id) selected @endif
+                                        @endif>
+                                        {{ $professeur->nom }} {{ $professeur->prenom }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -85,5 +88,4 @@
         </div>
 
     </div>
-
 @endsection

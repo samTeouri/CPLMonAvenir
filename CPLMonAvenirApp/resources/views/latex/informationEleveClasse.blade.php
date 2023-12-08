@@ -34,9 +34,13 @@
 
     \vspace{0cm}
 
-    %\begin{figure}[!h]
-    %\includegraphics[height=5.4cm]{}
-    %\end{figure}
+    \begin{figure}[!h]
+    @if (file_exists(public_path('/storage/' . $eleve->profil)))
+        \includegraphics[height=5.4cm]{@latex(public_path('/storage/' . $eleve->profil))}
+    @else
+        \includegraphics[height=5.4cm]{@latex(public_path('/assets/media/avatars/avatar1.jpg'))}
+    @endif
+    \end{figure}
 
 
 

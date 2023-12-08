@@ -7,8 +7,8 @@ use App\Http\Controllers\EvaluationController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LaTexToPDFController;
 use App\Http\Controllers\MatiereController;
-use App\Http\Controllers\NiveauController;
-use App\Models\Matiere;
+use App\Http\Controllers\CoursController;
+use App\Http\Controllers\ProfesseurController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -41,6 +41,18 @@ Route::middleware(['auth'])->group(function () {
 
 
 
+    // Routes concernant les professeurs
+    Route::controller(ProfesseurController::class)->group(function () {
+        Route::prefix('/professeur', function () {
+            Route::get('/liste-des-enseignants', 'index')->name('professeur.index');
+            Route::get('/ajouter-un-enseignant', 'create')->name('professeur.create');
+            Route::post('/ajouter-un-enseignant', 'store')->name('professeur.store');
+            Route::get('/modifier-informations/{professeur}', 'edit')->name('professeur.edit');
+            Route::post('/modifier-informations/{professeur}', 'update')->name('professeur.update');
+            Route::delete('/supprimer-enseignant', 'destroy')->name('professeur.delete');
+        });
+    });
+
     // Routes concernant les matières
     Route::controller(MatiereController::class)->group(function () {
         Route::prefix('/matiere')->group(function () {
@@ -57,6 +69,11 @@ Route::middleware(['auth'])->group(function () {
     // Routes concernant les élèves
     Route::controller(EleveController::class)->group(function () {
         Route::prefix('/eleve')->group(function () {
+            Route::get('/ajouter-un-eleve', 'create')->name('eleve.create');
+            Route::post('/ajouter-un-eleve', 'store')->name('eleve.store');
+            Route::get('/modifier-informations/{eleve}', 'edit')->name('eleve.edit');
+            Route::post('/modifier-informations/{eleve}', 'update')->name('eleve.update');
+            Route::get('/passage-année-supérieure/{eleve}', 'passageAnneeSup')->name('eleve.edit');
             Route::get('/details/{eleve}', 'show')->name('eleve.show');
             Route::delete('/supprimer/{eleve}', 'destroy')->name('eleve.destroy');
         });
@@ -106,8 +123,8 @@ Route::middleware(['auth'])->group(function () {
     });
 
     // Routes concernant les cours
-    Route::controller(CoursController::class)->group(function() {
-        Route::prefix('/cours')->group(function() {
+    Route::controller(CoursController::class)->group(function () {
+        Route::prefix('/cours')->group(function () {
             Route::get('/classe/{classe}', 'index')->name('cours.index');
             Route::get('/{cours}', 'show')->name('cours.show');
             Route::post('/update/{cours}', 'update')->name('cours.update');

@@ -15,7 +15,8 @@ class CoursController extends Controller
      * @param Classe $classe
      * @return void
      */
-    public function index(Classe $classe) {
+    public function index(Classe $classe)
+    {
         $data = [
             'classe' => $classe,
             'cours' => $classe->cours,
@@ -31,7 +32,8 @@ class CoursController extends Controller
      * @param Cours $cours
      * @return void
      */
-    public function show(Cours $cours) {
+    public function show(Cours $cours)
+    {
         $data = [
             'cours' => $cours,
             'professeurs' => Professeur::all(),
@@ -46,11 +48,12 @@ class CoursController extends Controller
      * @param Request $request
      * @return void
      */
-    public function update(Cours $cours, Request $request) {
+    public function update(Cours $cours, Request $request)
+    {
         $cours->update([
             'professeur_id' => $request->professeur_id,
             'coefficient' => $request->coefficient,
         ]);
-        return redirect()->route('cours.show', $cours->id)->with('notification', ['type' => 'success', 'message' => 'Affectation ajoutée avec succès']);
+        return redirect()->route('cours.show', $cours->id)->with('notification', ['type' => 'success', 'message' => 'Le cours à été mis à jour']);
     }
 }
