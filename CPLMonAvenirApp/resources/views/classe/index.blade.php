@@ -120,13 +120,17 @@
                                     $i = 1;
                                 @endphp
                                 @foreach ($eleves as $eleve)
+                                    @php
+                                        $profil = public_path('/storage/' . $eleve->profil);
+                                    @endphp
                                     <tr>
                                         <td class="text-center text-primary" style="font-weight: 700;">{{ $i++ }}
                                         </td>
-                                        <td class="text-center d-flex justify-content-center ">
+                                        <td class="text-center d-flex justify-content-center">
                                             <div style="height: 70px; width: 70px; border-radius: 100px; overflow: hidden;">
                                                 <img style="width: 100%;"
-                                                    src="{{ asset('assets/media/avatars/avatar0.jpg') }}" alt="" />
+                                                    @if (file_exists($profil)) src="{{ asset('storage/' . $eleve->profil) }}" @else src="{{ asset('assets/media/avatars/avatar1.jpg') }}" @endif
+                                                    alt="" />
                                             </div>
                                         </td>
                                         <td class="text-center text-primary fw-bolder" style="font-weight: 700">
@@ -222,22 +226,4 @@
             return confirm("Voulez vous supprimer l'élève ?")
         }
     </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @endsection

@@ -32,7 +32,7 @@ class LaTexToPDFController extends Controller
         $data = [
             'eleve' => $eleve,
             'logo' => public_path('assets/images/logo2.png'),
-            'photo_passeport' => public_path('assets/images/user.jpg')
+            'photo_passeport' => public_path('assets/media/avatars/avatar1.jpg')
         ];
 
         return (new LaraTeX('latex.informationEleve'))->with($data)->inline('fiche_information_' . $eleve->nom .  '_' . $eleve->prenom);

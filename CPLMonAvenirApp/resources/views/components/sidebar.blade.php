@@ -52,7 +52,7 @@
                     </a>
                     <ul class="nav-main-submenu">
                         <li class="nav-main-item">
-                            <a class="nav-main-link" href="{{route('matiere.index')}}">
+                            <a class="nav-main-link" href="{{ route('matiere.index') }}">
                                 <i class="nav-main-link-icon fa fa-book"></i>
                                 <span class="nav-main-link-name">Ajouter une matière</span>
                             </a>
@@ -94,7 +94,8 @@
                                             </a>
                                             <ul class="nav-main-submenu">
                                                 <li class="nav-main-item">
-                                                    <a class="nav-main-link" href="{{ route('cours.index', $classe->id) }}">
+                                                    <a class="nav-main-link"
+                                                        href="{{ route('cours.index', $classe->id) }}">
                                                         <span class="nav-main-link-name">Liste des cours</span>
                                                     </a>
                                                 </li>
@@ -345,7 +346,7 @@
                     </a>
                     <ul class="nav-main-submenu">
                         <li class="nav-main-item">
-                            <a class="nav-main-link" href="#">
+                            <a class="nav-main-link" href="{{ route('eleve.create') }}">
                                 <span class="nav-main-link-name">Inscrire un élève</span>
                             </a>
                         </li>

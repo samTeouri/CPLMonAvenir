@@ -33,10 +33,10 @@ class CheckAnneeScolaire
                 // vérifier si l'année suivante existe
                 $nextYear = AnneeScolaire::where('annee', '=', $aujourdHui->year + 1  . '-' . $aujourdHui->year + 2)->first();
 
-                //ddd($nextYear);
 
                 if ($nextYear === null) {
-                    //ddd('heelo');
+                    
+                    
                     $currentAnneeScolaire->update(['courant' => false]);
                     $currentAnneeScolaire->save();
 

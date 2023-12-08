@@ -11,7 +11,7 @@
                     <ol class="breadcrumb breadcrumb-alt">
                         <li class="breadcrumb-item">Cours</li>
                         <li class="breadcrumb-item">{{ $classe->promotion->nom }}eme</li>
-                        <li class="breadcrumb-item">{{ $classe->nom }}</li>
+                        <li class="breadcrumb-item"><a class="link-fx" href="">{{ $classe->nom }}</a></li>
                     </ol>
                 </nav>
             </div>
@@ -71,9 +71,9 @@
                         <tbody>
                             @if ($cours)
                                 @foreach ($cours as $cour)
-                                    <tr>
+                                    <tr @if(!$cour->professeur)class="table-warning"@endif>
                                         <td>{{ Str::substr($cour->nom, 0, -17) }}</td>
-                                        <td class="text-center text-primary fw-bolder"><a href="#">{{ $cour->professeur->nom }} {{ $cour->professeur->prenom }}</a></td>
+                                        <td class="text-center text-primary" style="font-weight: 500;">@if($cour->professeur){{ $cour->professeur->nom }} {{ $cour->professeur->prenom }}@else Pas de professeur @endif</td>
                                         <td class="text-center">{{ $cour->coefficient }}</td>
                                         <td class="text-center">
                                             <a class="btn btn-success"

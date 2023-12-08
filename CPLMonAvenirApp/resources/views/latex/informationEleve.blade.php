@@ -36,7 +36,11 @@ COMPLEXE PRIVÉ LAÏQUE MON AVENIR\\
 \vspace{0cm}
 
 \begin{figure}[!h]
-\includegraphics[height=5.4cm]{@latex($photo_passeport)}
+@if (file_exists(public_path('/storage/' . $eleve->profil)))
+    \includegraphics[height=5.4cm]{@latex(public_path('/storage/' . $eleve->profil))}
+@else
+    \includegraphics[height=5.4cm]{@latex($photo_passeport)}
+@endif
 \end{figure}
 
 

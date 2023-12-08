@@ -74,6 +74,7 @@
                         <button class="btn btn-success mx-4" type="submit">Enregistrer</button>
                     </div>
                 </div>
+            </form>
         </div>
 
     @endsection
