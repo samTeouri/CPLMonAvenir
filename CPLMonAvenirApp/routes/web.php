@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AbsenceController;
 use App\Http\Controllers\AnneeScolaireController;
+use App\Http\Controllers\AssiduiteController;
 use App\Http\Controllers\ClasseController;
 use App\Http\Controllers\EleveController;
 use App\Http\Controllers\EvaluationController;
@@ -9,6 +11,7 @@ use App\Http\Controllers\LaTexToPDFController;
 use App\Http\Controllers\MatiereController;
 use App\Http\Controllers\CoursController;
 use App\Http\Controllers\ProfesseurController;
+use App\Http\Controllers\RetardController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -71,15 +74,46 @@ Route::middleware(['auth'])->group(function () {
         Route::prefix('/eleve')->group(function () {
             Route::get('/ajouter-un-eleve', 'create')->name('eleve.create');
             Route::post('/ajouter-un-eleve', 'store')->name('eleve.store');
-            Route::get('/modifier-informations/{eleve}', 'edit')->name('eleve.edit');
+            Route::get('/modifier-informations/{eleve}/classe/{classe}', 'edit')->name('eleve.edit');
             Route::post('/modifier-informations/{eleve}', 'update')->name('eleve.update');
-            Route::get('/passage-année-supérieure/{eleve}', 'passageAnneeSup')->name('eleve.edit');
+            Route::get('/passage-année-supérieure/{eleve}/classe/{classe}', 'passageAnneeSup')->name('eleve.passage');
             Route::get('/details/{eleve}', 'show')->name('eleve.show');
             Route::delete('/supprimer/{eleve}', 'destroy')->name('eleve.destroy');
         });
     });
 
 
+    //Routes concernant l'assiduité de l'élève 
+    Route::controller(AssiduiteController::class)->group(function () {
+        Route::prefix('/assiduite')->group(function () {
+            Route::get('/liste-des avertissements/{eleve}/classe/{classe}', 'index')->name('assiduite.index');
+            Route::get('/ajouter-avertissement/eleve/{eleve}/trimestre/{trimestre}', 'create')->name('assiduite.create');
+            Route::post('/ajouter-avertissement/eleve/{eleve}/trimestre/{trimestre}', 'store')->name('assiduite.store');
+            Route::get('/modifier-avertissement/{assiduite}', 'edit')->name('assiduite.edit');
+            Route::post('/modifier-avertissement/{assiduite}', 'update')->name('assiduite.update');
+        });
+    });
+
+
+    //Routes concernant les retards de l'élève
+    Route::controller(RetardController::class)->group(function () {
+        Route::prefix('/retard')->group(function () {
+            Route::get('/liste-des-retards/{assiduite}/classe/{classe}', 'index')->name('retard.index');
+            Route::get('/ajouter-un-retard/{assiduite}/classe/{classe}', 'create')->name('retard.create');
+            Route::post('/ajouter-un-retard/{classe}', 'store')->name('retard.store');
+            Route::delete('/supprimer-un-retard/{retard}', 'destroy')->name('retard.destroy');
+        });
+    });
+
+    //Routes concernant les retards de l'élève
+    Route::controller(AbsenceController::class)->group(function () {
+        Route::prefix('/absence')->group(function () {
+            Route::get('/liste-des-absence/{assiduite}/classe/{classe}', 'index')->name('absence.index');
+            Route::get('/ajouter-une-absence/{assiduite}/classe/{classe}', 'create')->name('absence.create');
+            Route::post('/ajouter-une-absence/{classe}', 'store')->name('absence.store');
+            Route::delete('/supprimer-une-absence/{absence}', 'destroy')->name('absence.destroy');
+        });
+    });
 
 
 
@@ -136,5 +170,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/liste-eleves/classe/{classe}', 'listesDesEleves')->name('listeDesEleves');
         Route::get('/fiche-informations-eleve/{eleve}', 'informationsEleve')->name('eleve.info');
         Route::get('/fiche-informations-eleve/classe/{classe}', 'informationsEleveAll')->name('eleve.classe.info');
+        Route::get('/bulletin/eleve/{eleve}/classe/{classe}/{trimestre}', 'bulletinTrimestre')->name('eleve.bulletin');
+        Route::get('/bulletins-du-trimestre/classe/{classe}/trimestre/{trimestre}', 'bulletinsTrimestreClasse')->name('classe.bulletins');
     });
 });

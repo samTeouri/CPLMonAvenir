@@ -83,11 +83,12 @@
                             </a>
                             <ul class="nav-main-submenu">
 
-                                <!----- Gestion des groupes ------>
+                                <!----- Génération des bulletins ------>
 
                                 @foreach ($classe->promotion->trimestres as $trimestre)
                                     <li class="nav-main-item">
-                                        <a class="nav-main-link" href="#">
+                                        <a class="nav-main-link"
+                                            href="{{ route('classe.bulletins', ['classe' => $classe->id, 'trimestre' => $trimestre->id]) }}">
                                             <span
                                                 class="nav-main-link-name">{{ substr($trimestre->intitule, 0, 11) }}</span>
                                         </a>
@@ -151,6 +152,14 @@
 
                                                     <li class="nav-main-item">
                                                         <a class="nav-main-link"
+                                                            href="{{ route('eleve.edit', ['eleve' => $eleve->id, 'classe' => $classe->id]) }}">
+                                                            <span class="nav-main-link-name"><i
+                                                                    class="fa fa-user-edit mr-2"></i>Modifier</span>
+                                                        </a>
+                                                    </li>
+
+                                                    <li class="nav-main-item">
+                                                        <a class="nav-main-link"
                                                             href="{{ route('eleve.info', $eleve->id) }}">
                                                             <span class="nav-main-link-name"><i
                                                                     class="fa fa-info-circle mr-2"></i>Informations</span>
@@ -159,7 +168,7 @@
 
                                                     <li class="nav-main-item">
                                                         <a class="nav-main-link"
-                                                            href="{{ route('eleve.info', $eleve->id) }}">
+                                                            href="{{ route('assiduite.index', ['eleve' => $eleve->id, 'classe' => $classe->id]) }}">
                                                             <span class="nav-main-link-name"><i
                                                                     class="fa fa-clock mr-2"></i>Assiduité</span>
                                                         </a>
@@ -178,7 +187,8 @@
 
                                                             @foreach ($classe->promotion->trimestres as $trimestre)
                                                                 <li class="nav-main-item">
-                                                                    <a class="nav-main-link" href="#">
+                                                                    <a class="nav-main-link"
+                                                                        href="{{ route('eleve.bulletin', ['eleve' => $eleve->id, 'classe' => $classe->id, 'trimestre' => $trimestre->id]) }}">
                                                                         <span
                                                                             class="nav-main-link-name">{{ substr($trimestre->intitule, 0, 11) }}</span>
                                                                     </a>

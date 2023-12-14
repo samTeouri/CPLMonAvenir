@@ -10,24 +10,27 @@ class Assiduite extends Model
     use HasFactory;
 
     protected $fillable = [
-        'retard',
-        'absences',
         'comportement',
         'eleve_id',
         'trimestre_id'
     ];
 
-    protected $cast = [
-        'retard' => 'json',
-        'absences' => 'json'
-    ];
+    public function retards()
+    {
+        return $this->hasMany(Retard::class);
+    }
 
-    public function trimestres()
+    public function absences()
+    {
+        return $this->hasMany(Absence::class);
+    }
+
+    public function trimestre()
     {
         return $this->belongsTo(Trimestre::class);
     }
 
-    public function eleves()
+    public function eleve()
     {
         return $this->belongsTo(Eleve::class);
     }

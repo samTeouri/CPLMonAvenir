@@ -11,11 +11,14 @@
         <div class="content content-full">
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
                 <h1 class="flex-sm-fill h3 my-2">
-                    Inscription d'un nouvel élève
+                    Modifier les information de l'élève
                 </h1>
                 <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
-                        <li class="breadcrumb-item"><a class="link-fx" href="">Inscription</a></li>
+                        <li class="breadcrumb-item">{{ $classe->promotion->nom }}eme</li>
+                        <li class="breadcrumb-item">Modifier</li>
+                        <li class="breadcrumb-item"><a class="link-fx" href="">{{ $eleve->nom }}
+                                {{ $eleve->prenom }}</a></li>
                     </ol>
                 </nav>
             </div>
@@ -58,9 +61,9 @@
 
         <div class="block block-rounded">
             <div class="block-content px-5">
-                <h3>Formulaire d'inscription</h3>
+                <h3>Informations de {{ $eleve->nom }} {{ $eleve->prenom }}</h3>
                 <p class="font-size-sm text-muted">
-                    Inscrivez un nouvel élève dans votre établissement.
+                    Modifiez les informations de {{ $eleve->nom }} {{ $eleve->prenom }}.
                 </p>
             </div>
             <div>
@@ -84,7 +87,7 @@
                     <!-- END Step Tabs -->
 
                     <!-- Form -->
-                    <form action="{{ route('eleve.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('eleve.update', $eleve->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <!-- Steps Content -->
                         <div class="block-content block-content-full tab-content px-md-5" style="min-height: 303px;">
@@ -96,29 +99,30 @@
                                     <div class="form-group col-lg-3">
                                         <label for="wizard-simple2-firstname">Nom de l'élève</label>
                                         <input class="form-control form-control-alt" type="text"
-                                            id="wizard-simple2-firstname" name="nom" required />
+                                            id="wizard-simple2-firstname" value="{{ $eleve->nom }}" name="nom" />
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label for="wizard-simple2-lastname">Prénoms de l'élève</label>
                                         <input class="form-control form-control-alt" type="text"
-                                            id="wizard-simple2-lastname" name="prenom" required />
+                                            id="wizard-simple2-lastname" value="{{ $eleve->prenom }}" name="prenom" />
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label for="sexe">Sexe de l'élève</label>
-                                        <select class="form-control form-control-alt" name="sexe" id="sexe"
-                                            required>
-                                            <option value="M">Masculin</option>
-                                            <option value="F">Féminin</option>
+                                        <select class="form-control form-control-alt" name="sexe" id="sexe">
+                                            <option value="M" @if ($eleve->sexe === 'M') selected @endif>
+                                                Masculin</option>
+                                            <option value="F" @if ($eleve->sexe === 'F') selected @endif>Féminin
+                                            </option>
                                         </select>
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label for="example-flatpickr-default">Date de naissance de l'élève</label>
                                         <input type="text" class="js-flatpickr form-control form-control-alt"
-                                            id="example-flatpickr-default" name="date_naissance" placeholder="Y-m-d"
-                                            required />
+                                            id="example-flatpickr-default" name="date_naissance"
+                                            value="{{ $eleve->date_naissance }}" placeholder="Y-m-d" />
                                     </div>
 
                                 </div>
@@ -130,26 +134,22 @@
                                     <div class="form-group col-lg-3">
                                         <label for="wizard-simple2-lastname">Lieu de naissance</label>
                                         <input class="form-control form-control-alt" type="text"
-                                            id="wizard-simple2-lastname" name="lieu_naissance" required>
+                                            id="wizard-simple2-lastname" name="lieu_naissance"
+                                            value="{{ $eleve->lieu_naissance }}">
                                     </div>
 
                                     <div class="form-group col-lg-6">
                                         <label for="wizard-simple2-lastname">Adresse de l'élève</label>
                                         <input class="form-control form-control-alt" type="text"
-                                            id="wizard-simple2-lastname" name="adresse" required>
+                                            id="wizard-simple2-lastname" name="adresse" value="{{ $eleve->adresse }}">
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label for="wizard-simple2-skills">Classe</label>
                                         <select class="form-control form-control-alt" id="wizard-simple2-skills"
-                                            name="classe_id" required>
-                                            <option value="">Selectionnez la classe de l'élève</option>
-                                            @foreach ($promotions as $promotion)
-                                                @foreach ($promotion->classes as $classe)
-                                                    <option value="{{ $classe->id }}">{{ substr($classe->nom, 0, 6) }}
-                                                    </option>
-                                                @endforeach
-                                            @endforeach
+                                            name="classe_id">
+                                            <option value="{{ $classe->id }}" selected>{{ substr($classe->nom, 0, 6) }}
+                                            </option>
                                         </select>
                                     </div>
 
@@ -161,11 +161,22 @@
                                         <input type="file" name="profil" accept="image/*"
                                             class="form-control form-control-file form-control-alt" id=""
                                             onchange="previewImage(event)" />
+                                        <input hidden type="number" id="photo_change" name="photo_change"
+                                            value="0" />
                                     </div>
-
+                                    @php
+                                        $profil = public_path('/storage/' . $eleve->profil);
+                                    @endphp
                                     <div class="col-lg-3" id="imagePreview">
-
+                                        @if (file_exists($profil))
+                                            <img style="width: 100%;" src="{{ asset('storage/' . $eleve->profil) }}"
+                                                alt="" />
+                                        @else
+                                            <p>Pas de photo</p>
+                                        @endif
                                     </div>
+
+
                                 </div>
 
                             </div>
@@ -322,7 +333,7 @@
                                     <div class="form-group col-lg-3">
                                         <label for="sexe">Situation matrimoniale du tuteur</label>
                                         <select class="form-control form-control-alt" name="situation_matrimoniale_tuteur"
-                                            id="sexe" required>
+                                            id="sexe">
                                             <option value="Célibataire">Célibataire</option>
                                             <option value="Mariée">Marié(e)</option>
                                             <option value="Veuf">Veuf</option>
@@ -383,7 +394,7 @@
                                 <hr />
 
                                 <div class="d-flex justify-content-end">
-                                    <button class="btn btn-success" type="submit">Inscrire</button>
+                                    <button class="btn btn-success" type="submit">Modifier</button>
                                 </div>
 
                             </div>
@@ -403,9 +414,12 @@
 
 
     <script>
+        let photo_change = document.querySelector('#photo_change')
+
         function previewImage(event) {
             var input = event.target;
 
+            photo_change.value = 1;
             var reader = new FileReader();
             reader.onload = function() {
                 var dataURL = reader.result;
