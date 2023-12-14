@@ -13,8 +13,6 @@ return new class extends Migration
     {
         Schema::create('assiduites', function (Blueprint $table) {
             $table->id();
-            $table->json('retard')->nullable();
-            $table->json('absences')->nullable();
             $table->boolean('comportement')->default(true);
             $table->integer('trimestre_id');
             $table->integer('eleve_id');

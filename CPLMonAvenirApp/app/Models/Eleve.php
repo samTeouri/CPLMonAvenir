@@ -34,63 +34,92 @@ class Eleve extends Model
 
 
 
+    // public function getMoyenneCours($id_cours, $id_trimestre)
+    // {
+    //     $cours = Cours::with(['evaluations.notes' => function ($query) use ($id_trimestre) {
+    //         $query->where('trimestre_id', $id_trimestre);
+    //     }])
+    //         ->find($id_cours);
+
+    //     $notes_classes = collect();
+
+    //     foreach ($cours->evaluations as $evaluation) {
+    //         if (in_array($evaluation->type, ['devoir', 'interrogation'])) {
+    //             $notes_classes = $notes_classes->merge($evaluation->notes->where('eleve_id', $this->id));
+    //         }
+    //     }
+
+    //     $somme_notes = $notes_classes->sum('valeur');
+    //     $nbre_notes = $notes_classes->count();
+
+    //     if ($nbre_notes === 0) {
+    //         $nbre_notes = 1;
+    //     }
+
+    //     $moyenne_matiere = ['moyenne_classe' => round($somme_notes / $nbre_notes, 2)];
+
+    //     $note_composition = $cours->evaluations
+    //         ->where('type', 'composition')
+    //         ->flatMap(function ($evaluation) use ($id_trimestre) {
+    //             return $evaluation->notes->where('trimestre_id', $id_trimestre)->where('eleve_id', $this->id);
+    //         })
+    //         ->sum('valeur') * 1;
+
+    //     $moyenne_matiere['compo'] = $note_composition;
+    //     $moyenne_matiere['cours'] = $cours;
+
+    //     return $moyenne_matiere;
+    // }
+
+
     // calcul de la moyenne  en classe et composition d'un étudiant dans un cours dans un trimestre donné
     public function getMoyenneCours($id_cours, $id_trimestre)
     {
-        $cours = Cours::find($id_cours);
-
-        $trimestre = Trimestre::find($id_trimestre);
+        $cours = Cours::with(['evaluations.notes' => function ($query) use ($id_trimestre) {
+            $query->where('trimestre_id', $id_trimestre);
+        }])
+            ->find($id_cours);
 
         $notes_classes = [];
 
         // on parcours toutes les évaluations du cours pour rechercher les évaluations dans lesquelles l'élève à composé au cours du trimestre 
         // puis on récupère la note
         foreach ($cours->evaluations as $evaluation) {
-            if (($evaluation->type === 'devoir' || $evaluation->type === 'interrogation') && $evaluation->notes[0]->trimestre_id === $trimestre->id) {
-                foreach ($evaluation->notes as $note) {
-                    if ($note->eleve_id === $this->id) {
-                        array_push($notes_classes, $note);
-                    }
+            if (in_array($evaluation->type, ['devoir', 'interrogation'])) {
+                foreach ($evaluation->notes->where('eleve_id', $this->id) as $note) {
+                    array_push($notes_classes, $note);
                 }
             }
         }
 
 
-
-
-
         $somme_notes = 0;
-        $nbre_notes = 0;
+
         foreach ($notes_classes as $note) {
             // passage à 20 de la note dans le cas où le barême est inférieur à 20
             if ($note->evaluation->note_maximale < 20) {
                 $note_sur_20 = (20 * $note->valeur) / $note->evaluation->note_maximale;
                 $somme_notes += $note->valeur;
-                $nbre_notes += 1;
             } else {
                 $somme_notes += $note->valeur;
-                $nbre_notes += 1;
             }
         }
 
-        if ($nbre_notes === 0) {
-            $nbre_notes = 1;
+        $nbre_notes = 1;
+        if (count($notes_classes) != 0) {
+            $nbre_notes = count($notes_classes);
         }
 
         // calcul de la moyenne de classe
-        $moyenne_matiere = ['moyenne_classe' => round($somme_notes / $nbre_notes, 3)];
+        $moyenne_matiere = ['moyenne_classe' => round($somme_notes / $nbre_notes, 2)];
 
         $note_composition = 0;
 
         // on parcours toutes les évaluations du cours pour rechercher les évaluations dans lesquelles l'élève à composé au cours du trimestre 
         // puis on récupère la note
         foreach ($cours->evaluations as $evaluation) {
-            if (($evaluation->type === 'composition') && $evaluation->notes[0]->trimestre_id === $trimestre->id) {
-                foreach ($evaluation->notes as $note) {
-                    if ($note->eleve_id === $this->id) {
-                        $note_composition = $note->valeur * 1;
-                    }
-                }
+            if (($evaluation->type === 'composition')) {
+                $note_composition = $evaluation->notes->where('eleve_id', $this->id)->pluck('valeur')->first() * 1;
             }
         }
 
@@ -104,7 +133,7 @@ class Eleve extends Model
 
     public function getMoyenneTrimestrielle($classe_id, $trimestre_id)
     {
-        $classe = Classe::find($classe_id);
+        $classe = Classe::with('cours')->find($classe_id);
 
         $cours = $classe->cours;
 
@@ -120,7 +149,7 @@ class Eleve extends Model
         $total_moyenne = 0;
         $total_coefficients = 0;
         foreach ($liste_moyennes as $moyenne) {
-            $total_moyenne += ($moyenne['moyenne_classe'] + $moyenne['compo']) / $moyenne['cours']->coefficient;
+            $total_moyenne += (($moyenne['moyenne_classe'] + $moyenne['compo']) / 2) * $moyenne['cours']->coefficient;
             $total_coefficients += $moyenne['cours']->coefficient;
         }
 
@@ -129,15 +158,72 @@ class Eleve extends Model
     }
 
 
+    public function rangTrimestre($trimestre_id, $classe_id)
+    {
+        $classe = Classe::with('eleves')->find($classe_id);
+
+        $trimestre = Trimestre::find($trimestre_id);
+
+        $moyenne_eleve = $this->getMoyenneTrimestrielle($classe->id, $trimestre->id);
+
+        $moyennes = [];
+        foreach ($classe->eleves as $eleve) {
+            array_push($moyennes, $eleve->getMoyenneTrimestrielle($classe->id, $trimestre->id));
+        }
+
+        arsort($moyennes);
+
+        if ($moyenne_eleve === 0.0) {
+            return count($classe->eleves);
+        }
+
+        $rang = 0;
+        foreach ($moyennes as $moyenne) {
+            $rang++;
+            if ($moyenne_eleve === $moyenne) {
+                return $rang;
+            }
+        }
+    }
 
 
+    public function rangAnnuel($classe_id)
+    {
+        $classe = Classe::with(['promotion.trimestres', 'eleves'])->find($classe_id);
 
 
+        $moyenne_annuelle_eleve = 0.0;
+        foreach ($classe->promotion->trimestres as $trimestre) {
+            $moyenne_annuelle_eleve += $this->getMoyenneTrimestrielle($classe->id, $trimestre->id);
+        }
+
+        $moyenne_annuelle_eleve /= 3;
+
+        $moyennes = [];
+        foreach ($classe->eleves as $eleve) {
+            $moyenne_annuelle = 0.0;
+            foreach ($classe->promotion->trimestres as $trimestre) {
+                $moyenne_annuelle += $eleve->getMoyenneTrimestrielle($classe->id, $trimestre->id);
+            }
+            array_push($moyennes, round($moyenne_annuelle / 3, 2));
+        }
 
 
+        arsort($moyennes);
 
 
+        if (round($moyenne_annuelle_eleve, 2) === 0.0) {
+            return count($classe->eleves);
+        }
 
+        $rang = 0;
+        foreach ($moyennes as $moyenne) {
+            $rang++;
+            if (round($moyenne_annuelle_eleve, 2) === $moyenne) {
+                return $rang;
+            }
+        }
+    }
 
 
     public function classes()

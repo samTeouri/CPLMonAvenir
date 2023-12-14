@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Assiduite;
 use App\Models\Classe;
 use App\Models\Cours;
 use App\Models\Eleve;
@@ -83,7 +84,23 @@ class ClasseSeeder extends Seeder
             $eleve = Eleve::find($i);
             $eleve->classes()->attach($classe_3);
             $eleve->classes()->attach($classe_5);
+
+            foreach ($classe_3->promotion->trimestres as $trimestre) {
+                Assiduite::create([
+                    'eleve_id' => $eleve->id,
+                    'trimestre_id' => $trimestre->id
+                ]);
+            }
+
+            foreach ($classe_5->promotion->trimestres as $trimestre) {
+                Assiduite::create([
+                    'eleve_id' => $eleve->id,
+                    'trimestre_id' => $trimestre->id
+                ]);
+            }
         }
+
+
 
 
         $matieres = Matiere::all();
