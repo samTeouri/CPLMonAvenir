@@ -187,7 +187,7 @@
     Avertissement: Travail/Discipline & \\
     Blâme pour: Travail/Discipline & \\
     \hline
-    Nom et signature du titulaire: & Sokodé, le \large 24/08/2023\\
+    Nom et signature du titulaire: & Sokodé, le \large \today\\
     & \textbf{Le Directeur} \\
     & \\
     & \\

@@ -10,6 +10,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LaTexToPDFController;
 use App\Http\Controllers\MatiereController;
 use App\Http\Controllers\CoursController;
+use App\Http\Controllers\NoteController;
 use App\Http\Controllers\ProfesseurController;
 use App\Http\Controllers\RetardController;
 use Illuminate\Support\Facades\Auth;
@@ -46,15 +47,17 @@ Route::middleware(['auth'])->group(function () {
 
     // Routes concernant les professeurs
     Route::controller(ProfesseurController::class)->group(function () {
-        Route::prefix('/professeur', function () {
+        Route::prefix('/professeurs')->group(function () {
             Route::get('/liste-des-enseignants', 'index')->name('professeur.index');
             Route::get('/ajouter-un-enseignant', 'create')->name('professeur.create');
             Route::post('/ajouter-un-enseignant', 'store')->name('professeur.store');
             Route::get('/modifier-informations/{professeur}', 'edit')->name('professeur.edit');
             Route::post('/modifier-informations/{professeur}', 'update')->name('professeur.update');
-            Route::delete('/supprimer-enseignant', 'destroy')->name('professeur.delete');
+            Route::delete('/supprimer-enseignant/{professeur}', 'destroy')->name('professeur.destroy');
         });
     });
+
+
 
     // Routes concernant les matières
     Route::controller(MatiereController::class)->group(function () {
@@ -164,6 +167,10 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/update/{cours}', 'update')->name('cours.update');
         });
     });
+
+
+
+
 
     //Route pour la génération de documents
     Route::controller(LaTexToPDFController::class)->group(function () {

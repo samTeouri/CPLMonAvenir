@@ -365,8 +365,8 @@
                     </a>
                     <ul class="nav-main-submenu">
                         <li class="nav-main-item">
-                            <a class="nav-main-link" href="#">
-                                <span class="nav-main-link-name">Ajouter un enseignant</span>
+                            <a class="nav-main-link" href="{{ route('professeur.index') }}">
+                                <span class="nav-main-link-name">Recruter un enseignant</span>
                             </a>
                         </li>
                     </ul>

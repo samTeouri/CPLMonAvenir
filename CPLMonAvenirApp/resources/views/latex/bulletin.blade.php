@@ -16,6 +16,7 @@
 \usepackage{graphicx}
 \usepackage{eso-pic}
 \usepackage{ulem}
+\usepackage[french]{babel}
 \usepackage[left=1cm,right=1cm,top=1cm,bottom=1cm]{geometry}
 
 
@@ -182,7 +183,7 @@ Absences évaluées en heures: @latex($heures_absences)h & \\
 Avertissement: Travail/Discipline & \\
 Blâme pour: Travail/Discipline & \\
 \hline
-Nom et signature du titulaire: & Sokodé, le \large 24/08/2023\\
+Nom et signature du titulaire: & Sokodé, le \large \today\\
 & \textbf{Le Directeur} \\
 & \\
 & \\
