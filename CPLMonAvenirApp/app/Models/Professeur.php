@@ -13,7 +13,8 @@ class Professeur extends Model
         'nom',
         'prenom',
         'contact',
-        'sexe'
+        'sexe',
+        'user_id'
     ];
 
     protected $cast = [
