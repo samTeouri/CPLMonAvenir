@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('assiduites', function (Blueprint $table) {
             $table->id();
-            $table->boolean('comportement')->default(true);
+            $table->json('comportement')->default('{"avertissement": {"Travail": "false", "Discipline": "false"}, "blame": {"Travail": "false", "Discipline": "false"} }');
             $table->integer('trimestre_id');
             $table->integer('eleve_id');
             $table->foreign('trimestre_id')->references('id')->on('trimestres')->onDelete('cascade');

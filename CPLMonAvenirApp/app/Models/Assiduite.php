@@ -15,6 +15,10 @@ class Assiduite extends Model
         'trimestre_id'
     ];
 
+    protected $cast = [
+        'comportement' => 'json'
+    ];
+
     public function retards()
     {
         return $this->hasMany(Retard::class);
