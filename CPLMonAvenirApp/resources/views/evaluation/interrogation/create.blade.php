@@ -59,7 +59,12 @@
 
             <form action="{{ route('evaluation.store') }}" method="post">
                 @csrf
-                <h3>Nouvelle interrogation de {{ $cours->nom }}</h3>
+                <div class="d-flex mx-0 mb-5 px-0 justify-content-between align-items-center">
+                    <h3>Nouvelle interrogation de {{ $cours->nom }}</h3>
+                    <a href="{{ route('interrogation.cours', $classe->id) }}" class="btn btn-secondary"><i
+                            class="fa fa-angle-left mr-1" aria-hidden="true"></i>Retour</a>
+                </div>
+
 
                 <div class="col-12 py-3">
                     <div class="row justify-content-around mx-0 px-0">

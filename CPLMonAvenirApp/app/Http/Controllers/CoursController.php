@@ -54,6 +54,6 @@ class CoursController extends Controller
             'professeur_id' => $request->professeur_id,
             'coefficient' => $request->coefficient,
         ]);
-        return redirect()->route('cours.show', $cours->id)->with('notification', ['type' => 'success', 'message' => 'Le cours à été mis à jour']);
+        return redirect()->route('cours.index', $cours->classe->id)->with('notification', ['type' => 'success', 'message' => 'Le cours à été mis à jour']);
     }
 }

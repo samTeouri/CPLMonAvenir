@@ -94,6 +94,8 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/ajouter-avertissement/eleve/{eleve}/trimestre/{trimestre}', 'store')->name('assiduite.store');
             Route::get('/modifier-avertissement/{assiduite}', 'edit')->name('assiduite.edit');
             Route::post('/modifier-avertissement/{assiduite}', 'update')->name('assiduite.update');
+            Route::get('/comportement-de-l-eleve/{assiduite}/classe/{classe}', 'editComportement')->name('comportement.edit');
+            Route::post('/comportement-de-l-eleve/{assiduite}', 'updateComportement')->name('comportement.update');
         });
     });
 

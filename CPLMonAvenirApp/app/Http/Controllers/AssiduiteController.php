@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Assiduite;
 use App\Models\Classe;
 use App\Models\Eleve;
 use Illuminate\Http\Request;
@@ -30,5 +31,15 @@ class AssiduiteController extends Controller
         ];
 
         return view('assiduite.index', $data);
+    }
+
+    public function editComportement(Assiduite $assiduite, Classe $classe)
+    {
+        $data = [
+            'assiduite' => $assiduite,
+            'classe' => $classe
+        ];
+
+        return view('comportement.edit', $data);
     }
 }

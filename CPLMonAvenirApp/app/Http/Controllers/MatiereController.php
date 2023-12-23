@@ -75,8 +75,6 @@ class MatiereController extends Controller
     public function store(Request $request)
     {
 
-        $url = url()->previous();
-
         $matiere = Matiere::create([
             'intitule' => $request->intitule
         ]);
@@ -95,7 +93,7 @@ class MatiereController extends Controller
             }
         }
 
-        return redirect()->to($url)->with('notification', ['type' => 'success', 'message' => 'Matière crée avec succès']);
+        return redirect()->to(route('matiere.index'))->with('notification', ['type' => 'success', 'message' => 'Matière crée avec succès']);
     }
 
 

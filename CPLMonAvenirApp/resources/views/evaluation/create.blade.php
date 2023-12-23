@@ -59,7 +59,11 @@
 
             <form action="{{ route('evaluation.store') }}" method="post">
                 @csrf
-                <h3>Nouvelle évaluation de {{ $matiere->intitule }}</h3>
+                <div class="d-flex mx-0 px-0 mb-5 justify-content-between align-items-center">
+                    <h3 class="m-0">Nouvelle évaluation de {{ $matiere->intitule }}</h3>
+                    <a href="{{ route('evaluation_matieres', $promotion->id) }}" class="btn btn-secondary"><i
+                            class="fa fa-angle-left" aria-hidden="true"></i> Retour</a>
+                </div>
 
                 <div class="col-12 py-3">
                     <div class="row justify-content-around mx-0 px-0">

@@ -64,7 +64,7 @@
             </div>
             <div class="block-content">
                 <p class="font-size-sm text-muted">
-                    Voici la liste des cours de la classe de {{ substr($classe->nom, 0, 6) }}, choisissez la cours
+                    Voici la liste des cours de la classe de {{ substr($classe->nom, 0, 6) }}, choisissez le cours
                     et le trimestre
                     dans lequel créer l'interrogation.
                 </p>

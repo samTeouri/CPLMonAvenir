@@ -61,6 +61,7 @@
         <div class="block block-rounded">
             <div class="block-header">
                 <h3 class="block-title">Liste des evaluations de {{ $promotion->nom }}eme en {{ $matiere->intitule }}</h3>
+                <a href="{{ route('view_evaluation_matieres', $promotion->id) }}" class="btn btn-secondary"><i class="fa fa-angle-left mr-1" aria-hidden="true"></i>Retour</a>
             </div>
             <div class="block-content">
                 <p class="font-size-sm text-muted">

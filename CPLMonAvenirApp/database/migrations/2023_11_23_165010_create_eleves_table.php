@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('matricule')->nullable()->unique();
             $table->string('profil')->nullable();
             $table->string('adresse');
+            $table->boolean('redoublant')->default(False);
             $table->integer('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
