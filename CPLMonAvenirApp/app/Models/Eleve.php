@@ -34,43 +34,6 @@ class Eleve extends Model
 
 
 
-    // public function getMoyenneCours($id_cours, $id_trimestre)
-    // {
-    //     $cours = Cours::with(['evaluations.notes' => function ($query) use ($id_trimestre) {
-    //         $query->where('trimestre_id', $id_trimestre);
-    //     }])
-    //         ->find($id_cours);
-
-    //     $notes_classes = collect();
-
-    //     foreach ($cours->evaluations as $evaluation) {
-    //         if (in_array($evaluation->type, ['devoir', 'interrogation'])) {
-    //             $notes_classes = $notes_classes->merge($evaluation->notes->where('eleve_id', $this->id));
-    //         }
-    //     }
-
-    //     $somme_notes = $notes_classes->sum('valeur');
-    //     $nbre_notes = $notes_classes->count();
-
-    //     if ($nbre_notes === 0) {
-    //         $nbre_notes = 1;
-    //     }
-
-    //     $moyenne_matiere = ['moyenne_classe' => round($somme_notes / $nbre_notes, 2)];
-
-    //     $note_composition = $cours->evaluations
-    //         ->where('type', 'composition')
-    //         ->flatMap(function ($evaluation) use ($id_trimestre) {
-    //             return $evaluation->notes->where('trimestre_id', $id_trimestre)->where('eleve_id', $this->id);
-    //         })
-    //         ->sum('valeur') * 1;
-
-    //     $moyenne_matiere['compo'] = $note_composition;
-    //     $moyenne_matiere['cours'] = $cours;
-
-    //     return $moyenne_matiere;
-    // }
-
 
     // calcul de la moyenne  en classe et composition d'un étudiant dans un cours dans un trimestre donné
     public function getMoyenneCours($id_cours, $id_trimestre)

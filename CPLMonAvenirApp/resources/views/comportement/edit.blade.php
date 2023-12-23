@@ -72,40 +72,50 @@
                 <div class="col-12 py-3">
 
                     <div class="row mx-0 px-0 align-items-center justify-content-around">
-                        <!-- Affichage du nom de l'élève -->
-                        <input type="hidden" name="assiduite_id" value="{{ $assiduite->id }}">
+
+                        @php
+                            $comportement = json_decode($assiduite->comportement);
+                            $avertissement = json_decode($comportement->avertissement);
+                            $blame = json_decode($comportement->blame);
+                        @endphp
 
                         <div class="form-group">
                             <label>Avertissement</label>
                             <!-- Champ pour le groupe -->
-                            <div>
-                                <div class="custom-control custom-checkbox custom-control-inline">
-                                    <label for="" class="custom-control-label">Travail</label>
-                                    <input type="checkbox" name="avertissement[]" id=""
-                                        class="custom-control-input" value="travail" />
-                                </div>
-                                <div class="custom-control custom-checkbox custom-control-inline">
-                                    <label for="" class="custom-control-label">Discipline</label>
-                                    <input type="checkbox" name="avertissement[]" id=""
-                                        class="custom-control-input" value="discipline" />
+                            <div class="d-flex">
+                                <div>
+                                    <label class="mr-2" for="avertissement_travail">
+                                        Travail
+                                        <input type="checkbox" name="avertissement[Travail]" id="avertissement_travail"
+                                            value="true" @if ($avertissement->Travail === true) checked @endif />
+                                    </label>
+                                    <label for="avertissement_discipline">
+                                        Discipline
+                                        <input type="checkbox" name="avertissement[Discipline]"
+                                            id="avertissement_discipline" value="true"
+                                            @if ($avertissement->Discipline === true) checked @endif />
+                                    </label>
                                 </div>
                             </div>
+
                         </div>
 
 
                         <div class="form-group">
                             <label>Blâme</label>
                             <!-- Champ pour le groupe -->
-                            <div>
-                                <div class="custom-control custom-checkbox custom-control-inline">
-                                    <label for="" class="custom-control-label">Travail</label>
-                                    <input type="checkbox" name="avertissement[]" id=""
-                                        class="custom-control-input" value="travail" />
-                                </div>
-                                <div class="custom-control custom-checkbox custom-control-inline">
-                                    <label for="" class="custom-control-label">Discipline</label>
-                                    <input type="checkbox" name="avertissement[]" id=""
-                                        class="custom-control-input" value="discipline" />
+                            <div class="d-flex">
+                                <div>
+                                    <label class="mr-2" for="blame_travail">
+                                        Travail
+                                        <input type="checkbox" name="blame[Travail]" value="travail" id="blame_travail"
+                                            @if ($blame->Travail === true) checked @endif />
+                                    </label>
+                                    <label for="blame_discipline">
+                                        Discipline
+                                        <input type="checkbox" name="blame[Discipline]" value="discipline"
+                                            id="blame_discipline" @if ($blame->Discipline === true) checked @endif />
+                                    </label>
                                 </div>
                             </div>
                         </div>
@@ -119,5 +129,4 @@
         </div>
 
     </div>
-
 @endsection

@@ -42,4 +42,69 @@ class AssiduiteController extends Controller
 
         return view('comportement.edit', $data);
     }
+
+    public function updateComportement(Request $request, Assiduite $assiduite)
+    {
+        $url = url()->previous();
+
+        $avertissement = $request->avertissement;
+        $blame = $request->blame;
+
+        $comportement = [];
+
+        $comportement_avertissement = [];
+
+        $comportement_blame = [];
+
+        if ($avertissement) {
+            if (array_key_exists('Discipline', $avertissement)) {
+                $comportement_avertissement['Discipline'] = true;
+            } else {
+                $comportement_avertissement['Discipline'] = false;
+            }
+
+            if (array_key_exists('Travail', $avertissement)) {
+                $comportement_avertissement['Travail'] = true;
+            } else {
+                $comportement_avertissement['Travail'] = false;
+            }
+        } else {
+            $comportement_avertissement['Travail'] = false;
+            $comportement_avertissement['Discipline'] = false;
+        }
+
+
+
+        if ($blame) {
+            if (array_key_exists('Discipline', $blame)) {
+                $comportement_blame['Discipline'] = true;
+            } else {
+                $comportement_blame['Discipline'] = false;
+            }
+
+            if (array_key_exists('Travail', $blame)) {
+                $comportement_blame['Travail'] = true;
+            } else {
+                $comportement_blame['Travail'] = false;
+            }
+        } else {
+            $comportement_blame['Travail'] = false;
+            $comportement_blame['Discipline'] = false;
+        }
+
+
+
+
+
+        $comportement['avertissement'] = json_encode($comportement_avertissement);
+        $comportement['blame'] = json_encode($comportement_blame);
+
+        $assiduite->update([
+            'comportement' => $comportement
+        ]);
+
+        return redirect()->to($url)->with('notification', ['type' =>  'success', 'message' => "Comportement de l'élève mis à jour"]);
+
+
+    }
 }
