@@ -182,13 +182,13 @@ Absences: @latex(count($assiduite->absences)) & \\
 Absences évaluées en heures: @latex($heures_absences)h & \\
 @php
     $comportement = json_decode($assiduite->comportement);
-    $avertissement = json_decode($comportement->avertissement);
-    $blame = json_decode($comportement->blame);
+    $avertissement = $comportement->avertissement;
+    $blame = $comportement->blame;
 @endphp
 Avertissement: @if ($avertissement->Travail === true) Travail @endif @if ($avertissement->Discipline === true) Discipline @endif & \\
 Blâme pour: @if ($blame->Travail === true) Travail @endif @if ($blame->Discipline === true) Discipline @endif & \\
 \hline
-Nom et signature du titulaire: & Sokodé, le \large \today\\
+Nom et signature du titulaire: @if($classe->professeur) @latex($classe->professeur->nom) @latex($classe->professeur->prenom) @endif & Sokodé, le \large \today\\
 & \textbf{Le Directeur} \\
 & \\
 & \\
