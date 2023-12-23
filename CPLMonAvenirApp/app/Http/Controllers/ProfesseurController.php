@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AnneeScolaire;
+use App\Models\Classe;
 use App\Models\Professeur;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -44,7 +46,18 @@ class ProfesseurController extends Controller
 
     public function edit(Professeur $professeur)
     {
+        $classes = [];
+        $anneeScolaire = AnneeScolaire::getAnneeScolaire();
+        $promotions = $anneeScolaire->promotions;
+        foreach ($promotions as $promotion) {
+            foreach ($promotion->classes as $classe) {
+                if ($classe->professeur === null || ($classe->professeur->id === $professeur->id)) {
+                    array_push($classes, $classe);
+                }
+            }
+        }
         $data = [
+            'classes' => $classes,
             'professeur' => $professeur
         ];
 
@@ -54,6 +67,19 @@ class ProfesseurController extends Controller
     public function update(Request $request, Professeur $professeur)
     {
         $professeur->update($request->all());
+
+        if ($request->classe_id && $request->classe_id === 'aucune') {
+            $classe = Classe::find($professeur->classe->id);
+            $classe->update([
+                'professeur_id' => null
+            ]);
+        } else {
+            $classe = Classe::find($request->classe_id);
+
+            $classe->update([
+                'professeur_id' => $professeur->id
+            ]);
+        }
 
         return redirect()->to(route('professeur.index'))->with('notification', ['type' =>  'success', 'message' =>  "Enseignant modifié"]);
     }

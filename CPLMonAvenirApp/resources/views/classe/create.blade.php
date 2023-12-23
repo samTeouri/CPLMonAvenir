@@ -71,6 +71,16 @@
                         <input type="text" class="form-control form-control-alt col-4 col-lg-1" name="nom"
                             required />
 
+                        <label for="" class="col-lg-2">Enseignant titulaire</label>
+
+                        <select name="professeur_id" id="" class="form-control form-control-alt col-lg-3" required>
+                            <option value="">Sélectionnez un titulaire</option>
+                            @foreach ($professeurs as $professeur)
+                                <option value="{{ $professeur->id }}">{{ $professeur->nom }} {{ $professeur->prenom }}
+                                </option>
+                            @endforeach
+                        </select>
+
                         <button class="btn btn-success mx-4" type="submit">Enregistrer</button>
                     </div>
                 </div>

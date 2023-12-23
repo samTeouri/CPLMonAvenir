@@ -11,7 +11,8 @@ class Classe extends Model
 
     protected $fillable = [
         'nom',
-        'promotion_id'
+        'promotion_id',
+        'professeur_id'
     ];
 
     public function promotion()
@@ -27,5 +28,10 @@ class Classe extends Model
     public function cours()
     {
         return $this->hasMany(Cours::class);
+    }
+
+    public function professeur()
+    {
+        return $this->belongsTo(Professeur::class);
     }
 }

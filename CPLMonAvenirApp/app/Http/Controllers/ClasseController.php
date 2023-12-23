@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Classe;
 use App\Models\Cours;
+use App\Models\Professeur;
 use App\Models\Promotion;
 use Illuminate\Http\Request;
 use Illuminate\View\ViewException;
@@ -38,7 +39,16 @@ class ClasseController extends Controller
 
     public function create(Promotion $promotion)
     {
+        $temp_professeurs = Professeur::all();
+        $professeurs = [];
+        foreach ($temp_professeurs as $professeur) {
+            if ($professeur->classe === null) {
+                array_push($professeurs, $professeur);
+            }
+        }
+
         $data = [
+            'professeurs' => $professeurs,
             'promotion' => $promotion
         ];
 
@@ -47,13 +57,18 @@ class ClasseController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'professeur_id' => ['bail|unique:classes']
+        ]);
+
         $url = url()->previous();
         $promotion = Promotion::find($request->promotion_id);
 
 
         $classe = Classe::create([
             'nom' => $promotion->nom . 'eme' . ' ' .  $request->nom . ' ' . $promotion->anneeScolaire->annee,
-            'promotion_id' => $promotion->id
+            'promotion_id' => $promotion->id,
+            'professeur_id' => $request->professeur_id
         ]);
 
         // on récupère les matières de la promotion

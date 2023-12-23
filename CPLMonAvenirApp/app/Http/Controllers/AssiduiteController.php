@@ -96,15 +96,13 @@ class AssiduiteController extends Controller
 
 
 
-        $comportement['avertissement'] = json_encode($comportement_avertissement);
-        $comportement['blame'] = json_encode($comportement_blame);
+        $comportement['avertissement'] = $comportement_avertissement;
+        $comportement['blame'] = $comportement_blame;
 
         $assiduite->update([
-            'comportement' => $comportement
+            'comportement' => json_encode($comportement)
         ]);
 
         return redirect()->to($url)->with('notification', ['type' =>  'success', 'message' => "Comportement de l'élève mis à jour"]);
-
-
     }
 }

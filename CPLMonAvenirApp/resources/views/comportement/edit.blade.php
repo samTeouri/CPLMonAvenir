@@ -74,9 +74,10 @@
                     <div class="row mx-0 px-0 align-items-center justify-content-around">
 
                         @php
+
                             $comportement = json_decode($assiduite->comportement);
-                            $avertissement = json_decode($comportement->avertissement);
-                            $blame = json_decode($comportement->blame);
+                            $avertissement = $comportement->avertissement;
+                            $blame = $comportement->blame;
                         @endphp
 
                         <div class="form-group">

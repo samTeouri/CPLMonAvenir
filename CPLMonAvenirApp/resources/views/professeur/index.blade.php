@@ -68,6 +68,7 @@
                                 <th class="text-center">Nom Prénom</th>
                                 <th class="text-center">Sexe</th>
                                 <th class="text-center" style="width: 200px;">Contact</th>
+                                <th class="text-center">Classe tutorée</th>
                                 <th class="text-center" style="width: 200px;" class="text-center">Actions</th>
                             </tr>
                         </thead>
@@ -86,8 +87,21 @@
                                         <td class="text-center text-primary fw-bolder" style="font-weight: 700">
                                             {{ $professeur->contact }}</td>
                                         <td class="text-center">{{ $professeur->sexe }}</td>
-
-
+                                        <td class="text-center">
+                                            @if ($professeur->classes)
+                                                @foreach ($promotions as $promotion)
+                                                    @foreach ($promotion->classes as $classe)
+                                                        @foreach ($professeur->classes as $prof_classe)
+                                                            @if ($prof_classe->id === $classe->id)
+                                                                {{ substr($prof_classe->nom, 0, 6) }}
+                                                            @endif
+                                                        @endforeach
+                                                    @endforeach
+                                                @endforeach
+                                            @else
+                                                Pas de classe
+                                            @endif
+                                        </td>
                                         <td class="text-center">
                                             <div class="d-flex justify-content-around">
                                                 <a href="{{ route('professeur.edit', $professeur->id) }}"
