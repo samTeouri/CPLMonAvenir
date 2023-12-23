@@ -5,7 +5,8 @@
         <div class="content content-full">
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
                 <h1 class="flex-sm-fill h3 my-2">
-                    Ajouter un nouveau retard pour {{ $assiduite->eleve->nom }} {{ $assiduite->eleve->prenom }}.
+                    Comportement de l'élève {{ $assiduite->eleve->nom }} {{ $assiduite->eleve->prenom }} au cours du
+                    trimestre {{ substr($assiduite->trimestre->intitule, 0, 11) }}.
                 </h1>
                 <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
@@ -14,9 +15,8 @@
                         <li class="breadcrumb-item">{{ $assiduite->eleve->nom }}
                             {{ $assiduite->eleve->prenom }}
                         </li>
-                        <li class="breadcrumb-item">Retards</li>
                         <li class="breadcrumb-item">{{ substr($assiduite->trimestre->intitule, 0, 11) }}</li>
-                        <li class="breadcrumb-item"><a class="link-fx" href="">Ajouter un retard</a>
+                        <li class="breadcrumb-item"><a class="link-fx" href="">Comportement</a>
                         </li>
                     </ol>
                 </nav>
@@ -58,12 +58,13 @@
         <!---- Copiez collez ----->
 
         <div class="block block-rounded p-5">
-            <form action="{{ route('retard.store', $classe->id) }}" method="post">
+            <form action="{{ route('comportement.update', $assiduite->id) }}" method="post">
                 @csrf
                 <div class="d-flex mx-0 px-0 mb-5 justify-content-between align-items-center">
-                    <h3 class="m-0">Ajouter un retard</h3>
+                    <h3 class="m-0">Remarques sur le comportement de {{ $assiduite->eleve->nom }}
+                        {{ $assiduite->eleve->prenom }}</h3>
 
-                    <a href="{{ route('retard.index', ['assiduite' => $assiduite->id, 'classe' => $classe->id]) }}"
+                    <a href="{{ route('assiduite.index', ['eleve' => $assiduite->eleve->id, 'classe' => $classe->id]) }}"
                         class="btn btn-secondary mr-1">
                         <i class="fa fa-angle-left mr-1" aria-hidden="true"></i>Retour</a>
                 </div>
@@ -74,31 +75,39 @@
                         <!-- Affichage du nom de l'élève -->
                         <input type="hidden" name="assiduite_id" value="{{ $assiduite->id }}">
 
-                        <div class="form-group col-lg-2">
-                            <label>Date du retard</label>
-
-
+                        <div class="form-group">
+                            <label>Avertissement</label>
                             <!-- Champ pour le groupe -->
-                            <input type="text" class="js-flatpickr form-control form-control-alt "
-                                id="example-flatpickr-default" name="date" placeholder="Y-m-d" required />
+                            <div>
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <label for="" class="custom-control-label">Travail</label>
+                                    <input type="checkbox" name="avertissement[]" id=""
+                                        class="custom-control-input" value="travail" />
+                                </div>
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <label for="" class="custom-control-label">Discipline</label>
+                                    <input type="checkbox" name="avertissement[]" id=""
+                                        class="custom-control-input" value="discipline" />
+                                </div>
+                            </div>
                         </div>
 
 
-                        <div class="form-group col-lg-2">
-                            <label>Heure d'arrivée</label>
-
+                        <div class="form-group">
+                            <label>Blâme</label>
                             <!-- Champ pour le groupe -->
-                            <input type="text" class="js-flatpickr form-control form-control-alt bg-white "
-                                id="example-flatpickr-time-standalone-24" name="heure_arrive" data-enable-time="true"
-                                data-no-calendar="true" data-date-format="H:i" data-time_24hr="true">
-                        </div>
-
-
-                        <div class="form-group col-lg-6">
-                            <label>Justification</label>
-
-                            <!-- Champ pour le groupe -->
-                            <input type="text" class="form-control form-control-alt " name="justification" required />
+                            <div>
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <label for="" class="custom-control-label">Travail</label>
+                                    <input type="checkbox" name="avertissement[]" id=""
+                                        class="custom-control-input" value="travail" />
+                                </div>
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <label for="" class="custom-control-label">Discipline</label>
+                                    <input type="checkbox" name="avertissement[]" id=""
+                                        class="custom-control-input" value="discipline" />
+                                </div>
+                            </div>
                         </div>
 
                         <button class="btn btn-success mx-1" type="submit">Enregistrer</button>

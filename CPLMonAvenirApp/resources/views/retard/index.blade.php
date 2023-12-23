@@ -65,6 +65,9 @@
             <div class="block-header">
                 <h3 class="block-title">Liste des retards de {{ $assiduite->eleve->nom }}
                     {{ $assiduite->eleve->prenom }}</h3>
+                <a href="{{ route('assiduite.index', ['eleve' => $assiduite->eleve->id, 'classe' => $classe->id]) }}"
+                    class="btn btn-secondary mr-1">
+                    <i class="fa fa-angle-left mr-1" aria-hidden="true"></i>Retour</a>
                 <a class="btn btn-success"
                     href="{{ route('retard.create', ['assiduite' => $assiduite->id, 'classe' => $classe->id]) }}">Ajouter
                     un retard</a>

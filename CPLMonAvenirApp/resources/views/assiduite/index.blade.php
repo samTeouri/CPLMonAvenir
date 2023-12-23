@@ -60,6 +60,8 @@
             <div class="block-header">
                 <h3 class="block-title">Retards et absences de {{ $eleve->nom }} {{ $eleve->prenom }}</h3>
 
+                <a href="{{ route('classe.index', $classe->id) }}" class="btn btn-secondary"><i
+                        class="fa fa-angle-left mr-1" aria-hidden="true"></i>Retour</a>
             </div>
 
             <div class="block-content">
@@ -112,7 +114,7 @@
                                                 </li>
 
                                                 <li class="nav-main-item">
-                                                    <a class="nav-main-link" href="{{ route('eleve.info', $eleve->id) }}">
+                                                    <a class="nav-main-link" href="{{ route('comportement.edit', ['assiduite' => $assiduite->id, 'classe' => $classe->id]) }}">
                                                         <span class="nav-main-link-name"><i
                                                                 class="fa fa-exclamation-triangle mr-2"></i>Comportement</span>
                                                     </a>
@@ -134,7 +136,7 @@
 
     <script>
         function Confirm() {
-            return confirm("Voulez vous supprimer la classe ?")
+            return confirm("Voulez vous supprimer le retard ?")
         }
     </script>
 

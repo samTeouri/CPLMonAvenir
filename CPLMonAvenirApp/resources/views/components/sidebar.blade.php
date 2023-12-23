@@ -374,7 +374,7 @@
 
 
 
-                <li class="nav-main-heading">Develop</li>
+                {{-- <li class="nav-main-heading">Develop</li>
                 <li class="nav-main-item">
                     <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true"
                         aria-expanded="false" href="#">
@@ -487,7 +487,8 @@
                             </ul>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
+
             </ul>
         </div>
         <!-- END Side Navigation -->

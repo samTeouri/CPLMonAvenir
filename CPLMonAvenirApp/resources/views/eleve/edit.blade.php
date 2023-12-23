@@ -61,7 +61,13 @@
 
         <div class="block block-rounded">
             <div class="block-content px-5">
-                <h3>Informations de {{ $eleve->nom }} {{ $eleve->prenom }}</h3>
+                <div class="d-flex mx-0 px-0 justify-content-between align-items-center mb-5">
+                    <h3 class="m-0">Informations de {{ $eleve->nom }} {{ $eleve->prenom }}</h3>
+
+                    <a href="{{ route('classe.index', $classe->id) }}" class="btn btn-secondary"><i
+                            class="fa fa-angle-left mr-1" aria-hidden="true"></i>Retour</a>
+                </div>
+
                 <p class="font-size-sm text-muted">
                     Modifiez les informations de {{ $eleve->nom }} {{ $eleve->prenom }}.
                 </p>

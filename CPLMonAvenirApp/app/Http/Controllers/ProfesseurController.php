@@ -74,8 +74,6 @@ class ProfesseurController extends Controller
 
         $professeur->delete();
 
-
-
         return redirect()->to($url)->with('notification', ['type' =>  'success', 'message' =>  "L'enseignant à été supprimé"]);
     }
 }

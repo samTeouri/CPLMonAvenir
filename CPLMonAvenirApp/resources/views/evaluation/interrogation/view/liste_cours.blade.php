@@ -64,9 +64,8 @@
             </div>
             <div class="block-content">
                 <p class="font-size-sm text-muted">
-                    Voici la liste des cours de la classe de {{ substr($classe->nom, 0, 6) }}, choisissez la cours
-                    et le trimestre
-                    dans lequel créer l'interrogation.
+                    Voici la liste des cours de la classe de {{ substr($classe->nom, 0, 6) }}, choisissez le cours
+                    et le trimestre des interrogations à voir.
                 </p>
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped table-vcenter js-dataTable-full-pagination">
@@ -94,7 +93,7 @@
                                                     aria-labelledby="dropdown-default-primary">
                                                     @foreach ($trimestres as $trimestre)
                                                         <a class="dropdown-item"
-                                                            href="{{ route('interrogation.index', ['classe' => $classe, 'cours' => $cour->id, 'trimestre' => $trimestre->id]) }}">{{ substr($trimestre->intitule, 0, 11) }}</a>
+                                                            href="{{ route('interrogation.index', ['classe' => $classe->id, 'cours' => $cour->id, 'trimestre' => $trimestre->id]) }}">{{ substr($trimestre->intitule, 0, 11) }}</a>
                                                     @endforeach
                                                 </div>
                                             </div>

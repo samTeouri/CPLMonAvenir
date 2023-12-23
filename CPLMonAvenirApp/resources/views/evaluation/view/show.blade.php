@@ -56,7 +56,16 @@
                 action="{{ route('evaluation.update', ['evaluation' => $evaluation->id, 'trimestre' => $trimestre->id]) }}"
                 method="post">
                 @csrf
-                <h3>Notes de la classe de {{ substr($evaluation->cours->classe->nom, 0, 6) }}</h3>
+                <div class="d-flex mx-0 mb-5 px-0 justify-content-between align-items-center">
+                    <h3>Notes de la classe de {{ substr($evaluation->cours->classe->nom, 0, 6) }}</h3>
+                    @if ($evaluation->type === 'devoir' || $evaluation->type === 'composition')
+                        <a href="{{ route('evaluation.index', ['promotion' => $promotion->id, 'matiere' => $evaluation->cours->matiere->id, 'trimestre' => $trimestre->id]) }}"
+                            class="btn btn-secondary"><i class="fa fa-angle-left mr-1" aria-hidden="true"></i>Retour</a>
+                    @else
+                        <a href="{{ route('interrogation.index', ['classe' => $evaluation->cours->classe->id, 'cours' => $evaluation->cours->id, 'trimestre' => $trimestre->id]) }}"
+                            class="btn btn-secondary"><i class="fa fa-angle-left mr-1" aria-hidden="true"></i>Retour</a>
+                    @endif
+                </div>
 
                 <div class="col-12 py-3">
                     <div class="row justify-content-around mx-0 px-0">
@@ -115,8 +124,8 @@
 
                                 <!-- Champ pour la note -->
                                 <input type="number" class="form-control form-control-alt col-2 col-lg-1"
-                                    name="notes[{{ $note->id }}][valeur]" value="{{ $note->valeur }}" min="0"
-                                    step="0.25" max="20">
+                                    name="notes[{{ $note->id }}][valeur]" value="{{ $note->valeur }}"
+                                    min="0" step="0.25" max="20">
                             </div>
                         </div>
 

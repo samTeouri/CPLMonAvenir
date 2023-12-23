@@ -60,7 +60,13 @@
         <div class="block block-rounded p-5">
             <form action="{{ route('absence.store', $classe->id) }}" method="post">
                 @csrf
-                <h3>Ajouter une absence</h3>
+                <div class="d-flex mx-0 px-0 mb-5 justify-content-between align-items-center">
+                    <h3 class="m-0">Ajouter une absence</h3>
+
+                    <a href="{{ route('absence.index', ['assiduite' => $assiduite->id, 'classe' => $classe->id]) }}"
+                        class="btn btn-secondary mr-1">
+                        <i class="fa fa-angle-left mr-1" aria-hidden="true"></i>Retour</a>
+                </div>
 
                 <div class="col-12 py-3">
 
