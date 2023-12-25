@@ -70,7 +70,7 @@
                         <div class="form-group col-12 col-lg-5">
                             <label for="intitule">Intitulé de l'évaluation</label>
                             <input type="text" class="form-control form-control-alt" id="intitule" name="intitule"
-                                placeholder="Intitulé du devoir..." required />
+                                placeholder="Intitulé du devoir..." value="{{ old('intitule') }}" required />
                         </div>
                         <div class="form-group col-12 col-lg-3">
                             <label for="intitule">Type d'évaluation</label>
@@ -84,13 +84,23 @@
                         <div class="form-group col-12 col-lg-2">
                             <label for="bareme">Note maximale</label>
                             <input type="number" class="form-control form-control-alt" id="bareme" name="note_maximale"
-                                placeholder="Bareme..." alue="0.0" min="0" step="0.25" max="20"
+                                placeholder="Bareme..." value="0.0" min="0" step="0.25" max="20"
                                 required />
+                            @error('note_maximale')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <div class="form-group col-12 col-lg-2">
                             <label for="example-flatpickr-default">Date évaluation</label>
                             <input type="text" class="js-flatpickr form-control form-control-alt"
                                 id="example-flatpickr-default" name="date" placeholder="Y-m-d" required />
+                            @error('date')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                     </div>
                 </div>

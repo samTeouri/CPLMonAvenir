@@ -208,6 +208,12 @@ class EvaluationController extends Controller
     // Création des évaluations
     public function store(Request $request)
     {
+        $request->validate([
+            'intitule' => 'bail|required',
+            'type' => 'bail|required',
+            'note_maximale' => 'bail|min:0|max:20|numeric',
+            'date' => 'bail|required'
+        ]);
 
         if ($request->type === 'devoir' || $request->type === 'composition') {
 
