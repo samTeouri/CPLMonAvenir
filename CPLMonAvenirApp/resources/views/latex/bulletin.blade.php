@@ -35,15 +35,15 @@
 
 \normalsize
 Travail - Discipline - Succès\\
-BP:68 \textit{\textsf{SOKODE - TOGO}}\\
+BP: 68 \textit{\textsf{SOKODE - TOGO}}\\
 \vspace{0.5cm}
 \large
 
 @php
-    $indice_trimestre = substr($trimestre->intitule, 10, 1);
+    $indice_trimestre = intval(substr($trimestre->intitule, 10, 1));
     $prefixe = 'eme';
-    if ($indice_trimestre === '1') {
-        $prefixe === 'er';
+    if ($indice_trimestre === 1) {
+        $prefixe = 'er';
     }
 @endphp
 

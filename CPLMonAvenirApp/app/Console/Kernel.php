@@ -14,8 +14,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->command(NouvelleAnneeScolaire::class)->yearlyOn(8)->daily()->sendOutputTo('/home/kaiser/cronLog.txt');
-        $schedule->command(PassageEleves::class)->yearlyOn(8)->daily()->withoutOverlapping(30)->sendOutputTo('/home/kaiser/cronLog.txt');
+        $schedule->command(NouvelleAnneeScolaire::class)->yearlyOn(8)->daily()->sendOutputTo(__DIR__ . '/nouvelleAnneeSchedul.log');
+        $schedule->command(PassageEleves::class)->yearlyOn(8)->daily()->sendOutputTo(__DIR__ . '/passageElevesSchedule.log');
     }
 
     /**
