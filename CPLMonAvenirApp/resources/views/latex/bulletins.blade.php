@@ -35,7 +35,7 @@
 
     \normalsize
     Travail - Discipline - Succès\\
-    BP:68 \textit{\textsf{SOKODE - TOGO}}\\
+    BP: 68 \textit{\textsf{SOKODE - TOGO}}\\
     \vspace{0.5cm}
     \large
 
@@ -162,15 +162,19 @@
     \hspace{0.05cm}
     \renewcommand{\arraystretch}{1.2}
     \begin{tabular}{|p{9.5cm}|p{8.1cm}|}
-    
+
     \hline
-    
-    
+
+
 
     Moyenne en lettre: \textbf{\textit{\large @latex($bulletin['moyenne_lettres'])}} & Moyenne du $1^{er}$ trimestre:
     \textbf{\large @latex($bulletin['moyennes'][$trimestre->id]['moyenne'])}. Rang: \large\textbf{@latex($bulletin['moyennes'][$trimestre->id]['rang'])} sur \large @latex(count($classe->eleves))\\
 
-    Tableau d'honneur: @if($bulletin['moyennes'][$trimestre->id + 1]['rang'] < 5) Oui @else Non @endif & Moyenne du $2^{eme}$ trimestre: \textbf{\large @latex($bulletin['moyennes'][$trimestre->id + 1]['moyenne'])}. Rang:
+    Tableau d'honneur: @if ($bulletin['moyennes'][$trimestre->id + 1]['rang'] < 5)
+        Oui
+    @else
+        Non
+    @endif & Moyenne du $2^{eme}$ trimestre: \textbf{\large @latex($bulletin['moyennes'][$trimestre->id + 1]['moyenne'])}. Rang:
     \large\textbf{@latex($bulletin['moyennes'][$trimestre->id + 1]['rang'])} sur \large @latex(count($classe->eleves))\\
 
     Encouragements: Non & Moyenne du $3^{eme}$ trimestre: \textbf{\large @latex($bulletin['moyennes'][$trimestre->id + 2]['moyenne'])}. Rang:

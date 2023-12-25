@@ -35,7 +35,7 @@
 
 \normalsize
 Travail - Discipline - Succès\\
-BP:68 \textit{\textsf{SOKODE - TOGO}}\\
+BP: 68 \textit{\textsf{SOKODE - TOGO}}\\
 \vspace{0.5cm}
 \large
 
