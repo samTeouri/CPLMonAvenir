@@ -430,7 +430,7 @@
             reader.onload = function() {
                 var dataURL = reader.result;
                 var imagePreview = document.getElementById('imagePreview');
-                imagePreview.innerHTML = '<img src="' + dataURL + '" alt="Image Preview">';
+                imagePreview.innerHTML = '<img src="' + dataURL + '" alt="Image Preview" style="width:100%;" />';
             };
             reader.readAsDataURL(input.files[0]);
         }

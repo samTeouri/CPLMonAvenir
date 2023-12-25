@@ -83,7 +83,6 @@ class ClasseSeeder extends Seeder
         for ($i = 1; $i < 47; $i++) {
             $eleve = Eleve::find($i);
             $eleve->classes()->attach($classe_3);
-            $eleve->classes()->attach($classe_5);
 
             foreach ($classe_3->promotion->trimestres as $trimestre) {
                 Assiduite::create([

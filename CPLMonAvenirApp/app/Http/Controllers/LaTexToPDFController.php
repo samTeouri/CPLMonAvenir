@@ -136,7 +136,6 @@ class LaTexToPDFController extends Controller
             'trimestre' => $trimestre,
             'logo' => public_path('assets/images/logo2.png'),
             'moyenne_annuelle' => round($moyenne_annuelle, 2),
-            //'rang_annuel' => $rangAnnuel,
             'assiduite' => $assiduite,
 
         ];

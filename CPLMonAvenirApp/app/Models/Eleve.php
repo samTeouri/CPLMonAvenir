@@ -23,6 +23,7 @@ class Eleve extends Model
         'pere',
         'mere',
         'sante',
+        'redoublant'
     ];
 
     protected $cast = [
@@ -56,7 +57,7 @@ class Eleve extends Model
         }
 
 
-        $somme_notes = 0;
+        $somme_notes = 0.0;
 
         foreach ($notes_classes as $note) {
             // passage à 20 de la note dans le cas où le barême est inférieur à 20
@@ -109,8 +110,8 @@ class Eleve extends Model
         }
 
         // calcul de moyenne trimestrielle
-        $total_moyenne = 0;
-        $total_coefficients = 0;
+        $total_moyenne = 0.0;
+        $total_coefficients = 0.0;
         foreach ($liste_moyennes as $moyenne) {
             $total_moyenne += (($moyenne['moyenne_classe'] + $moyenne['compo']) / 2) * $moyenne['cours']->coefficient;
             $total_coefficients += $moyenne['cours']->coefficient;
@@ -150,42 +151,17 @@ class Eleve extends Model
     }
 
 
-    public function rangAnnuel($classe_id)
+    public function passeEnClasseSup($classe_id)
     {
-        $classe = Classe::with(['promotion.trimestres', 'eleves'])->find($classe_id);
+        $classe = Classe::with('promotion.trimestres')->find($classe_id);
+        $trimestres = $classe->promotion->trimestres;
 
-
-        $moyenne_annuelle_eleve = 0.0;
-        foreach ($classe->promotion->trimestres as $trimestre) {
-            $moyenne_annuelle_eleve += $this->getMoyenneTrimestrielle($classe->id, $trimestre->id);
+        $sum_moyenne_annuelle = 0.0;
+        foreach ($trimestres as $trimestre) {
+            $sum_moyenne_annuelle += $this->getMoyenneTrimestrielle($classe_id, $trimestre->id);
         }
 
-        $moyenne_annuelle_eleve /= 3;
-
-        $moyennes = [];
-        foreach ($classe->eleves as $eleve) {
-            $moyenne_annuelle = 0.0;
-            foreach ($classe->promotion->trimestres as $trimestre) {
-                $moyenne_annuelle += $eleve->getMoyenneTrimestrielle($classe->id, $trimestre->id);
-            }
-            array_push($moyennes, round($moyenne_annuelle / 3, 2));
-        }
-
-
-        arsort($moyennes);
-
-
-        if (round($moyenne_annuelle_eleve, 2) === 0.0) {
-            return count($classe->eleves);
-        }
-
-        $rang = 0;
-        foreach ($moyennes as $moyenne) {
-            $rang++;
-            if (round($moyenne_annuelle_eleve, 2) === $moyenne) {
-                return $rang;
-            }
-        }
+        return $sum_moyenne_annuelle / 3 >= 10;
     }
 
 
