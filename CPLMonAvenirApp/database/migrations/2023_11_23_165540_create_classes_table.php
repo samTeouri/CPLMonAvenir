@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nom');
             $table->integer('professeur_id')->nullable();
             $table->integer('promotion_id');
-            $table->foreign('professeur_id')->references('id')->on('professeurs')->onDelete('null');
+            $table->foreign('professeur_id')->references('id')->on('professeurs')->nullOnDelete();
             $table->foreign('promotion_id')->references('id')->on('promotions')->onDelete('cascade');
             $table->timestamps();
         });

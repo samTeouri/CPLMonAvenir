@@ -18,17 +18,5 @@ class MatiereSeeder extends Seeder
         Matiere::create([
             'intitule' => 'Mathématiques'
         ]);
-
-        Matiere::create([
-            'intitule' => 'Français'
-        ]);
-
-        Matiere::create([
-            'intitule' => 'Anglais'
-        ]);
-
-        Matiere::create([
-            'intitule' => 'Physique-Chimie'
-        ]);
     }
 }

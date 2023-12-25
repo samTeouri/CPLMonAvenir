@@ -2,6 +2,8 @@
 
 namespace App\Console;
 
+use App\Console\Commands\NouvelleAnneeScolaire;
+use App\Console\Commands\PassageEleves;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -12,8 +14,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
-        //$schedule->command('check:annee-scolaire')->daily();
+        $schedule->command(NouvelleAnneeScolaire::class)->yearlyOn(8)->daily()->sendOutputTo('/home/kaiser/cronLog.txt');
+        $schedule->command(PassageEleves::class)->yearlyOn(8)->daily()->withoutOverlapping(30)->sendOutputTo('/home/kaiser/cronLog.txt');
     }
 
     /**

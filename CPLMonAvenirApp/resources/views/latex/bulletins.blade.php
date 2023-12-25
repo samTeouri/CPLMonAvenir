@@ -151,7 +151,7 @@
             $total_coefficient += $coefficient;
         @endphp
     @endforeach
-    \multicolumn{3}{|c|}{\textsc{\textbf{TOTAUX}}} & & @latex($total_coefficient) & @latex($total) \\
+    \multicolumn{4}{|c|}{\textsc{\textbf{TOTAUX}}} & @latex($total_coefficient) & @latex($total) \\
     \cline{1-6}
     \end{tabular}
 
@@ -162,11 +162,15 @@
     \hspace{0.05cm}
     \renewcommand{\arraystretch}{1.2}
     \begin{tabular}{|p{9.5cm}|p{8.1cm}|}
+    
     \hline
+    
+    
+
     Moyenne en lettre: \textbf{\textit{\large @latex($bulletin['moyenne_lettres'])}} & Moyenne du $1^{er}$ trimestre:
     \textbf{\large @latex($bulletin['moyennes'][$trimestre->id]['moyenne'])}. Rang: \large\textbf{@latex($bulletin['moyennes'][$trimestre->id]['rang'])} sur \large @latex(count($classe->eleves))\\
 
-    Tableau d'honneur: Non & Moyenne du $2^{eme}$ trimestre: \textbf{\large @latex($bulletin['moyennes'][$trimestre->id + 1]['moyenne'])}. Rang:
+    Tableau d'honneur: @if($bulletin['moyennes'][$trimestre->id + 1]['rang'] < 5) Oui @else Non @endif & Moyenne du $2^{eme}$ trimestre: \textbf{\large @latex($bulletin['moyennes'][$trimestre->id + 1]['moyenne'])}. Rang:
     \large\textbf{@latex($bulletin['moyennes'][$trimestre->id + 1]['rang'])} sur \large @latex(count($classe->eleves))\\
 
     Encouragements: Non & Moyenne du $3^{eme}$ trimestre: \textbf{\large @latex($bulletin['moyennes'][$trimestre->id + 2]['moyenne'])}. Rang:
@@ -177,6 +181,7 @@
     Retards: @latex(count($bulletin['assiduite']->retards)) & Décisions du conseil des professeurs: \\
 
     Absences: @latex(count($bulletin['assiduite']->absences)) & \\
+
     @php
         $heures_absences = 0;
         foreach ($bulletin['assiduite']->absences as $absence) {
@@ -184,29 +189,44 @@
         }
     @endphp
     Absences évaluées en heures: @latex($heures_absences)h & \\
-    Avertissement: Travail/Discipline & \\
-    Blâme pour: Travail/Discipline & \\
-    \hline
-    Nom et signature du titulaire: & Sokodé, le \large \today\\
-    & \textbf{Le Directeur} \\
-    & \\
-    & \\
-    & \\
-    \hline
-    \end{tabular}
+    @php
+        $comportement = json_decode($bulletin['assiduite']->comportement);
+        $avertissement = $comportement->avertissement;
+        $blame = $comportement->blame;
+    @endphp
+    Avertissement: @if ($avertissement->Travail === true)
+        Travail
+        @endif @if ($avertissement->Discipline === true)
+            Discipline
+        @endif & \\
+        Blâme pour: @if ($blame->Travail === true)
+            Travail
+            @endif @if ($blame->Discipline === true)
+                Discipline
+            @endif & \\
+            \hline
+            Nom et signature du titulaire: @if ($classe->professeur)
+                @latex($classe->professeur->nom) @latex($classe->professeur->prenom)
+            @endif & Sokodé, le \large \today\\
+            & \textbf{Le Directeur} \\
+            & \\
+            & \\
+            & \\
+            \hline
+            \end{tabular}
 
-    \end{flushleft}
+            \end{flushleft}
 
 
 
 
 
 
-    \newpage
-@endforeach
+            \newpage
+        @endforeach
 
 
 
 
 
-\end{document}
+        \end{document}
