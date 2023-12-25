@@ -40,10 +40,10 @@ BP: 68 \textit{\textsf{SOKODE - TOGO}}\\
 \large
 
 @php
-    $indice_trimestre = substr($trimestre->intitule, 10, 1);
+    $indice_trimestre = intval(substr($trimestre->intitule, 10, 1));
     $prefixe = 'eme';
-    if ($indice_trimestre === '1') {
-        $prefixe === 'er';
+    if ($indice_trimestre === 1) {
+        $prefixe = 'er';
     }
 @endphp
 
