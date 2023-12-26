@@ -118,9 +118,10 @@
                     @foreach ($classes as $classe)
                         <div class="tab-pane" id="classe{{ $classe['classe']->id }}" role="tabpanel">
                             <h4 class="font-w400">Classe de {{ substr($classe['classe']->nom, 0, 6) }}</h4>
-                            <div class="row mx-0 px-0">
-                                @foreach ($classe['eleves'] as $eleve)
-                                    <div class="d-flex col-12 my-2">
+                            @foreach ($classe['eleves'] as $eleve)
+                                <div class="row mx-0 px-0">
+
+                                    <div class="d-flex col-12 my-2 align-items-center">
                                         <!-- Affichage du nom de l'élève -->
                                         <label class="col-10 col-lg-4">{{ $eleve->nom }} {{ $eleve->prenom }}</label>
 
@@ -140,17 +141,21 @@
                                             name="eleves[{{ $eleve->id }}][eleve_id]" value="{{ $eleve->id }}">
 
                                         <!-- Champ pour la note -->
-                                        <input type="number" class="form-control form-control-alt col-2 col-lg-1"
+                                        <input id="eleve_{{ $eleve->id }}" type="number"
+                                            class="note-input form-control form-control-alt col-2 col-lg-1"
                                             name="eleves[{{ $eleve->id }}][note]" value="0.0" min="0"
                                             step="0.25" max="20" required>
+                                        <span id="{{ $eleve->id }}" class="note-error-text text-danger ml-2">Note
+                                            invalide</span>
                                     </div>
-                                @endforeach
-                            </div>
+
+                                </div>
+
+                                <hr />
+                            @endforeach
                         </div>
                     @endforeach
                 </div>
-
-                <hr />
 
                 <div class="d-flex mt-5">
                     <button class="btn btn-success" type="submit">Enregistrer</button>
@@ -164,4 +169,26 @@
 
 
     </div>
+
+    <script>
+        note_errors_spans = document.querySelectorAll('.note-error-text')
+        notes_fields = document.querySelectorAll('.note-input')
+        bareme = document.querySelector('#bareme')
+
+        note_errors_spans.forEach(span => {
+            span.style.display = 'none'
+        })
+
+        notes_fields.forEach(field => {
+            field.oninput = () => {
+                console.log(field.value)
+                if (parseInt(bareme.value) < parseInt(field.value)) {
+                    console.log(bareme.value)
+                    field.nextElementSibling.style.display = 'block'
+                } else {
+                    field.nextElementSibling.style.display = 'none'
+                }
+            }
+        });
+    </script>
 @endsection

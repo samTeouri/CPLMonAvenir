@@ -88,7 +88,7 @@
                                         </td>
                                         <td class="text-center">
                                             <form action="{{ route('matiere.delete', $matiere['matiere']->id) }}"
-                                                method="post">
+                                                method="post" onsubmit="return Confirm()">
                                                 @method('delete')
                                                 @csrf
                                                 <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
@@ -108,4 +108,10 @@
         </div>
 
     </div>
+
+    <script>
+        function Confirm() {
+            return confirm("Voulez vous supprimer la matière ?")
+        }
+    </script>
 @endsection

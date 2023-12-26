@@ -83,7 +83,7 @@
                         <div class="form-group col-12 col-lg-2">
                             <label for="bareme">Note maximale</label>
                             <input type="number" class="form-control form-control-alt" id="bareme" name="note_maximale"
-                                placeholder="Bareme..." alue="0.0" min="0" step="0.25" max="20"
+                                placeholder="Bareme..." value="0.0" min="0" step="0.25" max="20"
                                 required>
                         </div>
                         <div class="form-group col-12 col-lg-2">
@@ -114,9 +114,13 @@
                                     {{ $eleve->prenom }}</label>
 
                                 <!-- Champ pour la note -->
-                                <input type="number" class="form-control form-control-alt col-2 col-lg-1"
+                                <input id="eleve_{{ $eleve->id }}" type="number"
+                                    class="note-input form-control form-control-alt col-2 col-lg-1"
                                     name="eleves[{{ $eleve->id }}][note]" value="0.0" min="0" step="0.25"
                                     max="20">
+
+                                <span id="{{ $eleve->id }}" class="note-error-text text-danger ml-2">Note
+                                    invalide</span>
                             </div>
                         </div>
 
@@ -136,8 +140,31 @@
         </div>
 
 
-
-
-
     </div>
+
+    <script>
+        note_errors_spans = document.querySelectorAll('.note-error-text')
+        notes_fields = document.querySelectorAll('.note-input')
+        bareme = document.querySelector('#bareme')
+
+        note_errors_spans.forEach(span => {
+            span.style.display = 'none'
+        })
+
+       
+        
+        notes_fields.forEach(field => {
+            field.oninput = () => {
+                console.log(field.value)
+                if (parseInt(bareme.value) < parseInt(field.value)) {
+                    console.log(bareme.value)
+                    field.nextElementSibling.style.display = 'block'
+                    field.value = 0.0
+                } else {
+                    field.nextElementSibling.style.display = 'none'
+                }
+            }
+        });
+    </script>
+
 @endsection
