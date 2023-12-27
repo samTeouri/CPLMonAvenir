@@ -33,7 +33,7 @@ class PassageEleves extends Command
         $anneeScolaire = AnneeScolaire::getAnneeScolaire();
         $promotions = $anneeScolaire->promotions;
 
-        $nextYear = AnneeScolaire::where('annee', '=', $aujourdHui->year + 1  . '-' . $aujourdHui->year + 2)->first();
+        $nextYear = AnneeScolaire::where('annee', '=', $aujourdHui->year . '-' . $aujourdHui->year + 1)->first();
 
 
         foreach ($promotions as $promotion) {
