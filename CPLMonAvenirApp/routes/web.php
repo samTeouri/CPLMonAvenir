@@ -79,7 +79,7 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/ajouter-un-eleve', 'store')->name('eleve.store');
             Route::get('/modifier-informations/{eleve}/classe/{classe}', 'edit')->name('eleve.edit');
             Route::post('/modifier-informations/{eleve}', 'update')->name('eleve.update');
-            Route::get('/passage-année-supérieure/{eleve}/classe/{classe}', 'passageAnneeSup')->name('eleve.passage');
+            Route::post('/passage-année-supérieure/{classe}', 'passageAnneeSup')->name('eleve.passage');
             Route::get('/details/{eleve}', 'show')->name('eleve.show');
             Route::delete('/supprimer/{eleve}', 'destroy')->name('eleve.destroy');
         });

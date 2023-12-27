@@ -42,7 +42,7 @@ class NouvelleAnneeScolaire extends Command
         if ($currentAnneeScolaire) {
 
             // vérifier si l'année suivante existe
-            $nextYear = AnneeScolaire::where('annee', '=', $aujourdHui->year   . '-' . $aujourdHui->year + 1)->first();
+            $nextYear = AnneeScolaire::where('annee', '=', $aujourdHui->year + 1  . '-' . $aujourdHui->year + 2)->first();
 
 
             if ($nextYear === null) {
@@ -54,7 +54,7 @@ class NouvelleAnneeScolaire extends Command
 
 
                 // Créez une nouvelle année scolaire et activez-la
-                $newAnneeScolaire = AnneeScolaire::create(['annee' => $aujourdHui->year   . '-' . $aujourdHui->year + 1, 'courant' => true]);
+                $newAnneeScolaire = AnneeScolaire::create(['annee' => $aujourdHui->year + 1  . '-' . $aujourdHui->year + 2, 'courant' => true]);
 
                 // Création automatique des niveaux, trimestres et classes de la nouvelle année scolaire
                 // création des promotions

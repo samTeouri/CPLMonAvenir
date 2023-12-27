@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\AnneeScolaire;
 use App\Models\Classe;
 use App\Models\Eleve;
+use App\Models\Promotion;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -138,10 +140,56 @@ class EleveController extends Controller
     {
         $url = url()->previous();
         $eleve->delete();
-        return redirect()->to($url)->with('notification', ['type' => 'sucess', 'message' => 'Elève supprimé']);
+        return redirect()->to($url)->with('notification', ['type' => 'success', 'message' => 'Elève supprimé']);
     }
 
-    public function passageAnneeSup(Eleve $eleve)
+    public function passageAnneeSup(Request $request, Classe $classe)
     {
+        $url = url()->previous();
+
+        $eleves_id = explode(',', $request->eleves);
+
+        $promotion = $classe->promotion;
+
+
+
+        $aujourdHui = Carbon::now();
+        $nextYear = AnneeScolaire::where('annee', '=', $aujourdHui->year + 1  . '-' . $aujourdHui->year + 2)->first();
+
+
+
+        if ($nextYear) {
+            $nom_promotion_actuelle = intval($promotion->nom);
+            foreach ($eleves_id as $id) {
+                $eleve = Eleve::find($id);
+
+
+                if ($nom_promotion_actuelle > 3) {
+                    $nom_promotion_suiv = $nom_promotion_actuelle - 1;
+                    $promotion_suiv = Promotion::where('annee_scolaire_id', $nextYear->id)->where('nom', strval($nom_promotion_suiv))->first();
+                    $classe_suiv_pass = $promotion_suiv->classes[0];
+                    if (!in_array($eleve->id, $classe_suiv_pass->eleves->pluck('id')->toArray())) {
+                        $eleve->classes()->attach($classe_suiv_pass);
+                        $eleve->update([
+                            'redoublant' => false
+                        ]);
+                    } else {
+                        return redirect()->to($url)->with('notification', ['type' => 'warning', 'message' => 'L\'élève est déjà passé en classe supérieure']);
+                    }
+                    $temp_promotion_suiv = Promotion::where('annee_scolaire_id', $nextYear->id)->where('nom', strval($nom_promotion_actuelle))->first();
+                    $temp_classe_suiv_pass = $temp_promotion_suiv->classes[0];
+
+                    if (in_array($eleve->id, $temp_classe_suiv_pass->eleves->pluck('id')->toArray())) {
+                        $eleve->classes()->detach($temp_classe_suiv_pass);
+                    }
+                } else {
+                    return redirect()->to($url)->with('notification', ['type' => 'warning', 'message' => 'Le passage en classe supérieure est impossible pour les élèves de 3ème']);
+                }
+            }
+
+            return redirect()->to($url)->with('notification', ['type' => 'success', 'message' => 'Passage des élèves validé avec succès']);
+        } else {
+            return redirect()->to($url)->with('notification', ['type' => 'warning', 'message' => 'Impossible de faire passer les élèves en classe supérieure, l\'année scolaire n\'est pas pas terminée']);
+        }
     }
 }

@@ -33,7 +33,7 @@ class PassageEleves extends Command
         $anneeScolaire = AnneeScolaire::getAnneeScolaire();
         $promotions = $anneeScolaire->promotions;
 
-        $nextYear = AnneeScolaire::where('annee', '=', $aujourdHui->year   . '-' . $aujourdHui->year + 1)->first();
+        $nextYear = AnneeScolaire::where('annee', '=', $aujourdHui->year + 1  . '-' . $aujourdHui->year + 2)->first();
 
 
         foreach ($promotions as $promotion) {
@@ -54,7 +54,7 @@ class PassageEleves extends Command
                                 }
                                 $temp_promotion_suiv = Promotion::where('annee_scolaire_id', $nextYear->id)->where('nom', strval($nom_promotion_actuelle))->first();
                                 $temp_classe_suiv_pass = $temp_promotion_suiv->classes[0];
-                                
+
                                 if (in_array($eleve->id, $temp_classe_suiv_pass->eleves->pluck('id')->toArray())) {
                                     $eleve->classes()->detach($temp_classe_suiv_pass);
                                 }

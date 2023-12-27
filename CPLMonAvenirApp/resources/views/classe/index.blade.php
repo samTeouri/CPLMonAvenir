@@ -32,7 +32,7 @@
                     <p class="mb-0">{{ $notification['message'] }}</p>
                 </div>
             @endif
-            @if ($notification['type'] === 'success')
+            @if ($notification['type'] === 'warning')
                 <div class="alert alert-warning alert-dismissable" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -56,6 +56,15 @@
 
             <div class="block-header">
                 <h3 class="block-title">Liste des élèves de la classe de {{ $classe->nom }}</h3>
+
+                <form action="{{ route('eleve.passage', $classe->id) }}" method="post">
+                    @csrf
+                    <input type="text" id="listeEleves" name="eleves" hidden />
+                    <button id="passage-button" class="btn btn-secondary mr-1" disabled>
+                        Valider le passage
+                    </button>
+                </form>
+
                 <div class="dropdown">
                     <button type="button" class="btn btn-success dropdown-toggle" id="dropdown-default-primary"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -97,17 +106,19 @@
 
                             </ul>
                         </li>
-
                     </div>
                 </div>
+
             </div>
 
             <div class="block-content">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-striped table-vcenter js-dataTable-full-pagination">
+                    <table id="classe-list"
+                        class="table table-bordered table-striped table-vcenter js-dataTable-full-pagination">
                         <thead>
                             <tr>
                                 <th style="width: 50px;">N°</th>
+                                <th></th>
                                 <th class="text-center" style="width: 200px;">Photo</th>
                                 <th class="text-center">Nom Prénom</th>
                                 <th class="text-center" style="width: 200px;">Date Naissance</th>
@@ -127,8 +138,13 @@
                                     <tr>
                                         <td class="text-center text-primary" style="font-weight: 700;">{{ $i++ }}
                                         </td>
+                                        <td class="text-center">
+                                            <input type="checkbox" class="form-control form-control-alt form-control-sm"
+                                                name="" id="passage" value="{{ $eleve->id }}">
+                                        </td>
                                         <td class="text-center d-flex justify-content-center">
-                                            <div style="height: 70px; width: 70px; border-radius: 100px; overflow: hidden;">
+                                            <div
+                                                style="height: 70px; width: 70px; border-radius: 100px; overflow: hidden;">
                                                 <img style="width: 100%;"
                                                     @if (file_exists($profil)) src="{{ asset('storage/' . $eleve->profil) }}" @else src="{{ asset('assets/media/avatars/avatar1.jpg') }}" @endif
                                                     alt="" />
@@ -236,4 +252,6 @@
             return confirm("Voulez vous supprimer l'élève ?")
         }
     </script>
+
+
 @endsection

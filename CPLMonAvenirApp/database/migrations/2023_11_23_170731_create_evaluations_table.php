@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('intitule');
             $table->enum('type', ['devoir', 'composition', 'interrogation']);
             $table->date('date');
-            $table->integer('note_maximale');
+            $table->float('note_maximale');
             $table->integer('cours_id');
             $table->foreign('cours_id')->references('id')->on('cours')->onDelete('cascade');
             $table->timestamps();

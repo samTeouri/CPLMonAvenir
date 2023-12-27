@@ -104,6 +104,55 @@
                 }
             })
         })
+
+
+        let listeEleves = document.querySelector('#listeEleves')
+        let passageBouton = document.querySelector('#passage-button')
+
+        $('#classe-list').on('change', '#passage', function() {
+            if (this.checked === true) {
+
+
+
+                // récuprération de l'ensemble des id 
+                var currentValue = listeEleves.value
+                // si il n'y a aucun id alors on crée un tableau vide sinon 
+                // on crée un nouveau tbleau en séparant chaque id en utilisant les virgules
+                var valueArray = currentValue ? currentValue.split(',') : []
+                // puis on ajoute la valeur du checkbox au tableau
+                valueArray.push(this.value)
+                // ensuite on converti le tableau en chaine en mettant entre chacun 
+                // de ses éléments une virgule
+                var updatedValue = valueArray.join(',')
+                // puis on passe la nouvelle valeur à l'input
+                listeEleves.value = updatedValue
+
+                if (valueArray.length > 0) {
+                    passageBouton.disabled = false
+                }
+
+            } else {
+                // si il est déselectionné
+
+                // on récupère la valeur actuelle de l'input
+                var currentValue = listeEleves.value
+                // on convertit la chaine en tableau en séparant via les virgules
+                var valueArray = currentValue.split(',')
+                // puis on récupère l'index de la valeur dans le tableau
+                index = valueArray.indexOf(this.value)
+                // ensuite on supprime l'id positionné à l'index défini
+                valueArray.splice(index, 1)
+                // on reconvertit le tableau en chaine en mettant entre chaque id un virgule
+                var updatedValue = valueArray.join(',')
+                // puis on passe la nouvelle valeur à l'input
+                listeEleves.value = updatedValue
+
+                if (valueArray.length === 0) {
+                    passageBouton.disabled = true
+                }
+            }
+
+        });
     </script>
 
 
