@@ -25,7 +25,7 @@
 
         @if ($notification = Session::get('notification'))
             @if ($notification['type'] === 'success')
-                <div class="alert alert-success alert-dismissable" role="alert">
+                <div class="alert alert-success alert-dismissable col-lg-8" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -33,7 +33,7 @@
                 </div>
             @endif
             @if ($notification['type'] === 'warning')
-                <div class="alert alert-warning alert-dismissable" role="alert">
+                <div class="alert alert-warning alert-dismissable col-lg-8" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -41,7 +41,7 @@
                 </div>
             @endif
             @if ($notification['type'] === 'error')
-                <div class="alert alert-danger alert-dismissable" role="alert">
+                <div class="alert alert-danger alert-dismissable col-lg-8" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -54,11 +54,11 @@
 
 
 
-        <div class="block block-rounded col-lg-7 p-3">
+        <div class="block block-rounded col-lg-8 p-3">
 
             <div class="block-header">
                 <h3 class="block-title">Importer les élèves de la classe de {{ $classe->nom }}</h3>
-                {{-- <a href="{{ route('eleves.template', $classe->id) }}">Template</a> --}}
+                <a class="btn btn-secondary" href="{{ route('eleves.template') }}">Template</a>
             </div>
 
             <div class="block-content">
@@ -69,7 +69,7 @@
                 <form action="{{ route('eleves.import') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row mx-0 px-0 align-items-center">
-                        <div class="form-group col-7">
+                        <div class="form-group col-10">
                             <label for="">Chargez le fichier excel</label>
                             <input type="file" name="excel" accept=".xlsx" id=""
                                 class="form-control form-control-alt form-control-file" />

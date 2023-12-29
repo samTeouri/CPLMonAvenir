@@ -12,6 +12,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 
 class EleveController extends Controller
@@ -216,5 +217,10 @@ class EleveController extends Controller
         $url = url()->previous();
         Excel::import(new ElevesImport, $request->file('excel'));
         return redirect()->to($url)->with('notification', ['type' => 'success', 'message' => 'Élèves importés']);
+    }
+
+    public function template()
+    {
+        return Storage::download('templates/template_eleves.xlsx');
     }
 }

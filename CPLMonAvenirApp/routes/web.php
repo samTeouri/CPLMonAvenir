@@ -85,6 +85,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/export-eleves/classe/{classe}', 'export')->name('eleves.export');
             Route::get('/import-eleves/classe/{classe}', 'importPage')->name('eleves.importPage');
             Route::post('/import-eleves', 'import')->name('eleves.import');
+            Route::get('/download-template', 'template')->name('eleves.template');
         });
     });
 
