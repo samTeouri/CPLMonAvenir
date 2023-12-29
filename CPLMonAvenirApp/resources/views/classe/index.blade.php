@@ -57,6 +57,8 @@
             <div class="block-header">
                 <h3 class="block-title">Liste des élèves de la classe de {{ $classe->nom }}</h3>
 
+
+
                 <form action="{{ route('eleve.passage', $classe->id) }}" method="post">
                     @csrf
                     <input type="text" id="listeEleves" name="eleves" hidden />
@@ -64,6 +66,9 @@
                         Valider le passage
                     </button>
                 </form>
+
+                <a class="btn btn-success mr-1" href="{{ route('eleves.export', $classe->id) }}"><i
+                        class="fa fa-file-excel mr-1" aria-hidden="true"></i>Excel</a>
 
                 <div class="dropdown">
                     <button type="button" class="btn btn-success dropdown-toggle" id="dropdown-default-primary"

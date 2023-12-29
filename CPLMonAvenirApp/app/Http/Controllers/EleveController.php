@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ElevesExport;
 use App\Models\AnneeScolaire;
 use App\Models\Classe;
 use App\Models\Eleve;
@@ -10,6 +11,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
 
 class EleveController extends Controller
 {
@@ -192,5 +194,10 @@ class EleveController extends Controller
         } else {
             return redirect()->to($url)->with('notification', ['type' => 'warning', 'message' => 'Impossible de faire passer les élèves en classe supérieure, l\'année scolaire n\'est pas pas terminée']);
         }
+    }
+
+    public function export(Classe $classe)
+    {
+        return Excel::download(new ElevesExport, $classe->nom . '.xlsx');
     }
 }
