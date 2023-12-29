@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\ElevesExport;
+use App\Imports\ElevesImport;
 use App\Models\AnneeScolaire;
 use App\Models\Classe;
 use App\Models\Eleve;
@@ -199,5 +200,21 @@ class EleveController extends Controller
     public function export(Classe $classe)
     {
         return Excel::download(new ElevesExport, $classe->nom . '.xlsx');
+    }
+
+    public function importPage(Classe $classe)
+    {
+        $data = [
+            'classe' => $classe
+        ];
+
+        return view('eleve.import.form', $data);
+    }
+
+    public function import(Request $request)
+    {
+        $url = url()->previous();
+        Excel::import(new ElevesImport, $request->file('excel'));
+        return redirect()->to($url)->with('notification', ['type' => 'success', 'message' => 'Élèves importés']);
     }
 }

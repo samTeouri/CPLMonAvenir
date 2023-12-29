@@ -67,8 +67,38 @@
                     </button>
                 </form>
 
-                <a class="btn btn-success mr-1" href="{{ route('eleves.export', $classe->id) }}"><i
-                        class="fa fa-file-excel mr-1" aria-hidden="true"></i>Excel</a>
+
+                <div class="dropdown mr-1">
+                    <button type="button" class="btn btn-success dropdown-toggle" id="dropdown-default-primary"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-file-excel"></i> Excel
+                    </button>
+                    <div class="dropdown-menu font-size-sm" aria-labelledby="dropdown-default-primary">
+
+                        <li class="nav-main-item">
+                            <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true"
+                                aria-expanded="false" href="#">
+                                <span class="nav-main-link-name"> <i class="fa fa-file-pdf mr-2"></i>Import/Excel</span>
+                            </a>
+                            <ul class="nav-main-submenu">
+
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link" href="{{ route('eleves.export', $classe->id) }}"><span
+                                            class="nav-main-link-name"><i class="fa fa-file-export mr-1"></i>Exporter
+                                            élèves</span></a>
+                                </li>
+
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link" href="{{ route('eleves.importPage', $classe->id) }}"><span
+                                            class="nav-main-link-name"><i class="fa fa-file-import mr-1"></i>Importer
+                                            élèves</span></a>
+                                </li>
+
+                            </ul>
+                        </li>
+                    </div>
+                </div>
+
 
                 <div class="dropdown">
                     <button type="button" class="btn btn-success dropdown-toggle" id="dropdown-default-primary"
@@ -141,7 +171,8 @@
                                         $profil = public_path('/storage/' . $eleve->profil);
                                     @endphp
                                     <tr>
-                                        <td class="text-center text-primary" style="font-weight: 700;">{{ $i++ }}
+                                        <td class="text-center text-primary" style="font-weight: 700;">
+                                            {{ $i++ }}
                                         </td>
                                         <td class="text-center">
                                             <input type="checkbox" class="form-control form-control-alt form-control-sm"
