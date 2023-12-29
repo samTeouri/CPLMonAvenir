@@ -82,6 +82,10 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/passage-année-supérieure/{classe}', 'passageAnneeSup')->name('eleve.passage');
             Route::get('/details/{eleve}', 'show')->name('eleve.show');
             Route::delete('/supprimer/{eleve}', 'destroy')->name('eleve.destroy');
+            Route::get('/export-eleves/classe/{classe}', 'export')->name('eleves.export');
+            Route::get('/import-eleves/classe/{classe}', 'importPage')->name('eleves.importPage');
+            Route::post('/import-eleves', 'import')->name('eleves.import');
+            Route::get('/download-template', 'template')->name('eleves.template');
         });
     });
 
