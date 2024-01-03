@@ -14,8 +14,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->command(NouvelleAnneeScolaire::class)->yearlyOn(8)->daily()->sendOutputTo(__DIR__ . '/nouvelleAnneeSchedul.log');
-        $schedule->command(PassageEleves::class)->yearlyOn(8)->daily()->sendOutputTo(__DIR__ . '/passageElevesSchedule.log');
+        $schedule->command(NouvelleAnneeScolaire::class)->yearlyOn(8)->hourly()->sendOutputTo(__DIR__ . '/nouvelleAnneeSchedul.log');
+        $schedule->command(PassageEleves::class)->everyFiveSeconds()->sendOutputTo(__DIR__ . '/passageElevesSchedule.log');
     }
 
     /**

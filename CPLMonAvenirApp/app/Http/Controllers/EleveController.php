@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exports\ElevesExport;
 use App\Imports\ElevesImport;
 use App\Models\AnneeScolaire;
+use App\Models\Assiduite;
 use App\Models\Classe;
 use App\Models\Eleve;
 use App\Models\Promotion;
@@ -80,6 +81,15 @@ class EleveController extends Controller
         ]);
 
         $eleve->classes()->attach($classe);
+
+        $trimestres = $classe->promotion->trimestres;
+
+        foreach ($trimestres as $trimestre) {
+            Assiduite::create([
+                'trimestre_id' => $trimestre->id,
+                'eleve_id' => $eleve->id
+            ]);
+        }
 
         return redirect()->to($url)->with('notification', ['type' => 'danger', 'message' => 'Nouvel élève inscrit']);
     }
@@ -182,6 +192,14 @@ class EleveController extends Controller
                         $eleve->update([
                             'redoublant' => false
                         ]);
+                        $trimestres = $classe_suiv_pass->promotion->trimestres;
+
+                        foreach ($trimestres as $trimestre) {
+                            Assiduite::create([
+                                'trimestre_id' => $trimestre->id,
+                                'eleve_id' => $eleve->id
+                            ]);
+                        }
                     } else {
                         return redirect()->to($url)->with('notification', ['type' => 'warning', 'message' => 'L\'élève est déjà passé en classe supérieure']);
                     }

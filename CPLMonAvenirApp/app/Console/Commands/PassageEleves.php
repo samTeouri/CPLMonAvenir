@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\AnneeScolaire;
+use App\Models\Assiduite;
 use App\Models\Promotion;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
@@ -51,6 +52,15 @@ class PassageEleves extends Command
                                     $eleve->update([
                                         'redoublant' => false
                                     ]);
+
+                                    $trimestres = $classe_suiv_pass->promotion->trimestres;
+
+                                    foreach ($trimestres as $trimestre) {
+                                        Assiduite::create([
+                                            'trimestre_id' => $trimestre->id,
+                                            'eleve_id' => $eleve->id
+                                        ]);
+                                    }
                                 }
                                 $temp_promotion_suiv = Promotion::where('annee_scolaire_id', $nextYear->id)->where('nom', strval($nom_promotion_actuelle))->first();
                                 $temp_classe_suiv_pass = $temp_promotion_suiv->classes[0];
@@ -67,6 +77,16 @@ class PassageEleves extends Command
                                 $eleve->update([
                                     'redoublant' => true
                                 ]);
+
+
+                                $trimestres = $classe_suiv->promotion->trimestres;
+
+                                foreach ($trimestres as $trimestre) {
+                                    Assiduite::create([
+                                        'trimestre_id' => $trimestre->id,
+                                        'eleve_id' => $eleve->id
+                                    ]);
+                                }
                             }
                         }
                     }
