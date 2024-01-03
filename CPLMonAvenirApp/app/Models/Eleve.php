@@ -117,6 +117,10 @@ class Eleve extends Model
             $total_coefficients += $moyenne['cours']->coefficient;
         }
 
+        if ($total_coefficients === 0.0) {
+            $total_coefficients = 1.0;
+        }
+
         $moyenne_trimestre = round($total_moyenne / $total_coefficients, 2);
         return $moyenne_trimestre;
     }
