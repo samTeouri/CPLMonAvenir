@@ -51,7 +51,11 @@ class EleveController extends Controller
 
 
 
-        $profil = $request->file('profil')->storeAs($annee . '/' . $classe_name_for_image_path . '/' . $matricule . '.png');
+        if ($request->file('profil')) {
+            $profil = $request->file('profil')->storeAs($annee . '/' . $classe_name_for_image_path . '/' . $matricule . '.png');
+        } else {
+            $profil = public_path('assets/media/avatars/avatar1.jpg');
+        }
 
         $user = User::create([
             'username' => $matricule,
