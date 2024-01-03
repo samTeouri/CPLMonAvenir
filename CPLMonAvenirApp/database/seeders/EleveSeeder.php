@@ -18,7 +18,7 @@ class EleveSeeder extends Seeder
     {
         //
 
-        Eleve::factory()->count(46)->create();
+        // Eleve::factory()->count(46)->create();
 
 
     }

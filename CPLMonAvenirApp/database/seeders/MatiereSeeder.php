@@ -15,8 +15,8 @@ class MatiereSeeder extends Seeder
     {
         //
 
-        Matiere::create([
-            'intitule' => 'Mathématiques'
-        ]);
+        // Matiere::create([
+        //     'intitule' => 'Mathématiques'
+        // ]);
     }
 }

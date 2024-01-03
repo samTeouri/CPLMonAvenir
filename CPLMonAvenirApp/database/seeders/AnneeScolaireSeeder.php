@@ -20,12 +20,5 @@ class AnneeScolaireSeeder extends Seeder
             'courant' => true
         ]);
 
-        AnneeScolaire::create([
-            'annee' => '2022-2023',
-        ]);
-
-        AnneeScolaire::create([
-            'annee' => '2021-2022',
-        ]);
     }
 }

@@ -98,7 +98,7 @@
                                 @endforeach
                             @else
                                 <tr>
-                                    <td colspan="2">Pas de matières disponibles</td>
+                                    <td colspan="3" class="text-center">Pas de matières disponibles</td>
                                 </tr>
                             @endif
                         </tbody>
