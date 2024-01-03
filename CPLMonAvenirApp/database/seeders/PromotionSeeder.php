@@ -18,7 +18,7 @@ class PromotionSeeder extends Seeder
     {
         //
         $annee_1 = AnneeScolaire::find(1);
-        $annee_2 = AnneeScolaire::find(2);
+
 
         $tab_promotions = [];
 
@@ -50,36 +50,7 @@ class PromotionSeeder extends Seeder
 
         array_push($tab_promotions, $promotion_4);
 
-        $promotion_5 = Promotion::create([
-            'nom' => '6',
-            'annee_scolaire_id' => $annee_2->id
-        ]);
-
-        array_push($tab_promotions, $promotion_5);
-
-        $promotion_6 = Promotion::create([
-            'nom' => '5',
-            'annee_scolaire_id' => $annee_2->id
-        ]);
-
-        array_push($tab_promotions, $promotion_6);
-
-        $promotion_7 = Promotion::create([
-            'nom' => '4',
-            'annee_scolaire_id' => $annee_2->id
-        ]);
-
-        array_push($tab_promotions, $promotion_7);
-
-        $promotion_8 = Promotion::create([
-            'nom' => '3',
-            'annee_scolaire_id' => $annee_2->id
-        ]);
-
-        array_push($tab_promotions, $promotion_8);
-
-        $matieres = Matiere::all();
-
+       
 
         // création des trimestres de chaque niveau
         foreach ($tab_promotions as $promotion) {
@@ -92,10 +63,6 @@ class PromotionSeeder extends Seeder
                 //$promotion->trimestres()->attach($trimestre);
             }
 
-            // ajout des matières enseignées au niveau
-            foreach ($matieres as $matiere) {
-                $promotion->matieres()->attach($matiere);
-            }
         }
     }
 }

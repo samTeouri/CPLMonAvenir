@@ -17,23 +17,23 @@ class ProfesseurSeeder extends Seeder
     {
         //
 
-        $user_4 = User::find(4);
-        $user_5 = User::find(5);
+        // $user_4 = User::find(4);
+        // $user_5 = User::find(5);
 
-        Professeur::create([
-            'nom' => 'BAGOUNA',
-            'prenom' => 'Joseph',
-            'contact' => '90123456',
-            'sexe' => 'M',
-            'user_id' => $user_4->id
-        ]);
+        // Professeur::create([
+        //     'nom' => 'BAGOUNA',
+        //     'prenom' => 'Joseph',
+        //     'contact' => '90123456',
+        //     'sexe' => 'M',
+        //     'user_id' => $user_4->id
+        // ]);
 
-        Professeur::create([
-            'nom' => 'RHODES',
-            'prenom' => 'Cecile',
-            'contact' => '90123456',
-            'sexe' => 'M',
-            'user_id' => $user_5->id
-        ]);
+        // Professeur::create([
+        //     'nom' => 'RHODES',
+        //     'prenom' => 'Cecile',
+        //     'contact' => '90123456',
+        //     'sexe' => 'M',
+        //     'user_id' => $user_5->id
+        // ]);
     }
 }
