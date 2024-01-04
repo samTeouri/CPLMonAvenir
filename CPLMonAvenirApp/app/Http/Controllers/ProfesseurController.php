@@ -69,10 +69,13 @@ class ProfesseurController extends Controller
         $professeur->update($request->all());
 
         if ($request->classe_id && $request->classe_id === 'aucune') {
-            $classe = Classe::find($professeur->classe->id);
-            $classe->update([
-                'professeur_id' => null
-            ]);
+            $classes = $professeur->classes;
+
+            foreach ($classes as $classe) {
+                $classe->update([
+                    'professeur_id' => null
+                ]);
+            }
         } else {
             $classe = Classe::find($request->classe_id);
 

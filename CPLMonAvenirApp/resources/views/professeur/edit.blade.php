@@ -90,7 +90,6 @@
                         <div class="form-group col-lg-3">
                             <label for="">Classe tutorée</label>
                             <select class="form-control form-control-alt" name="classe_id" id="" required>
-                                <option value="">Selectionnez la classe tutorée</option>
                                 <option value="aucune">Aucune</option>
                                 @foreach ($classes as $classe)
                                     <option value="{{ $classe->id }}" @if ($professeur->classe && $professeur->classe->id === $classe->id) selected @endif>

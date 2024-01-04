@@ -93,7 +93,11 @@
                                                     @foreach ($promotion->classes as $classe)
                                                         @foreach ($professeur->classes as $prof_classe)
                                                             @if ($prof_classe->id === $classe->id)
-                                                                {{ substr($prof_classe->nom, 0, 6) }}
+                                                                <span
+                                                                    class="badge badge-primary"
+                                                                    >{{ substr($prof_classe->nom, 0, 6) }}</span
+                                                                >
+                                                                 
                                                             @endif
                                                         @endforeach
                                                     @endforeach
