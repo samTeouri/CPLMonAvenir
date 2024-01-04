@@ -57,10 +57,6 @@ class ClasseController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'professeur_id' => ['bail|unique:classes']
-        ]);
-
         $url = url()->previous();
         $promotion = Promotion::find($request->promotion_id);
 

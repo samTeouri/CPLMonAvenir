@@ -96,19 +96,22 @@
                                     <div class="form-group col-lg-3">
                                         <label for="wizard-simple2-firstname">Nom de l'élève</label>
                                         <input class="form-control form-control-alt" type="text"
-                                            id="wizard-simple2-firstname" name="nom" required />
+                                            id="wizard-simple2-firstname" name="nom" value="{{ old('nom') }}"
+                                            required />
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label for="wizard-simple2-lastname">Prénoms de l'élève</label>
                                         <input class="form-control form-control-alt" type="text"
-                                            id="wizard-simple2-lastname" name="prenom" required />
+                                            id="wizard-simple2-lastname" name="prenom" value="{{ old('prenom') }}"
+                                            required />
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label for="sexe">Sexe de l'élève</label>
                                         <select class="form-control form-control-alt" name="sexe" id="sexe"
                                             required>
+                                            <option value="">Sélectionnez le sexe</option>
                                             <option value="M">Masculin</option>
                                             <option value="F">Féminin</option>
                                         </select>
@@ -117,8 +120,11 @@
                                     <div class="form-group col-lg-3">
                                         <label for="example-flatpickr-default">Date de naissance de l'élève</label>
                                         <input type="text" class="js-flatpickr form-control form-control-alt"
-                                            id="example-flatpickr-default" name="date_naissance" placeholder="Y-m-d"
-                                            required />
+                                            id="example-flatpickr-default" name="date_naissance"
+                                            value="{{ old('date_naissance') }}" placeholder="Y-m-d" required />
+                                        @error('date_naissance')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
 
                                 </div>
@@ -130,13 +136,15 @@
                                     <div class="form-group col-lg-3">
                                         <label for="wizard-simple2-lastname">Lieu de naissance</label>
                                         <input class="form-control form-control-alt" type="text"
-                                            id="wizard-simple2-lastname" name="lieu_naissance" required>
+                                            id="wizard-simple2-lastname" name="lieu_naissance"
+                                            value="{{ old('lieu_naissance') }}" required>
                                     </div>
 
                                     <div class="form-group col-lg-6">
                                         <label for="wizard-simple2-lastname">Adresse de l'élève</label>
                                         <input class="form-control form-control-alt" type="text"
-                                            id="wizard-simple2-lastname" name="adresse" required>
+                                            id="wizard-simple2-lastname" name="adresse" value="{{ old('adresse') }}"
+                                            required>
                                     </div>
 
                                     <div class="form-group col-lg-3">
@@ -168,6 +176,12 @@
                                     </div>
                                 </div>
 
+                                <hr />
+
+                                <div class="d-flex justify-content-end">
+                                    <button class="btn btn-success" type="submit">Inscrire</button>
+                                </div>
+
                             </div>
 
                             <!-- END Step 1 -->
@@ -182,19 +196,22 @@
                                     <div class="form-group col-lg-3">
                                         <label for="wizard-simple2-firstname">Nom du père</label>
                                         <input class="form-control form-control-alt" type="text"
-                                            id="wizard-simple2-firstname" name="nom_pere" />
+                                            id="wizard-simple2-firstname" name="nom_pere"
+                                            value="{{ old('nom_pere') }}" />
                                     </div>
 
                                     <div class="form-group col-lg-6">
                                         <label for="wizard-simple2-lastname">Prénom du père</label>
                                         <input class="form-control form-control-alt" type="text"
-                                            id="wizard-simple2-lastname" name="prenom_pere" />
+                                            id="wizard-simple2-lastname" name="prenom_pere"
+                                            value="{{ old('prenom_pere') }}" />
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label for="wizard-simple2-lastname">Contact du père</label>
                                         <input class="form-control form-control-alt" type="text"
-                                            id="wizard-simple2-lastname" name="contact_pere" />
+                                            id="wizard-simple2-lastname" name="contact_pere"
+                                            value="{{ old('contact_pere') }}" />
                                     </div>
 
                                 </div>
@@ -204,22 +221,25 @@
                                     <div class="form-group col-lg-6">
                                         <label for="wizard-simple2-firstname">Adresse du père</label>
                                         <input class="form-control form-control-alt" type="text"
-                                            id="wizard-simple2-firstname" name="adresse_pere" />
+                                            id="wizard-simple2-firstname" name="adresse_pere"
+                                            value="{{ old('adresse_pere') }}" />
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label for="wizard-simple2-lastname">Profession du père</label>
                                         <input class="form-control form-control-alt" type="text"
-                                            id="wizard-simple2-lastname" name="profession_pere" />
+                                            id="wizard-simple2-lastname" name="profession_pere"
+                                            value="{{ old('profession_pere') }}" />
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label for="sexe">Situation matrimoniale du père</label>
                                         <select class="form-control form-control-alt" name="situation_matrimoniale_pere"
                                             id="sexe">
-                                            <option value="Célibataire">Célibataire</option>
                                             <option value="Marié">Marié</option>
                                             <option value="Veuf">Veuf</option>
+                                            <option value="Célibataire">Célibataire</option>
+                                            <option value="Divorcé">Divorcé</option>
                                             <option value="Autre">Autre</option>
                                         </select>
                                     </div>
@@ -235,19 +255,22 @@
                                     <div class="form-group col-lg-3">
                                         <label for="wizard-simple2-firstname">Nom de la mère</label>
                                         <input class="form-control form-control-alt" type="text"
-                                            id="wizard-simple2-firstname" name="nom_mere" />
+                                            id="wizard-simple2-firstname" name="nom_mere"
+                                            value="{{ old('nom_mere') }}" />
                                     </div>
 
                                     <div class="form-group col-lg-6">
                                         <label for="wizard-simple2-lastname">Prénom de la mère</label>
                                         <input class="form-control form-control-alt" type="text"
-                                            id="wizard-simple2-lastname" name="prenom_mere" />
+                                            id="wizard-simple2-lastname" name="prenom_mere"
+                                            value="{{ old('prenom_mere') }}" />
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label for="wizard-simple2-lastname">Contact de la mère</label>
                                         <input class="form-control form-control-alt" type="text"
-                                            id="wizard-simple2-lastname" name="contact_mere" />
+                                            id="wizard-simple2-lastname" name="contact_mere"
+                                            value="{{ old('contact_mere') }}" />
                                     </div>
 
                                 </div>
@@ -257,22 +280,25 @@
                                     <div class="form-group col-lg-6">
                                         <label for="wizard-simple2-firstname">Adresse de la mère</label>
                                         <input class="form-control form-control-alt" type="text"
-                                            id="wizard-simple2-firstname" name="adresse_mere" />
+                                            id="wizard-simple2-firstname" name="adresse_mere"
+                                            value="{{ old('adresse_mere') }}" />
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label for="wizard-simple2-lastname">Profession de la mère</label>
                                         <input class="form-control form-control-alt" type="text"
-                                            id="wizard-simple2-lastname" name="profession_mere" />
+                                            id="wizard-simple2-lastname" name="profession_mere"
+                                            value="{{ old('profession_mere') }}" />
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label for="sexe">Situation matrimoniale de la mère</label>
                                         <select class="form-control form-control-alt" name="situation_matrimoniale_mere"
                                             id="sexe">
-                                            <option value="Célibataire">Célibataire</option>
                                             <option value="Mariée">Mariée</option>
+                                            <option value="Célibataire">Célibataire</option>
                                             <option value="Veuve">Veuve</option>
+                                            <option value="Divorcée">Divorcée</option>
                                             <option value="Autre">Autre</option>
                                         </select>
                                     </div>
@@ -288,19 +314,22 @@
                                     <div class="form-group col-lg-3">
                                         <label for="wizard-simple2-firstname">Nom du tuteur</label>
                                         <input class="form-control form-control-alt" type="text"
-                                            id="wizard-simple2-firstname" name="nom_tuteur" />
+                                            id="wizard-simple2-firstname" name="nom_tuteur"
+                                            value="{{ old('nom_tuteur') }}" />
                                     </div>
 
                                     <div class="form-group col-lg-6">
                                         <label for="wizard-simple2-lastname">Prénom du tuteur</label>
                                         <input class="form-control form-control-alt" type="text"
-                                            id="wizard-simple2-lastname" name="prenom_tuteur" />
+                                            id="wizard-simple2-lastname" name="prenom_tuteur"
+                                            value="{{ old('prenom_tuteur') }}" />
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label for="wizard-simple2-lastname">Contact du tuteur</label>
                                         <input class="form-control form-control-alt" type="text"
-                                            id="wizard-simple2-lastname" name="contact_tuteur" />
+                                            id="wizard-simple2-lastname" name="contact_tuteur"
+                                            value="{{ old('contact_tuteur') }}" />
                                     </div>
 
                                 </div>
@@ -310,21 +339,24 @@
                                     <div class="form-group col-lg-6">
                                         <label for="wizard-simple2-firstname">Adresse du tuteur</label>
                                         <input class="form-control form-control-alt" type="text"
-                                            id="wizard-simple2-firstname" name="adresse_tuteur" />
+                                            id="wizard-simple2-firstname" name="adresse_tuteur"
+                                            value="{{ old('adresse_tuteur') }}" />
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label for="wizard-simple2-lastname">Profession du tuteur</label>
                                         <input class="form-control form-control-alt" type="text"
-                                            id="wizard-simple2-lastname" name="profession_tuteur" />
+                                            id="wizard-simple2-lastname" name="profession_tuteur"
+                                            value="{{ old('profession_tuteur') }}" />
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label for="sexe">Situation matrimoniale du tuteur</label>
                                         <select class="form-control form-control-alt" name="situation_matrimoniale_tuteur"
                                             id="sexe" required>
+                                            <option value="Marié(e)">Marié(e)</option>
                                             <option value="Célibataire">Célibataire</option>
-                                            <option value="Mariée">Marié(e)</option>
+                                            <option value="Divorcé(e)">Divorcé</option>
                                             <option value="Veuf">Veuf</option>
                                             <option value="Veuve">Veuve</option>
                                             <option value="Autre">Autre</option>
@@ -333,6 +365,11 @@
 
                                 </div>
 
+                                <hr />
+
+                                <div class="d-flex justify-content-end">
+                                    <button class="btn btn-success" type="submit">Inscrire</button>
+                                </div>
 
                             </div>
                             <!-- END Step 2 -->
@@ -361,21 +398,22 @@
                                         <label for="wizard-simple2-firstname">Problèmes de santés importants</label>
                                         <input class="form-control form-control-alt" type="text"
                                             id="wizard-simple2-firstname" name="problemes"
-                                            placeholder="(Diabète, problèmes cardiaques)" />
+                                            placeholder="(Diabète, problèmes cardiaques)"
+                                            value="{{ old('problemes') }}" />
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label for="wizard-simple2-firstname">Activitées restrintes</label>
                                         <input class="form-control form-control-alt" type="text"
                                             id="wizard-simple2-firstname" placeholder="course, balayage,..."
-                                            name="restrictions" />
+                                            name="restrictions" value="{{ old('restrictions') }}" />
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <label for="wizard-simple2-firstname">Médicaments pris</label>
                                         <input class="form-control form-control-alt" type="text"
                                             id="wizard-simple2-firstname" placeholder="ventoline, insuline,..."
-                                            name="medicaments" />
+                                            name="medicaments" value="{{ old('medicaments') }}" />
                                     </div>
 
                                 </div>

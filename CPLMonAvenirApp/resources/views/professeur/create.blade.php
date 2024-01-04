@@ -73,7 +73,7 @@
                         </div>
                         <div class="form-group col-lg-2">
                             <label for="">Sexe de l'enseignant</label>
-                            <select class="form-control form-control-alt" name="sexe" id="">
+                            <select class="form-control form-control-alt" name="sexe" id="" required>
                                 <option value="">Sélectionnez le sexe</option>
                                 <option value="M">Masculin</option>
                                 <option value="F">Féminin</option>
@@ -81,7 +81,7 @@
                         </div>
                         <div class="form-group col-lg-2">
                             <label for="">Contact de l'enseignant</label>
-                            <input type="telephone" name="contact" class="form-control form-control-alt" />
+                            <input type="telephone" name="contact" class="form-control form-control-alt" required />
                         </div>
                     </div>
                     <div class="row mx-0 px-0 py-2 justify-content-center">

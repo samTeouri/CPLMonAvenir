@@ -28,6 +28,11 @@ class EleveController extends Controller
     public function store(Request $request)
     {
 
+
+        $request->validate([
+            'date_naissance' => 'required|date|before:'. date('Y-m-j')
+        ]);
+
         $url = url()->previous();
 
         $annee = AnneeScolaire::getAnneeScolaire()->annee;
