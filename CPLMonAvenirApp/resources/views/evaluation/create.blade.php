@@ -116,7 +116,7 @@
                 </ul>
                 <div class="block-content tab-content">
                     @foreach ($classes as $classe)
-                        <div class="tab-pane" id="classe{{ $classe['classe']->id }}" role="tabpanel">
+                        <div class="tab-panel" id="classe{{ $classe['classe']->id }}" role="tabpanel">
                             <h4 class="font-w400">Classe de {{ substr($classe['classe']->nom, 0, 6) }}</h4>
                             @foreach ($classe['eleves'] as $eleve)
                                 <div class="row mx-0 px-0">

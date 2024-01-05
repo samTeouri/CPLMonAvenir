@@ -209,7 +209,7 @@ class EvaluationController extends Controller
     public function store(Request $request)
     {
 
-        //ddd($request->note_maximale);
+
 
         if ($request->type === 'devoir' || $request->type === 'composition') {
 
@@ -217,6 +217,11 @@ class EvaluationController extends Controller
 
             // Récupérer les notes pour chaque élève
             $eleves = $request->input('eleves');
+
+            if (!$eleves) {
+                $url = url()->previous();
+                return redirect()->to($url)->with('notification', ['type' => 'error', 'message' => 'Impossible de créer l\'évaluation aucun élève existant']);
+            }
 
             // Tableau pour stocker les IDs de cours uniques
             $idsCours = [];
@@ -301,6 +306,10 @@ class EvaluationController extends Controller
 
             $eleves = $request->input('eleves');
 
+            if (!$eleves) {
+                $url = url()->previous();
+                return redirect()->to($url)->with('notification', ['type' => 'error', 'message' => 'Impossible de créer l\'évaluation aucun élève existant']);
+            }
 
             foreach ($eleves as $eleve) {
 
