@@ -27,7 +27,8 @@ class EleveCinquiemeImport implements ToCollection
                 $eleve = Eleve::create([
                     'nom' => $row[0],
                     'prenom' => $row[1],
-                    'date_naissance' => Date::excelToDateTimeObject($row[2])->format('Y-m-d'),
+                    'date_naissance' =>
+                    Date::excelToDateTimeObject(intval($row[2]))->format('Y-m-d'),
                     'lieu_naissance' => $row[3],
                     'sexe' => $row[4],
                     'adresse' => $row[5],
