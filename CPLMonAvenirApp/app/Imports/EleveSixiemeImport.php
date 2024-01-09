@@ -3,6 +3,7 @@
 namespace App\Imports;
 
 use App\Models\AnneeScolaire;
+use App\Models\Assiduite;
 use App\Models\Eleve;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
@@ -34,6 +35,15 @@ class EleveSixiemeImport implements ToCollection
                 ]);
 
                 $eleve->classes()->attach($classe);
+
+                $trimestres = $classe->promotion->trimestres;
+
+                foreach ($trimestres as $trimestre) {
+                    Assiduite::create([
+                        'trimestre_id' => $trimestre->id,
+                        'eleve_id' => $eleve->id
+                    ]);
+                }
             }
         }
     }
