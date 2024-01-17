@@ -165,22 +165,74 @@
 
     \hline
 
+    @php
+        $temp_trimestre = 1;
+        if (substr($trimestre->intitule, 0, 11) === 'Trimestre 2') {
+            $temp_trimestre = 2;
+        } elseif (substr($trimestre->intitule, 0, 11) === 'Trimestre 3') {
+            $temp_trimestre = 3;
+        }
+    @endphp
+
+    @if ($temp_trimestre === 1)
+        Moyenne en lettre: \textbf{\textit{\large @latex($bulletin['moyenne_lettres'])}} & Moyenne du $1^{er}$ trimestre:
+        \textbf{\large @latex($bulletin['moyennes'][$trimestre->id]['moyenne'])}. Rang: \large\textbf{@latex($bulletin['moyennes'][$trimestre->id]['rang'])} sur \large @latex(count($classe->eleves))\\
+
+        Tableau d'honneur: @if ($bulletin['moyennes'][$trimestre->id]['moyenne'] >= 13)
+            Oui
+        @else
+            Non
+        @endif & \\
+
+        Encouragements: @if ($bulletin['moyennes'][$trimestre->id]['moyenne'] >= 13)
+            Oui
+        @else
+            Non
+        @endif & \\
+    @endif
+
+    @if ($temp_trimestre === 2)
+        Moyenne en lettre: \textbf{\textit{\large @latex($bulletin['moyenne_lettres'])}} & Moyenne du $1^{er}$ trimestre:
+        \textbf{\large @latex($bulletin['moyennes'][$trimestre->id - 1]['moyenne'])}. Rang: \large\textbf{@latex($bulletin['moyennes'][$trimestre->id - 1]['rang'])} sur \large @latex(count($classe->eleves))\\
+
+        Tableau d'honneur: @if ($bulletin['moyennes'][$trimestre->id]['moyenne'] >= 13)
+            Oui
+        @else
+            Non
+        @endif & Moyenne du $2^{eme}$ trimestre: \textbf{\large @latex($bulletin['moyennes'][$trimestre->id]['moyenne'])}. Rang:
+        \large\textbf{@latex($bulletin['moyennes'][$trimestre->id]['rang'])} sur \large @latex(count($classe->eleves))\\
+
+        Encouragements: @if ($bulletin['moyennes'][$trimestre->id]['moyenne'] >= 13)
+            Oui
+        @else
+            Non
+        @endif & \\
+    @endif
+
+    @if ($temp_trimestre === 3)
+        Moyenne en lettre: \textbf{\textit{\large @latex($bulletin['moyenne_lettres'])}} & Moyenne du $1^{er}$ trimestre:
+        \textbf{\large @latex($bulletin['moyennes'][$trimestre->id - 2]['moyenne'])}. Rang: \large\textbf{@latex($bulletin['moyennes'][$trimestre->id - 2]['rang'])} sur \large @latex(count($classe->eleves))\\
+
+        Tableau d'honneur: @if ($bulletin['moyennes'][$trimestre->id]['moyenne'] >= 13)
+            Oui
+        @else
+            Non
+        @endif & Moyenne du $2^{eme}$ trimestre: \textbf{\large @latex($bulletin['moyennes'][$trimestre->id - 1]['moyenne'])}. Rang:
+        \large\textbf{@latex($bulletin['moyennes'][$trimestre->id - 1]['rang'])} sur \large @latex(count($classe->eleves))\\
+
+        Encouragements: @if ($bulletin['moyennes'][$trimestre->id]['moyenne'] >= 13)
+            Oui
+        @else
+            Non
+        @endif & Moyenne du $3^{eme}$ trimestre: \textbf{\large @latex($bulletin['moyennes'][$trimestre->id]['moyenne'])}. Rang:
+        \large\textbf{@latex($bulletin['moyennes'][$trimestre->id]['rang'])} sur \large @latex(count($classe->eleves))\\
+    @endif
 
 
-    Moyenne en lettre: \textbf{\textit{\large @latex($bulletin['moyenne_lettres'])}} & Moyenne du $1^{er}$ trimestre:
-    \textbf{\large @latex($bulletin['moyennes'][$trimestre->id]['moyenne'])}. Rang: \large\textbf{@latex($bulletin['moyennes'][$trimestre->id]['rang'])} sur \large @latex(count($classe->eleves))\\
 
-    Tableau d'honneur: @if ($bulletin['moyennes'][$trimestre->id + 1]['rang'] < 5)
-        Oui
-    @else
-        Non
-    @endif & Moyenne du $2^{eme}$ trimestre: \textbf{\large @latex($bulletin['moyennes'][$trimestre->id + 1]['moyenne'])}. Rang:
-    \large\textbf{@latex($bulletin['moyennes'][$trimestre->id + 1]['rang'])} sur \large @latex(count($classe->eleves))\\
 
-    Encouragements: Non & Moyenne du $3^{eme}$ trimestre: \textbf{\large @latex($bulletin['moyennes'][$trimestre->id + 2]['moyenne'])}. Rang:
-    \large\textbf{@latex($bulletin['moyennes'][$trimestre->id + 2]['rang'])} sur \large @latex(count($classe->eleves))\\
 
-    Félicitations: Non & Moyenne Annuelle: \textbf{\large @latex($bulletin['moyenne_annuelle'])}. \\
+    Félicitations: @if ($bulletin['moyennes'][$trimestre->id]['moyenne'] >= 16) Oui @else Non @endif & Moyenne Annuelle: \textbf{\large @latex($bulletin['moyenne_annuelle'])}. \\
 
     Retards: @latex(count($bulletin['assiduite']->retards)) & Décisions du conseil des professeurs: \\
 

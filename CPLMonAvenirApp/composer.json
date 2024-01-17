@@ -2,7 +2,10 @@
     "name": "laravel/laravel",
     "type": "project",
     "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "keywords": [
+        "laravel",
+        "framework"
+    ],
     "license": "MIT",
     "require": {
         "php": "^8.1",
@@ -14,7 +17,7 @@
         "laravel/tinker": "^2.8",
         "laravel/ui": "^4.2",
         "maatwebsite/excel": "^3.1",
-        "rmunate/spell-number": "^1.0"
+        "rmunate/spell-number": "^4.2"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

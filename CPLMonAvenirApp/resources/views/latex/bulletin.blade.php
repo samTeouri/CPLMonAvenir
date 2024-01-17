@@ -105,11 +105,11 @@ N & D \\
     \vspace{0.5cm}
     \hspace{-0.5cm}
     \renewcommand{\arraystretch}{2.2}
-    \begin{tabular}{|l||p{1cm}|p{1cm}|p{1.5cm}|c|p{1.5cm}|p{2.5cm}|c|}
+    \begin{tabular}{|l||p{1cm}|p{1cm}|p{1.5cm}|c|p{1.5cm}|p{2.5cm}|c|p{1cm}|}
     \hline
     \Large \textbf{MATIERES} & \multicolumn{2}{c|}{Notes} & \centering Moy. des 2 notes & Coef & \centering Notes
     définitives &
-    \centering Appréciation des professeurs & Noms et signatures \\
+    \centering Appréciation des professeurs & Professeur et signature  \\
     \cline{2-3}
     & Class & Compo & & & & & \ \\
     \hline
@@ -144,7 +144,7 @@ N & D \\
         \textsf{@latex($ligne['notes_cours']['compo'])} &
         \centering \large \textsf{@latex($moyenne_2_notes)} & \large \textsf{@latex($coefficient)}
         & \centering \large \textsf{@latex($note_def)} & \centering \large \textsf{@latex($appreciation)} & \large
-        \textsf{@latex($professeur)}
+        \textsf{@latex($professeur) (Validée)}
         \\
         \hline
         @php
@@ -180,15 +180,13 @@ N & D \\
         Moyenne en lettre: \textbf{\textit{\large @latex($moyenne_lettre)}} & Moyenne du $1^{er}$ trimestre:
         \textbf{\large @latex($moyennes_trimestres[$trimestre->id]['moyenne'])}. Rang: \large\textbf{@latex($moyennes_trimestres[$trimestre->id]['rang'])} sur \large @latex(count($classe->eleves))\\
 
-        Tableau d'honneur: @if ($moyennes_trimestres[$trimestre->id]['rang'] < 5)
+        Tableau d'honneur: @if ($moyennes_trimestres[$trimestre->id]['moyenne'] >= 13)
             Oui
         @else
             Non
-        @endif & Moyenne du $2^{eme}$ trimestre: \textbf{\large @latex($moyennes_trimestres[$trimestre->id + 1]['moyenne'])}. Rang:
-        \large\textbf{@latex($moyennes_trimestres[$trimestre->id + 1]['rang'])} sur \large @latex(count($classe->eleves))\\
+        @endif & \\
 
-        Encouragements: Non & Moyenne du $3^{eme}$ trimestre: \textbf{\large @latex($moyennes_trimestres[$trimestre->id + 2]['moyenne'])}. Rang:
-        \large\textbf{@latex($moyennes_trimestres[$trimestre->id + 2]['rang'])} sur \large @latex(count($classe->eleves))\\
+        Encouragements: @if ($moyennes_trimestres[$trimestre->id]['moyenne'] >= 13) Oui @else Non @endif & \\
     @endif
 
 
@@ -196,34 +194,35 @@ N & D \\
         Moyenne en lettre: \textbf{\textit{\large @latex($moyenne_lettre)}} & Moyenne du $1^{er}$ trimestre:
         \textbf{\large @latex($moyennes_trimestres[$trimestre->id - 1]['moyenne'])}. Rang: \large\textbf{@latex($moyennes_trimestres[$trimestre->id - 1]['rang'])} sur \large @latex(count($classe->eleves))\\
 
-        Tableau d'honneur: @if ($moyennes_trimestres[$trimestre->id]['rang'] < 5)
+        Tableau d'honneur: @if ($moyennes_trimestres[$trimestre->id]['moyenne'] >= 13)
             Oui
         @else
             Non
         @endif & Moyenne du $2^{eme}$ trimestre: \textbf{\large @latex($moyennes_trimestres[$trimestre->id]['moyenne'])}. Rang:
         \large\textbf{@latex($moyennes_trimestres[$trimestre->id]['rang'])} sur \large @latex(count($classe->eleves))\\
 
-        Encouragements: Non & Moyenne du $3^{eme}$ trimestre: \textbf{\large @latex($moyennes_trimestres[$trimestre->id + 1]['moyenne'])}. Rang:
-        \large\textbf{@latex($moyennes_trimestres[$trimestre->id + 1]['rang'])} sur \large @latex(count($classe->eleves))\\
+        Encouragements: @if ($moyennes_trimestres[$trimestre->id]['moyenne'] >= 13) Oui @else Non @endif & \\
     @endif
 
     @if ($temp_trimestre === 3)
         Moyenne en lettre: \textbf{\textit{\large @latex($moyenne_lettre)}} & Moyenne du $1^{er}$ trimestre:
         \textbf{\large @latex($moyennes_trimestres[$trimestre->id - 2]['moyenne'])}. Rang: \large\textbf{@latex($moyennes_trimestres[$trimestre->id - 2]['rang'])} sur \large @latex(count($classe->eleves))\\
 
-        Tableau d'honneur: @if ($moyennes_trimestres[$trimestre->id]['rang'] < 5)
+        Tableau d'honneur: @if ($moyennes_trimestres[$trimestre->id]['moyenne'] >= 13)
             Oui
         @else
             Non
         @endif & Moyenne du $2^{eme}$ trimestre: \textbf{\large @latex($moyennes_trimestres[$trimestre->id - 1]['moyenne'])}. Rang:
         \large\textbf{@latex($moyennes_trimestres[$trimestre->id - 1]['rang'])} sur \large @latex(count($classe->eleves))\\
 
-        Encouragements: Non & Moyenne du $3^{eme}$ trimestre: \textbf{\large @latex($moyennes_trimestres[$trimestre->id]['moyenne'])}. Rang:
+        Encouragements: @if ($moyennes_trimestres[$trimestre->id]['moyenne'] >= 13) Oui @else Non @endif & Moyenne du $3^{eme}$ trimestre: \textbf{\large @latex($moyennes_trimestres[$trimestre->id]['moyenne'])}. Rang:
         \large\textbf{@latex($moyennes_trimestres[$trimestre->id]['rang'])} sur \large @latex(count($classe->eleves))\\
     @endif
 
 
-    Félicitations: Non & Moyenne Annuelle: \textbf{\large @latex($moyenne_annuelle)}. \\
+    Félicitations: @if ($moyennes_trimestres[$trimestre->id]['moyenne'] >= 16) Oui @else Non @endif & @if ($temp_trimestre === 3)
+        Moyenne Annuelle: \textbf{\large @latex($moyenne_annuelle)}.
+    @endif \\
 
     Retards: @latex(count($assiduite->retards)) & Décisions du conseil des professeurs: \\
 
