@@ -9,8 +9,6 @@ use Illuminate\Http\Request;
 use Ismaelw\LaraTeX\LaraTeX;
 use Rmunate\Utilities\SpellNumber;
 
-
-
 class LaTexToPDFController extends Controller
 {
 
@@ -106,11 +104,12 @@ class LaTexToPDFController extends Controller
             }
         }
 
+        $moyennes[$trimestre->id]['moyenne'] = 7.50;
 
         if ($moyennes[$trimestre->id]['moyenne'] === 0.0) {
             $moyenne_lettre = 'Zéro';
         } else {
-            $moyenne_lettre = SpellNumber::float($moyennes[$trimestre->id]['moyenne'])->toLetters();
+            $moyenne_lettre = SpellNumber::value($moyennes[$trimestre->id]['moyenne'])->locale('fr')->toLetters(); 
         }
 
         $moyenne_annuelle = 0.0;
