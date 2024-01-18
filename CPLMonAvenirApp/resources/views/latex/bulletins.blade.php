@@ -121,7 +121,7 @@
             $moyenne_2_notes = round(($ligne['notes_cours']['moyenne_classe'] + $ligne['notes_cours']['compo']) / 2, 2);
             $coefficient = $ligne['notes_cours']['cours']->coefficient;
             $note_def = round($moyenne_2_notes * $coefficient, 2);
-            $professeur = $ligne['notes_cours']['cours']->professeur->nom . ' ' . $ligne['notes_cours']['cours']->professeur->prenom;
+            $professeur = $ligne['notes_cours']['cours']->professeur->nom;
             $appreciation = 'Néant';
             if ($moyenne_2_notes <= 5.0) {
                 $appreciation = 'Faible';
@@ -143,7 +143,7 @@
         \textsf{@latex($ligne['notes_cours']['compo'])} &
         \centering \large \textsf{@latex($moyenne_2_notes)} & \large \textsf{@latex($coefficient)}
         & \centering \large \textsf{@latex($note_def)} & \centering \large \textsf{@latex($appreciation)} & \large
-        \textsf{@latex($professeur)}
+        \textsf{@latex($professeur)} (Validée)
         \\
         \hline
         @php
@@ -232,57 +232,63 @@
 
 
 
-    Félicitations: @if ($bulletin['moyennes'][$trimestre->id]['moyenne'] >= 16) Oui @else Non @endif & Moyenne Annuelle: \textbf{\large @latex($bulletin['moyenne_annuelle'])}. \\
+    Félicitations: @if ($bulletin['moyennes'][$trimestre->id]['moyenne'] >= 16)
+        Oui
+    @else
+        Non
+        @endif & @if ($temp_trimestre === 3)
+            Moyenne Annuelle: \textbf{\large @latex($bulletin['moyenne_annuelle'])}.
+        @endif \\
 
-    Retards: @latex(count($bulletin['assiduite']->retards)) & Décisions du conseil des professeurs: \\
+        Retards: @latex(count($bulletin['assiduite']->retards)) & Décisions du conseil des professeurs: \\
 
-    Absences: @latex(count($bulletin['assiduite']->absences)) & \\
+        Absences: @latex(count($bulletin['assiduite']->absences)) & \\
 
-    @php
-        $heures_absences = 0;
-        foreach ($bulletin['assiduite']->absences as $absence) {
-            $heures_absences += $absence->nombre_heure;
-        }
-    @endphp
-    Absences évaluées en heures: @latex($heures_absences)h & \\
-    @php
-        $comportement = json_decode($bulletin['assiduite']->comportement);
-        $avertissement = $comportement->avertissement;
-        $blame = $comportement->blame;
-    @endphp
-    Avertissement: @if ($avertissement->Travail === true)
-        Travail
-        @endif @if ($avertissement->Discipline === true)
-            Discipline
-        @endif & \\
-        Blâme pour: @if ($blame->Travail === true)
+        @php
+            $heures_absences = 0;
+            foreach ($bulletin['assiduite']->absences as $absence) {
+                $heures_absences += $absence->nombre_heure;
+            }
+        @endphp
+        Absences évaluées en heures: @latex($heures_absences)h & \\
+        @php
+            $comportement = json_decode($bulletin['assiduite']->comportement);
+            $avertissement = $comportement->avertissement;
+            $blame = $comportement->blame;
+        @endphp
+        Avertissement: @if ($avertissement->Travail === true)
             Travail
-            @endif @if ($blame->Discipline === true)
+            @endif @if ($avertissement->Discipline === true)
                 Discipline
             @endif & \\
-            \hline
-            Nom et signature du titulaire: @if ($classe->professeur)
-                @latex($classe->professeur->nom) @latex($classe->professeur->prenom)
-            @endif & Sokodé, le \large \today\\
-            & \textbf{Le Directeur} \\
-            & \\
-            & \\
-            & \\
-            \hline
-            \end{tabular}
+            Blâme pour: @if ($blame->Travail === true)
+                Travail
+                @endif @if ($blame->Discipline === true)
+                    Discipline
+                @endif & \\
+                \hline
+                Nom et signature du titulaire: @if ($classe->professeur)
+                    @latex($classe->professeur->nom) @latex($classe->professeur->prenom)
+                @endif & Sokodé, le \large \today\\
+                & \textbf{Le Directeur} \\
+                & \\
+                & \\
+                & \\
+                \hline
+                \end{tabular}
 
-            \end{flushleft}
-
-
-
-
-
-
-            \newpage
-        @endforeach
+                \end{flushleft}
 
 
 
 
 
-        \end{document}
+
+                \newpage
+            @endforeach
+
+
+
+
+
+            \end{document}

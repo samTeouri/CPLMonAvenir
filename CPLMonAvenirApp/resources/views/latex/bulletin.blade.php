@@ -109,7 +109,7 @@ N & D \\
     \hline
     \Large \textbf{MATIERES} & \multicolumn{2}{c|}{Notes} & \centering Moy. des 2 notes & Coef & \centering Notes
     définitives &
-    \centering Appréciation des professeurs & Professeur et signature  \\
+    \centering Appréciation des professeurs & Professeur et signature \\
     \cline{2-3}
     & Class & Compo & & & & & \ \\
     \hline
@@ -122,7 +122,7 @@ N & D \\
             $moyenne_2_notes = round(($ligne['notes_cours']['moyenne_classe'] + $ligne['notes_cours']['compo']) / 2, 2);
             $coefficient = $ligne['notes_cours']['cours']->coefficient;
             $note_def = round($moyenne_2_notes * $coefficient, 2);
-            $professeur = $ligne['notes_cours']['cours']->professeur->nom . ' ' . $ligne['notes_cours']['cours']->professeur->prenom;
+            $professeur = $ligne['notes_cours']['cours']->professeur->nom;
             $appreciation = 'Néant';
             if ($moyenne_2_notes <= 5.0) {
                 $appreciation = 'Faible';
@@ -144,7 +144,7 @@ N & D \\
         \textsf{@latex($ligne['notes_cours']['compo'])} &
         \centering \large \textsf{@latex($moyenne_2_notes)} & \large \textsf{@latex($coefficient)}
         & \centering \large \textsf{@latex($note_def)} & \centering \large \textsf{@latex($appreciation)} & \large
-        \textsf{@latex($professeur) (Validée)}
+        \textsf{@latex($professeur)} (Validée)
         \\
         \hline
         @php
@@ -186,7 +186,11 @@ N & D \\
             Non
         @endif & \\
 
-        Encouragements: @if ($moyennes_trimestres[$trimestre->id]['moyenne'] >= 13) Oui @else Non @endif & \\
+        Encouragements: @if ($moyennes_trimestres[$trimestre->id]['moyenne'] >= 13)
+            Oui
+        @else
+            Non
+        @endif & \\
     @endif
 
 
@@ -201,7 +205,11 @@ N & D \\
         @endif & Moyenne du $2^{eme}$ trimestre: \textbf{\large @latex($moyennes_trimestres[$trimestre->id]['moyenne'])}. Rang:
         \large\textbf{@latex($moyennes_trimestres[$trimestre->id]['rang'])} sur \large @latex(count($classe->eleves))\\
 
-        Encouragements: @if ($moyennes_trimestres[$trimestre->id]['moyenne'] >= 13) Oui @else Non @endif & \\
+        Encouragements: @if ($moyennes_trimestres[$trimestre->id]['moyenne'] >= 13)
+            Oui
+        @else
+            Non
+        @endif & \\
     @endif
 
     @if ($temp_trimestre === 3)
@@ -215,59 +223,60 @@ N & D \\
         @endif & Moyenne du $2^{eme}$ trimestre: \textbf{\large @latex($moyennes_trimestres[$trimestre->id - 1]['moyenne'])}. Rang:
         \large\textbf{@latex($moyennes_trimestres[$trimestre->id - 1]['rang'])} sur \large @latex(count($classe->eleves))\\
 
-        Encouragements: @if ($moyennes_trimestres[$trimestre->id]['moyenne'] >= 13) Oui @else Non @endif & Moyenne du $3^{eme}$ trimestre: \textbf{\large @latex($moyennes_trimestres[$trimestre->id]['moyenne'])}. Rang:
+        Encouragements: @if ($moyennes_trimestres[$trimestre->id]['moyenne'] >= 13)
+            Oui
+        @else
+            Non
+        @endif & Moyenne du $3^{eme}$ trimestre: \textbf{\large @latex($moyennes_trimestres[$trimestre->id]['moyenne'])}. Rang:
         \large\textbf{@latex($moyennes_trimestres[$trimestre->id]['rang'])} sur \large @latex(count($classe->eleves))\\
     @endif
 
 
-    Félicitations: @if ($moyennes_trimestres[$trimestre->id]['moyenne'] >= 16) Oui @else Non @endif & @if ($temp_trimestre === 3)
-        Moyenne Annuelle: \textbf{\large @latex($moyenne_annuelle)}.
-    @endif \\
+    Félicitations: @if ($moyennes_trimestres[$trimestre->id]['moyenne'] >= 16)
+        Oui
+    @else
+        Non
+        @endif & @if ($temp_trimestre === 3)
+            Moyenne Annuelle: \textbf{\large @latex($moyenne_annuelle)}.
+        @endif \\
 
-    Retards: @latex(count($assiduite->retards)) & Décisions du conseil des professeurs: \\
+        Retards: @latex(count($assiduite->retards)) & Décisions du conseil des professeurs: \\
 
-    Absences: @latex(count($assiduite->absences)) & \\
-    @php
-        $heures_absences = 0;
-        foreach ($assiduite->absences as $absence) {
-            $heures_absences += $absence->nombre_heure;
-        }
-    @endphp
-    Absences évaluées en heures: @latex($heures_absences)h & \\
-    @php
-        $comportement = json_decode($assiduite->comportement);
-        $avertissement = $comportement->avertissement;
-        $blame = $comportement->blame;
-    @endphp
-    Avertissement: @if ($avertissement->Travail === true)
-        Travail
-        @endif @if ($avertissement->Discipline === true)
-            Discipline
-        @endif & \\
-        Blâme pour: @if ($blame->Travail === true)
+        Absences: @latex(count($assiduite->absences)) & \\
+        @php
+            $heures_absences = 0;
+            foreach ($assiduite->absences as $absence) {
+                $heures_absences += $absence->nombre_heure;
+            }
+        @endphp
+        Absences évaluées en heures: @latex($heures_absences)h & \\
+        @php
+            $comportement = json_decode($assiduite->comportement);
+            $avertissement = $comportement->avertissement;
+            $blame = $comportement->blame;
+        @endphp
+        Avertissement: @if ($avertissement->Travail === true)
             Travail
-            @endif @if ($blame->Discipline === true)
+            @endif @if ($avertissement->Discipline === true)
                 Discipline
             @endif & \\
-            \hline
-            Nom et signature du titulaire: @if ($classe->professeur)
-                @latex($classe->professeur->nom) @latex($classe->professeur->prenom)
-            @endif & Sokodé, le \large \today\\
-            & \textbf{Le Directeur} \\
-            & \\
-            & \\
-            & \\
-            \hline
-            \end{tabular}
+            Blâme pour: @if ($blame->Travail === true)
+                Travail
+                @endif @if ($blame->Discipline === true)
+                    Discipline
+                @endif & \\
+                \hline
+                Nom et signature du titulaire: @if ($classe->professeur)
+                    @latex($classe->professeur->nom) @latex($classe->professeur->prenom)
+                @endif & Sokodé, le \large \today\\
+                & \textbf{Le Directeur} \\
+                & \\
+                & \\
+                & \\
+                \hline
+                \end{tabular}
 
-            \end{flushleft}
-
-
-
-
-
-
-
+                \end{flushleft}
 
 
 
@@ -275,4 +284,11 @@ N & D \\
 
 
 
-            \end{document}
+
+
+
+
+
+
+
+                \end{document}

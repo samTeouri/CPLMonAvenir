@@ -109,7 +109,7 @@ class LaTexToPDFController extends Controller
         if ($moyennes[$trimestre->id]['moyenne'] === 0.0) {
             $moyenne_lettre = 'Zéro';
         } else {
-            $moyenne_lettre = SpellNumber::value($moyennes[$trimestre->id]['moyenne'])->locale('fr')->toLetters(); 
+            $moyenne_lettre = SpellNumber::value(strval($moyennes[$trimestre->id]['moyenne']))->locale('fr')->toLetters();
         }
 
         $moyenne_annuelle = 0.0;
@@ -213,7 +213,7 @@ class LaTexToPDFController extends Controller
             if ($temp_bulletin['moyennes'][$trimestre->id]['moyenne'] === 0.0) {
                 $temp_bulletin['moyenne_lettres'] = 'Zéro';
             } else {
-                $temp_bulletin['moyenne_lettres'] = SpellNumber::float($temp_bulletin['moyennes'][$trimestre->id]['moyenne'])->toLetters();
+                $temp_bulletin['moyenne_lettres'] = SpellNumber::float(strval($temp_bulletin['moyennes'][$trimestre->id]['moyenne']))->toLetters();
             }
         }
 
