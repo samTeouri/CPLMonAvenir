@@ -47,12 +47,16 @@ php artisan key:generate
 php artisan migrate --seed
 ```
 
-7. Lancez le serveur de développement :
+7. Modifiez le username de connexion :
+Rendez-vous dans le fichier: vendor/laravel/ui/auth-backend/AuthenticatesUsers.php à la ligne 160.
+Remplacez "email" par "username"
+
+8. Lancez le serveur de développement :
 ```bash
 php artisan serve
 ```
 
-8. Accédez à l'application dans votre navigateur à l'adresse http://localhost:8000.
+9. Accédez à l'application dans votre navigateur à l'adresse http://localhost:8000.
 
 ## Informations supplémentaires
 
