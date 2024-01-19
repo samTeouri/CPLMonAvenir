@@ -23,4 +23,9 @@ class AnneeScolaire extends Model
     {
         return $this->hasMany(Promotion::class);
     }
+
+    public function paiements()
+    {
+        return $this->hasMany(Paiement::class);
+    }
 }
