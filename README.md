@@ -56,6 +56,9 @@ Remplacez "email" par "username"
 php artisan serve
 ```
 
+Nom d'utilisateur: monavenir
+Mot de passe: monavenir
+
 9. Accédez à l'application dans votre navigateur à l'adresse http://localhost:8000.
 
 ## Informations supplémentaires
