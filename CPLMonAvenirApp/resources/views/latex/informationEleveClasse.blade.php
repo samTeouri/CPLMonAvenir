@@ -57,7 +57,16 @@
     @else
         Féminin
     @endif\\
-    \textbf{Date de Naissance:} @latex($eleve->date_naissance)\\
+    @php
+        $date = $eleve->date_naissance;
+
+        // Création du timestamp à partir du date donnée
+        $timestamp = strtotime($date);
+
+        // Créer le nouveau format à partir du timestamp
+        $date_naissance = date('d-m-Y', $timestamp);
+    @endphp
+    \textbf{Date de Naissance:} @latex($date_naissance)\\
     \textbf{Lieu de Naissance:} @latex($eleve->lieu_naissance)\\
     \textbf{Adresse:} @latex($eleve->adresse)\\
     \textbf{Matricule:} @latex($eleve->matricule)\\

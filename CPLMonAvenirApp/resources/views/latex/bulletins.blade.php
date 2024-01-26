@@ -17,6 +17,7 @@
 \usepackage{eso-pic}
 \usepackage{ulem}
 \usepackage[left=1cm,right=1cm,top=1cm,bottom=1cm]{geometry}
+\usepackage[french]{babel}
 
 
 \begin{document}
@@ -39,11 +40,12 @@
     \vspace{0.5cm}
     \large
 
+
     @php
-        $indice_trimestre = substr($trimestre->intitule, 10, 1);
+        $indice_trimestre = intval(substr($trimestre->intitule, 10, 1));
         $prefixe = 'eme';
-        if ($indice_trimestre === '1') {
-            $prefixe === 'er';
+        if ($indice_trimestre === 1) {
+            $prefixe = 'er';
         }
     @endphp
 
@@ -91,8 +93,18 @@
     \vspace{2cm}
     \begin{center}
 
+    @php
+        $date = $bulletin['eleve']->date_naissance;
+
+        // Création du timestamp à partir du date donnée
+        $timestamp = strtotime($date);
+
+        // Créer le nouveau format à partir du timestamp
+        $date_naissance = date('d-m-Y', $timestamp);
+    @endphp
+
     \large Nom et prénoms: \Large \textbf{@latex($bulletin['eleve']->nom) @latex($bulletin['eleve']->prenom)} \large Sexe: \textbf{\Large
-    @latex($bulletin['eleve']->sexe)} \large Date naissance: \Large \textbf{@latex($bulletin['eleve']->date_naissance)}
+    @latex($bulletin['eleve']->sexe)} \large Date naissance: \Large \textbf{@latex($date_naissance)}
     \end{center}
 
     \begin{center}
@@ -101,7 +113,7 @@
     \vspace{0.5cm}
     \hspace{-0.5cm}
     \renewcommand{\arraystretch}{2.2}
-    \begin{tabular}{|l||p{1cm}|p{1cm}|p{1.5cm}|c|p{1.5cm}|p{2.5cm}|c|}
+    \begin{tabular}{|l||p{1cm}|p{1cm}|p{1.5cm}|c|p{1.5cm}|p{2.5cm}|l|}
     \hline
     \Large \textbf{MATIERES} & \multicolumn{2}{c|}{Notes} & \centering Moy. des 2 notes & Coef & \centering Notes
     définitives &
@@ -142,7 +154,7 @@
         \large \textsf{@latex($ligne['notes_cours']['cours']->matiere->intitule)} & \large \centering \textsf{@latex($ligne['notes_cours']['moyenne_classe'])} & \large \centering
         \textsf{@latex($ligne['notes_cours']['compo'])} &
         \centering \large \textsf{@latex($moyenne_2_notes)} & \large \textsf{@latex($coefficient)}
-        & \centering \large \textsf{@latex($note_def)} & \centering \large \textsf{@latex($appreciation)} & \large
+        & \centering \large \textsf{@latex($note_def)} & \large \textsf{@latex($appreciation)} & \large
         \textsf{@latex($professeur)} (Validée)
         \\
         \hline
