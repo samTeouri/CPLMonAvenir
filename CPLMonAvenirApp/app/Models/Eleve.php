@@ -188,4 +188,9 @@ class Eleve extends Model
     {
         return $this->hasMany(Note::class);
     }
+
+    public function paiements()
+    {
+        return $this->hasMany(Paiement::class);
+    }
 }

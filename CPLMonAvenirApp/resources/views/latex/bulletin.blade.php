@@ -94,9 +94,19 @@ N & D \\
     \vspace{2cm}
     \begin{center}
 
+    @php
+        $date = $eleve->date_naissance;
+
+        // Création du timestamp à partir du date donnée
+        $timestamp = strtotime($date);
+
+        // Créer le nouveau format à partir du timestamp
+        $date_naissance = date('d-m-Y', $timestamp);
+    @endphp
+
     \large Nom et prénoms: \Large \textbf{@latex($eleve->nom) @latex($eleve->prenom)} \large Sexe:
     \textbf{\Large
-    @latex($eleve->sexe)} \large Date naissance: \Large \textbf{@latex($eleve->date_naissance)}
+    @latex($eleve->sexe)} \large Date naissance: \Large \textbf{@latex($date_naissance)}
     \end{center}
 
     \begin{center}
