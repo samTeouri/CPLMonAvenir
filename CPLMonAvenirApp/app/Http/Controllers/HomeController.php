@@ -27,6 +27,25 @@ class HomeController extends Controller
     {
 
         $anneCourante = AnneeScolaire::getAnneeScolaire();
-        return view('index',)->with('anneeCourante', $anneCourante);
+        $promotions = $anneCourante->promotions;
+
+        // calcul du nombre d'élèves inscrits au cours de l'année scolaire actuelle
+
+
+
+        $nbre_eleves = 0;
+        foreach ($promotions as $promotion) {
+            foreach ($promotion->classes as $classe) {
+                //ddd($classe->eleves);
+                $nbre_eleves += count($classe->eleves);
+            }
+        }
+
+        $data = [
+            'anneeCourante' => $anneCourante,
+            'nbre_eleves' => $nbre_eleves,
+        ];
+
+        return view('index', $data);
     }
 }

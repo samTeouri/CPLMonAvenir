@@ -372,122 +372,39 @@
                     </ul>
                 </li>
 
-
-
-                {{-- <li class="nav-main-heading">Develop</li>
                 <li class="nav-main-item">
                     <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true"
                         aria-expanded="false" href="#">
-                        <i class="nav-main-link-icon si si-puzzle"></i>
-                        <span class="nav-main-link-name">Multi Level Menu</span>
+                        <i class="nav-main-link-icon fa fa-balance-scale"></i>
+                        <span class="nav-main-link-name">Comptabilitée</span>
                     </a>
                     <ul class="nav-main-submenu">
                         <li class="nav-main-item">
-                            <a class="nav-main-link" href="#">
-                                <span class="nav-main-link-name">Link 1-1</span>
-                            </a>
-                        </li>
-                        <li class="nav-main-item">
-                            <a class="nav-main-link" href="#">
-                                <span class="nav-main-link-name">Link 1-2</span>
+                            <a class="nav-main-link" href="{{ route('professeur.index') }}">
+                                <span class="nav-main-link-name">Paiement scolaritée</span>
                             </a>
                         </li>
                         <li class="nav-main-item">
                             <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true"
                                 aria-expanded="false" href="#">
-                                <span class="nav-main-link-name">Sub Level 2</span>
+                                <span class="nav-main-link-name">Dépenses</span>
                             </a>
                             <ul class="nav-main-submenu">
                                 <li class="nav-main-item">
                                     <a class="nav-main-link" href="#">
-                                        <span class="nav-main-link-name">Link 2-1</span>
+                                        <span class="nav-main-link-name">Salaires enseignants</span>
                                     </a>
                                 </li>
                                 <li class="nav-main-item">
                                     <a class="nav-main-link" href="#">
-                                        <span class="nav-main-link-name">Link 2-2</span>
+                                        <span class="nav-main-link-name">Dépenses </span>
                                     </a>
-                                </li>
-                                <li class="nav-main-item">
-                                    <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu"
-                                        aria-haspopup="true" aria-expanded="false" href="#">
-                                        <span class="nav-main-link-name">Sub Level 3</span>
-                                    </a>
-                                    <ul class="nav-main-submenu">
-                                        <li class="nav-main-item">
-                                            <a class="nav-main-link" href="#">
-                                                <span class="nav-main-link-name">Link 3-1</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-main-item">
-                                            <a class="nav-main-link" href="#">
-                                                <span class="nav-main-link-name">Link 3-2</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-main-item">
-                                            <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu"
-                                                aria-haspopup="true" aria-expanded="false" href="#">
-                                                <span class="nav-main-link-name">Sub Level 4</span>
-                                            </a>
-                                            <ul class="nav-main-submenu">
-                                                <li class="nav-main-item">
-                                                    <a class="nav-main-link" href="#">
-                                                        <span class="nav-main-link-name">Link 4-1</span>
-                                                    </a>
-                                                </li>
-                                                <li class="nav-main-item">
-                                                    <a class="nav-main-link" href="#">
-                                                        <span class="nav-main-link-name">Link 4-2</span>
-                                                    </a>
-                                                </li>
-                                                <li class="nav-main-item">
-                                                    <a class="nav-main-link nav-main-link-submenu"
-                                                        data-toggle="submenu" aria-haspopup="true"
-                                                        aria-expanded="false" href="#">
-                                                        <span class="nav-main-link-name">Sub Level 5</span>
-                                                    </a>
-                                                    <ul class="nav-main-submenu">
-                                                        <li class="nav-main-item">
-                                                            <a class="nav-main-link" href="#">
-                                                                <span class="nav-main-link-name">Link 5-1</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="nav-main-item">
-                                                            <a class="nav-main-link" href="#">
-                                                                <span class="nav-main-link-name">Link 5-2</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="nav-main-item">
-                                                            <a class="nav-main-link nav-main-link-submenu"
-                                                                data-toggle="submenu" aria-haspopup="true"
-                                                                aria-expanded="false" href="#">
-                                                                <span class="nav-main-link-name">Sub Level 6</span>
-                                                            </a>
-                                                            <ul class="nav-main-submenu">
-                                                                <li class="nav-main-item">
-                                                                    <a class="nav-main-link" href="#">
-                                                                        <span class="nav-main-link-name">Link
-                                                                            6-1</span>
-                                                                    </a>
-                                                                </li>
-                                                                <li class="nav-main-item">
-                                                                    <a class="nav-main-link" href="#">
-                                                                        <span class="nav-main-link-name">Link
-                                                                            6-2</span>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
                                 </li>
                             </ul>
                         </li>
                     </ul>
-                </li> --}}
+                </li>
+
 
             </ul>
         </div>

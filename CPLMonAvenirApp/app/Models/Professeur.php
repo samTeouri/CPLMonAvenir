@@ -14,7 +14,8 @@ class Professeur extends Model
         'prenom',
         'contact',
         'sexe',
-        'user_id'
+        'user_id',
+        'type',
     ];
 
     protected $cast = [
@@ -34,5 +35,10 @@ class Professeur extends Model
     public function classes()
     {
         return $this->hasMany(Classe::class);
+    }
+
+    public function salaire()
+    {
+        return $this->hasOne(Salaire::class);
     }
 }

@@ -14,13 +14,13 @@ class Paiement extends Model
         'montant',
         'methode',
         'date_paiement',
-        'annee_scolaire',
+        'compte_scolarite_id',
         'eleve_id'
     ];
 
-    public function anneeScolaire()
+    public function compteScolarite()
     {
-        return $this->belongsTo(AnneeScolaire::class);
+        return $this->belongsTo(CompteScolarite::class);
     }
 
     public function eleve()

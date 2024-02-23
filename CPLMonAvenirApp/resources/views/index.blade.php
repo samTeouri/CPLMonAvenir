@@ -8,7 +8,7 @@
                 <div class="flex-sm-fill">
                     <div class="d-flex justify-content-between">
                         <h1 class="h2 font-w700 mb-2">
-                            CPL Mon Avenir 
+                            CPL Mon Avenir
                         </h1>
                         <h2 class="font-w700 mb-2">
                             Année Scolaire: <span class="text-primary">{{ $anneeCourante->annee }}</span>
@@ -31,18 +31,12 @@
                     <div
                         class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
                         <dl class="mb-0">
-                            <dt class="font-size-h2 font-w700">32</dt>
-                            <dd class="text-muted mb-0">Pending Orders</dd>
+                            <dt class="font-size-h2 font-w700">{{ $nbre_eleves }}</dt>
+                            <dd class="text-muted mb-0">Nombre d'élèves</dd>
                         </dl>
                         <div class="item item-rounded bg-body">
-                            <i class="fa fa-shopping-cart font-size-h3 text-primary"></i>
+                            <i class="fa fa-users font-size-h3 text-primary"></i>
                         </div>
-                    </div>
-                    <div class="block-content block-content-full block-content-sm bg-body-light font-size-sm">
-                        <a class="font-w500 d-flex align-items-center" href="javascript:void(0)">
-                            View all orders
-                            <i class="fa fa-arrow-alt-circle-right ml-1 opacity-25 font-size-base"></i>
-                        </a>
                     </div>
                 </div>
                 <!-- END Pending Orders -->
@@ -60,12 +54,6 @@
                             <i class="fa fa-users font-size-h3 text-primary"></i>
                         </div>
                     </div>
-                    <div class="block-content block-content-full block-content-sm bg-body-light font-size-sm">
-                        <a class="font-w500 d-flex align-items-center" href="javascript:void(0)">
-                            View all customers
-                            <i class="fa fa-arrow-alt-circle-right ml-1 opacity-25 font-size-base"></i>
-                        </a>
-                    </div>
                 </div>
                 <!-- END New Customers -->
             </div>
@@ -82,12 +70,6 @@
                             <i class="fa fa-inbox font-size-h3 text-primary"></i>
                         </div>
                     </div>
-                    <div class="block-content block-content-full block-content-sm bg-body-light font-size-sm">
-                        <a class="font-w500 d-flex align-items-center" href="javascript:void(0)">
-                            View all messages
-                            <i class="fa fa-arrow-alt-circle-right ml-1 opacity-25 font-size-base"></i>
-                        </a>
-                    </div>
                 </div>
                 <!-- END Messages -->
             </div>
@@ -103,12 +85,6 @@
                         <div class="item item-rounded bg-body">
                             <i class="fa fa-chart-line font-size-h3 text-primary"></i>
                         </div>
-                    </div>
-                    <div class="block-content block-content-full block-content-sm bg-body-light font-size-sm">
-                        <a class="font-w500 d-flex align-items-center" href="javascript:void(0)">
-                            View statistics
-                            <i class="fa fa-arrow-alt-circle-right ml-1 opacity-25 font-size-base"></i>
-                        </a>
                     </div>
                 </div>
                 <!-- END Conversion Rate-->
