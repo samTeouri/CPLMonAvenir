@@ -397,7 +397,7 @@
                                 </li>
                                 <li class="nav-main-item">
                                     <a class="nav-main-link" href="#">
-                                        <span class="nav-main-link-name">Dépenses </span>
+                                        <span class="nav-main-link-name">Dépenses</span>
                                     </a>
                                 </li>
                             </ul>
